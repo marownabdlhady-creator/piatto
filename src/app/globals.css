@@ -82,3 +82,11 @@ html {
     scroll-padding-top: 9.5rem;
   }
 }
+
+/* Soft state for the Spaces panels' inner layer. Declared here so the panels
+   never paint sharp for a frame before their entrance runs; the tween writes
+   the final values back over it. */
+.reveal-soft {
+  filter: blur(10px);
+  transform: scale(1.06);
+}
