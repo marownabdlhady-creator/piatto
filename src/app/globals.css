@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  /* Placeholder monochrome editorial palette — tuned in the design step. */
+  --color-bg: #f6f3ee; /* warm off-white */
+  --color-fg: #14120f; /* deep near-black */
+
+  /* Resolved to the Arabic face on /ar (see below). */
+  --font-primary: var(--font-latin);
+}
+
+html[lang="ar"] {
+  --font-primary: var(--font-arabic);
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-fg);
+
+  --font-sans: var(--font-primary);
+  --font-latin-serif: var(--font-latin);
+  --font-arabic-sans: var(--font-arabic);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-primary), ui-serif, Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
