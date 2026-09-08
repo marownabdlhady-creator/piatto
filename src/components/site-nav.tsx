@@ -5,15 +5,14 @@ import { useTranslations } from "next-intl";
 import gsap from "gsap";
 
 import { LanguageToggle } from "@/components/language-toggle";
+import { ENTRANCE, entranceScale } from "@/lib/entrance";
 import { navItems } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
-const EASE = "power4.out";
-
 const linkBase =
-  "tracked-label relative inline-block uppercase opacity-70 transition-opacity " +
-  "duration-500 hover:opacity-100 " +
-  "after:absolute after:inset-x-0 after:-bottom-1.5 after:h-px after:origin-center " +
+  "tracked-label relative inline-block pb-1.5 uppercase opacity-70 " +
+  "transition-opacity duration-500 hover:opacity-100 " +
+  "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-center " +
   "after:scale-x-0 after:bg-current after:transition-transform after:duration-500 " +
   "after:ease-[cubic-bezier(0.22,1,0.36,1)] after:content-[''] hover:after:scale-x-100";
 
@@ -28,35 +27,35 @@ export function SiteNav() {
 
   const close = useCallback(() => setOpen(false), []);
 
-  // Entrance: the wordmark settles first, then the links rise in behind it.
+  // Entrance: the wordmark settles first, then the hairline and links rise in
+  // just behind it. The stagger follows DOM order, which is also reading order
+  // in both locales — leftmost first on /en, rightmost first on /ar.
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const reduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      const scale = reduced ? 0 : 1;
+      const scale = entranceScale();
 
       gsap
-        .timeline({ defaults: { ease: EASE } })
+        .timeline({ defaults: { ease: ENTRANCE.ease } })
         .fromTo(
           "[data-reveal='wordmark']",
-          { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 1.6 * scale, delay: 0.15 * scale },
+          { opacity: 0, y: ENTRANCE.wordmark.y },
+          { opacity: 1, y: 0, duration: ENTRANCE.wordmark.duration * scale },
+          ENTRANCE.wordmark.at * scale,
         )
         .fromTo(
           "[data-reveal='link']",
-          { opacity: 0, y: 14 },
+          { opacity: 0, y: ENTRANCE.links.y },
           {
             opacity: 1,
             y: 0,
-            duration: 1.2 * scale,
-            stagger: 0.07 * scale,
+            duration: ENTRANCE.links.duration * scale,
+            stagger: ENTRANCE.links.stagger * scale,
           },
-          `-=${1.1 * scale}`,
+          ENTRANCE.links.at * scale,
         );
 
       overlayTimeline.current = gsap
-        .timeline({ paused: true, defaults: { ease: EASE } })
+        .timeline({ paused: true, defaults: { ease: ENTRANCE.ease } })
         .fromTo(
           overlayRef.current,
           { autoAlpha: 0 },
@@ -110,7 +109,7 @@ export function SiteNav() {
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>
 
-      <div className="relative px-6 py-7 md:py-9">
+      <div className="relative px-6 pt-7 md:pt-9">
         <a
           href="#top"
           data-reveal="wordmark"
@@ -162,7 +161,7 @@ export function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? t("closeMenu") : t("openMenu")}
-          className="reveal absolute end-5 top-1/2 z-30 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-[7px] md:hidden"
+          className="reveal absolute end-5 top-0 bottom-0 z-30 my-auto flex h-8 w-8 flex-col items-center justify-center gap-[7px] md:hidden"
         >
           <span
             className={cn(

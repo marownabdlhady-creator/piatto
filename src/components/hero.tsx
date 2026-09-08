@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+
+import { ENTRANCE, entranceScale } from "@/lib/entrance";
 
 /**
  * Framed hero panel: the video sits inset from the page edges so the warm
@@ -11,6 +14,7 @@ import { useEffect, useState } from "react";
  * connections entirely.
  */
 export function Hero() {
+  const panelRef = useRef<HTMLDivElement>(null);
   const [playVideo, setPlayVideo] = useState(false);
 
   useEffect(() => {
@@ -22,9 +26,35 @@ export function Hero() {
     return () => query.removeEventListener("change", sync);
   }, []);
 
+  // Closes out the page entrance: the panel rises in just after the nav links.
+  // Timings live in ENTRANCE so the two components stay in step.
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const scale = entranceScale();
+
+      gsap.fromTo(
+        panelRef.current,
+        { opacity: 0, y: ENTRANCE.panel.y },
+        {
+          opacity: 1,
+          y: 0,
+          ease: ENTRANCE.ease,
+          duration: ENTRANCE.panel.duration * scale,
+          delay: ENTRANCE.panel.at * scale,
+        },
+      );
+    }, panelRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section className="px-4 pb-4 md:px-8 md:pb-8 lg:px-12 lg:pb-10">
-      <div className="relative mx-auto h-[72svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 md:h-[82svh] lg:h-[88svh]">
+      <div
+        ref={panelRef}
+        data-reveal="panel"
+        className="reveal relative mx-auto h-[72svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 md:h-[82svh] lg:h-[88svh]"
+      >
         {/* Shares its URL with the video's poster attribute, so it is fetched once. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
