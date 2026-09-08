@@ -155,7 +155,7 @@ export function SiteNav() {
   const shortcuts = quickLinks.map((item) => ({ ...item, label: t(item.key) }));
 
   return (
-    <header id="top" ref={rootRef} className="relative z-20 bg-background">
+    <header id="top" ref={rootRef} className="sticky top-0 z-40 bg-background">
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>
@@ -183,10 +183,10 @@ export function SiteNav() {
             aria-expanded={open}
             aria-controls="site-menu"
             aria-label={t("openMenu")}
-            className="reveal absolute inset-y-0 end-[-0.625rem] my-auto flex h-11 w-11 flex-col items-center justify-center gap-[7px]"
+            className="reveal absolute inset-y-0 end-[-7px] my-auto flex h-12 w-12 flex-col items-center justify-center gap-[10px]"
           >
-            <span className="h-px w-[22px] bg-current" />
-            <span className="h-px w-[22px] bg-current" />
+            <span className="h-px w-[34px] bg-current" />
+            <span className="h-px w-[34px] bg-current" />
           </button>
         </div>
 
@@ -261,10 +261,10 @@ export function SiteNav() {
             type="button"
             onClick={close}
             aria-label={t("closeMenu")}
-            className="relative -me-[0.625rem] flex h-11 w-11 items-center justify-center"
+            className="relative -me-[11px] flex h-12 w-12 items-center justify-center"
           >
-            <span className="absolute h-px w-[22px] rotate-45 bg-current" />
-            <span className="absolute h-px w-[22px] -rotate-45 bg-current" />
+            <span className="absolute h-px w-[26px] rotate-45 bg-current" />
+            <span className="absolute h-px w-[26px] -rotate-45 bg-current" />
           </button>
         </div>
 

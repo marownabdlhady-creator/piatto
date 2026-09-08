@@ -16,5 +16,11 @@
   },
   "reservations": {
     "title": "Reservations"
+  },
+  "about": {
+    "p1": "Placeholder text — final content to be provided.",
+    "p2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "p3": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+    "logo": "Logo"
   }
 }

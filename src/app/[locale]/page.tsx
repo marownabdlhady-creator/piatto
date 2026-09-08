@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 
+import { About } from "@/components/about";
 import { Hero } from "@/components/hero";
 import { SiteNav } from "@/components/site-nav";
 
@@ -16,6 +17,7 @@ export default async function Home({ params }: HomeProps) {
       <SiteNav />
       <main>
         <Hero />
+        <About />
       </main>
     </>
   );
