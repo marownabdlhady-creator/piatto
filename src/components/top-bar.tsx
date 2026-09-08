@@ -16,9 +16,10 @@ const label = cn(
 );
 
 /**
- * Slim dark strip above the off-white nav bar: the reservation action on the
- * inline start, the language toggle on the inline end. Both mirror with the
- * locale because the row is laid out with logical direction, not sides.
+ * Slim dark strip above the off-white nav bar on small screens only: the
+ * reservation action on the inline start, the language toggle on the inline
+ * end. Both mirror with the locale because the row is laid out with logical
+ * direction, not sides. From md these two live in the nav bar row instead.
  */
 export function TopBar() {
   const t = useTranslations("nav");
@@ -26,7 +27,7 @@ export function TopBar() {
   return (
     <div
       data-reveal="topbar"
-      className="reveal relative z-30 h-[var(--bar-top-h)] bg-foreground text-background"
+      className="reveal relative z-30 h-[var(--bar-top-h)] bg-foreground text-background md:hidden"
     >
       <div className="flex h-full items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12">
         <Link href="/reservations" className={slot}>

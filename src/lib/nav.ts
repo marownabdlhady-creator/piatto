@@ -28,8 +28,9 @@ export const navUnderline =
   "after:ease-[cubic-bezier(0.22,1,0.36,1)] after:content-[''] hover:after:scale-x-100";
 
 /**
- * Shortcut grid shown under the action strip on small screens only. The
- * WhatsApp cell is a placeholder anchor until the real wa.me link exists.
+ * Curated shortcuts: the 2x2 grid under the action strip on small screens,
+ * and the visible row in the desktop bar. The WhatsApp entry is a placeholder
+ * anchor until the real wa.me link exists.
  */
 export const quickLinks = [
   { key: "menu", href: "#menu" },
