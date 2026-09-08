@@ -23,8 +23,8 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="px-4 py-4 md:px-8 md:py-8 lg:px-12 lg:py-10">
-      <div className="relative mx-auto h-[58svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 md:h-[68svh] lg:h-[74svh]">
+    <section className="px-4 pb-4 md:px-8 md:pb-8 lg:px-12 lg:pb-10">
+      <div className="relative mx-auto h-[72svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 md:h-[82svh] lg:h-[88svh]">
         {/* Shares its URL with the video's poster attribute, so it is fetched once. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

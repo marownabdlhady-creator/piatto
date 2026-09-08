@@ -104,7 +104,7 @@ export function SiteNav() {
     <header
       id="top"
       ref={rootRef}
-      className="relative z-20 border-b border-foreground/10 bg-background text-foreground"
+      className="relative z-20 bg-background text-foreground"
     >
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
@@ -118,6 +118,14 @@ export function SiteNav() {
         >
           {tCommon("siteName")}
         </a>
+
+        {/* Editorial rule separating the wordmark from the links row. It only
+            appears alongside the row itself, so it is hidden on small screens. */}
+        <div
+          data-reveal="link"
+          aria-hidden="true"
+          className="reveal -mx-6 mt-5 hidden h-px bg-foreground/10 md:mt-6 md:block"
+        />
 
         <nav
           aria-label={tCommon("siteName")}
