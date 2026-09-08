@@ -1,6 +1,15 @@
 {
   "common": {
-    "siteName": "piatto",
-    "placeholder": "Placeholder"
+    "siteName": "piatto"
+  },
+  "nav": {
+    "contact": "Contact",
+    "workingHours": "Working Hours",
+    "menu": "Menu",
+    "about": "About Us",
+    "gallery": "Gallery",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "switchLanguage": "Switch language"
   }
 }

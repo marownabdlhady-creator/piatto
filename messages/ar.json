@@ -1,6 +1,15 @@
 {
   "common": {
-    "siteName": "piatto",
-    "placeholder": "نص مؤقت"
+    "siteName": "piatto"
+  },
+  "nav": {
+    "contact": "تواصل معنا",
+    "workingHours": "ساعات العمل",
+    "menu": "القائمة",
+    "about": "من نحن",
+    "gallery": "معرض الصور",
+    "openMenu": "فتح قائمة التنقل",
+    "closeMenu": "إغلاق قائمة التنقل",
+    "switchLanguage": "تغيير اللغة"
   }
 }

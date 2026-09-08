@@ -41,3 +41,15 @@ video {
   display: block;
   max-width: 100%;
 }
+
+/* Elements animated in by GSAP start hidden; the <noscript> block in the nav
+   reveals them when scripting is unavailable. */
+.reveal {
+  opacity: 0;
+}
+
+/* Letter-spacing breaks the connected letterforms of Arabic script, so the
+   tracked nav labels drop it on /ar. */
+html[lang="ar"] .tracked-label {
+  letter-spacing: normal;
+}
