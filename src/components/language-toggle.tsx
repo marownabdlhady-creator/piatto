@@ -8,7 +8,10 @@ import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 type LanguageToggleProps = {
+  /** Applied to the link itself, which carries the tap target. */
   className?: string;
+  /** Applied to the inner span, which carries the type treatment. */
+  labelClassName?: string;
   label: string;
   onNavigate?: () => void;
 };
@@ -20,6 +23,7 @@ type LanguageToggleProps = {
  */
 export function LanguageToggle({
   className,
+  labelClassName,
   label,
   onNavigate,
 }: LanguageToggleProps) {
@@ -36,7 +40,7 @@ export function LanguageToggle({
       onClick={onNavigate}
       className={cn("transition-opacity duration-500", className)}
     >
-      {localeNames[target]}
+      <span className={labelClassName}>{localeNames[target]}</span>
     </Link>
   );
 }

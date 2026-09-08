@@ -8,8 +8,12 @@
     "menu": "Menu",
     "about": "About Us",
     "gallery": "Gallery",
+    "reservations": "Reservations",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
     "switchLanguage": "Switch language"
+  },
+  "reservations": {
+    "title": "Reservations"
   }
 }

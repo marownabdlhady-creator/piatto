@@ -1,14 +1,15 @@
 /**
- * Shared timing for the one-shot page entrance. The nav bar and the hero panel
+ * Shared timing for the one-shot page entrance. The bars and the hero panel
  * animate from separate components, so the positions below are absolute
  * (seconds from the start of the load) to keep them reading as a single,
- * cohesive move rather than three separate animations.
+ * cohesive move rather than several separate animations.
  */
 export const ENTRANCE = {
   ease: "power4.out",
-  wordmark: { at: 0.1, duration: 1.3, y: 26 },
-  links: { at: 0.45, duration: 1.1, stagger: 0.07, y: 18 },
-  panel: { at: 0.72, duration: 1.4, y: 24 },
+  topBar: { at: 0, duration: 1, y: 12 },
+  wordmark: { at: 0.14, duration: 1.3, y: 26 },
+  links: { at: 0.48, duration: 1.1, stagger: 0.07, y: 18 },
+  panel: { at: 0.74, duration: 1.4, y: 24 },
 } as const;
 
 /**

@@ -7,6 +7,11 @@
 
   /* Resolved to the Arabic face on /ar (see below). */
   --font-primary: var(--font-latin);
+
+  /* Heights of the two stacked bars. The small-screen menu offsets itself by
+     their sum, so they are declared once here rather than per component. */
+  --bar-top-h: 2.5rem;
+  --bar-main-h: 4rem;
 }
 
 html[lang="ar"] {

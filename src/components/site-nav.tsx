@@ -4,20 +4,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 
-import { LanguageToggle } from "@/components/language-toggle";
+import { TopBar } from "@/components/top-bar";
 import { ENTRANCE, entranceScale } from "@/lib/entrance";
-import { navItems } from "@/lib/nav";
+import { navItems, navUnderline } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
-/** Hairline that wipes in from the centre on hover. */
-const underline =
-  "relative inline-block after:absolute after:inset-x-0 after:h-px after:origin-center " +
-  "after:scale-x-0 after:bg-current after:transition-transform after:duration-500 " +
-  "after:ease-[cubic-bezier(0.22,1,0.36,1)] after:content-[''] hover:after:scale-x-100";
-
 const linkBase = cn(
+  navUnderline,
   "tracked-label uppercase opacity-70 transition-opacity duration-500 hover:opacity-100",
-  underline,
 );
 
 /** Bar links sit tight to the row; the underline rides just under the text. */
@@ -37,16 +31,23 @@ export function SiteNav() {
 
   const close = useCallback(() => setOpen(false), []);
 
-  // Entrance: the wordmark settles first, then the bar furniture (the hairline
-  // and, on small screens, the hamburger) and the links rise in together just
-  // behind it. The link stagger follows DOM order, which is also reading order
-  // in both locales - leftmost first on /en, rightmost first on /ar.
+  // Entrance: the dark strip leads, the wordmark settles, then the bar
+  // furniture (the hairline and, on small screens, the hamburger) and the
+  // links rise in together just behind it. The link stagger follows DOM order,
+  // which is also reading order in both locales - leftmost first on /en,
+  // rightmost first on /ar.
   useEffect(() => {
     const ctx = gsap.context(() => {
       const scale = entranceScale();
 
       gsap
         .timeline({ defaults: { ease: ENTRANCE.ease } })
+        .fromTo(
+          "[data-reveal='topbar']",
+          { opacity: 0, y: ENTRANCE.topBar.y },
+          { opacity: 1, y: 0, duration: ENTRANCE.topBar.duration * scale },
+          ENTRANCE.topBar.at * scale,
+        )
         .fromTo(
           "[data-reveal='wordmark']",
           { opacity: 0, y: ENTRANCE.wordmark.y },
@@ -130,23 +131,22 @@ export function SiteNav() {
   const links = navItems.map((item) => ({ ...item, label: t(item.key) }));
 
   return (
-    <header
-      id="top"
-      ref={rootRef}
-      className="relative z-20 bg-background text-foreground"
-    >
+    <header id="top" ref={rootRef} className="relative z-20 bg-background">
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>
 
-      <div className="relative px-4 sm:px-6 md:px-8 lg:px-12">
-        {/* Small screens: wordmark centred with the hamburger on the inline
-            end. From md the row becomes the top half of the stacked bar. */}
-        <div className="relative flex h-18 items-center justify-center md:block md:h-auto md:pt-9">
+      <TopBar />
+
+      <div className="relative px-4 text-foreground sm:px-6 md:px-8 lg:px-12">
+        {/* Small screens: wordmark on the inline start, hamburger on the
+            inline end. From md the row becomes the top half of the stacked
+            bar, with the wordmark centred over the links. */}
+        <div className="relative z-30 flex h-[var(--bar-main-h)] items-center justify-between md:block md:h-auto md:pt-9">
           <a
             href="#top"
             data-reveal="wordmark"
-            className="reveal relative z-30 -me-[0.16em] block text-center text-[1.45rem] leading-none font-normal tracking-[0.16em] lowercase sm:text-[1.6rem] md:text-[1.9rem]"
+            className="reveal -me-[0.16em] block text-[1.45rem] leading-none font-normal tracking-[0.16em] lowercase sm:text-[1.6rem] md:text-center md:text-[1.9rem]"
           >
             {tCommon("siteName")}
           </a>
@@ -158,7 +158,7 @@ export function SiteNav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t("closeMenu") : t("openMenu")}
-            className="reveal absolute inset-y-0 end-[-0.625rem] z-30 my-auto flex h-11 w-11 flex-col items-center justify-center gap-[7px] md:hidden"
+            className="reveal -me-[0.625rem] flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-[7px] md:hidden"
           >
             <span
               className={cn(
@@ -176,8 +176,7 @@ export function SiteNav() {
         </div>
 
         {/* Full-bleed rule: the bar's bottom edge on small screens, the divider
-            between wordmark and links from md. It stays above the overlay so
-            the bar reads as intact while the menu is open. */}
+            between wordmark and links from md. */}
         <div
           data-reveal="bar"
           aria-hidden="true"
@@ -200,24 +199,19 @@ export function SiteNav() {
                 </a>
               </li>
             ))}
-            <li
-              data-reveal="link"
-              className="reveal border-s border-foreground/15 ps-8 lg:ps-14"
-            >
-              <LanguageToggle label={t("switchLanguage")} className={barLink} />
-            </li>
           </ul>
         </nav>
       </div>
 
-      {/* Small-screen menu. It fills the page beneath the bar, which stays
-          visible above it, so the hamburger doubles as the close affordance. */}
+      {/* Small-screen menu. It fills the page from just below the bars down,
+          leaving both of them in place, so the hamburger-turned-X stays put as
+          the close affordance. */}
       <div
         id="mobile-menu"
         ref={overlayRef}
-        className="invisible fixed inset-0 z-20 flex flex-col items-center justify-center bg-background px-6 pt-18 text-foreground opacity-0 md:hidden"
+        className="invisible fixed inset-x-0 bottom-0 top-[calc(var(--bar-top-h)_+_var(--bar-main-h)_+_1px)] z-20 flex flex-col items-center overflow-y-auto bg-background px-6 py-10 text-foreground opacity-0 md:hidden"
       >
-        <nav aria-label={tCommon("siteName")} className="w-full max-w-xs">
+        <nav aria-label={tCommon("siteName")} className="my-auto w-full max-w-xs">
           <ul className="flex flex-col items-center gap-3 text-center text-[1.05rem]">
             {links.map((item) => (
               <li key={item.key}>
@@ -231,16 +225,6 @@ export function SiteNav() {
                 </a>
               </li>
             ))}
-            <li
-              data-reveal="overlay-link"
-              className="mt-6 w-full border-t border-foreground/15 pt-6"
-            >
-              <LanguageToggle
-                label={t("switchLanguage")}
-                onNavigate={close}
-                className={cn(overlayLink, "text-[0.85rem]")}
-              />
-            </li>
           </ul>
         </nav>
       </div>

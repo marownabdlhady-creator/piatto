@@ -8,8 +8,12 @@
     "menu": "القائمة",
     "about": "من نحن",
     "gallery": "معرض الصور",
+    "reservations": "حجز طاولة",
     "openMenu": "فتح قائمة التنقل",
     "closeMenu": "إغلاق قائمة التنقل",
     "switchLanguage": "تغيير اللغة"
+  },
+  "reservations": {
+    "title": "حجز طاولة"
   }
 }

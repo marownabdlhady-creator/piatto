@@ -53,7 +53,7 @@ export function Hero() {
       <div
         ref={panelRef}
         data-reveal="panel"
-        className="reveal relative mx-auto h-[54svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 sm:h-[64svh] md:h-[82svh] lg:h-[88svh]"
+        className="reveal relative mx-auto aspect-[3/2] w-full max-w-[1600px] overflow-hidden bg-foreground/5 sm:aspect-auto sm:h-[58svh] md:h-[82svh] lg:h-[88svh]"
       >
         {/* Shares its URL with the video's poster attribute, so it is fetched once. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
