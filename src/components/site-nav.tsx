@@ -9,12 +9,22 @@ import { ENTRANCE, entranceScale } from "@/lib/entrance";
 import { navItems } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
-const linkBase =
-  "tracked-label relative inline-block pb-1.5 uppercase opacity-70 " +
-  "transition-opacity duration-500 hover:opacity-100 " +
-  "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-center " +
+/** Hairline that wipes in from the centre on hover. */
+const underline =
+  "relative inline-block after:absolute after:inset-x-0 after:h-px after:origin-center " +
   "after:scale-x-0 after:bg-current after:transition-transform after:duration-500 " +
   "after:ease-[cubic-bezier(0.22,1,0.36,1)] after:content-[''] hover:after:scale-x-100";
+
+const linkBase = cn(
+  "tracked-label uppercase opacity-70 transition-opacity duration-500 hover:opacity-100",
+  underline,
+);
+
+/** Bar links sit tight to the row; the underline rides just under the text. */
+const barLink = cn(linkBase, "pb-1.5 tracking-[0.2em] after:bottom-0");
+
+/** Overlay links carry their own padding so each is a comfortable tap target. */
+const overlayLink = cn(linkBase, "py-3 tracking-[0.24em] after:bottom-1.5");
 
 export function SiteNav() {
   const t = useTranslations("nav");
@@ -27,9 +37,10 @@ export function SiteNav() {
 
   const close = useCallback(() => setOpen(false), []);
 
-  // Entrance: the wordmark settles first, then the hairline and links rise in
-  // just behind it. The stagger follows DOM order, which is also reading order
-  // in both locales — leftmost first on /en, rightmost first on /ar.
+  // Entrance: the wordmark settles first, then the bar furniture (the hairline
+  // and, on small screens, the hamburger) and the links rise in together just
+  // behind it. The link stagger follows DOM order, which is also reading order
+  // in both locales - leftmost first on /en, rightmost first on /ar.
   useEffect(() => {
     const ctx = gsap.context(() => {
       const scale = entranceScale();
@@ -41,6 +52,12 @@ export function SiteNav() {
           { opacity: 0, y: ENTRANCE.wordmark.y },
           { opacity: 1, y: 0, duration: ENTRANCE.wordmark.duration * scale },
           ENTRANCE.wordmark.at * scale,
+        )
+        .fromTo(
+          "[data-reveal='bar']",
+          { opacity: 0, y: ENTRANCE.links.y },
+          { opacity: 1, y: 0, duration: ENTRANCE.links.duration * scale },
+          ENTRANCE.links.at * scale,
         )
         .fromTo(
           "[data-reveal='link']",
@@ -59,13 +76,13 @@ export function SiteNav() {
         .fromTo(
           overlayRef.current,
           { autoAlpha: 0 },
-          { autoAlpha: 1, duration: 0.7 * scale, ease: "power3.out" },
+          { autoAlpha: 1, duration: 0.55 * scale, ease: "power3.out" },
         )
         .fromTo(
           "[data-reveal='overlay-link']",
-          { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: 0.9 * scale, stagger: 0.06 * scale },
-          `-=${0.4 * scale}`,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.85 * scale, stagger: 0.05 * scale },
+          0.15 * scale,
         );
     }, rootRef);
 
@@ -97,6 +114,19 @@ export function SiteNav() {
     };
   }, [open, close]);
 
+  // The overlay only exists below md. Growing past that breakpoint while it is
+  // open would hide it with the scroll lock still applied, so close it instead.
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 48rem)");
+    const sync = () => {
+      if (query.matches) setOpen(false);
+    };
+
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
+
   const links = navItems.map((item) => ({ ...item, label: t(item.key) }));
 
   return (
@@ -109,34 +139,62 @@ export function SiteNav() {
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>
 
-      <div className="relative px-6 pt-7 md:pt-9">
-        <a
-          href="#top"
-          data-reveal="wordmark"
-          className="reveal -me-[0.16em] block text-center text-[1.6rem] leading-none font-normal tracking-[0.16em] lowercase md:text-[1.9rem]"
-        >
-          {tCommon("siteName")}
-        </a>
+      <div className="relative px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Small screens: wordmark centred with the hamburger on the inline
+            end. From md the row becomes the top half of the stacked bar. */}
+        <div className="relative flex h-18 items-center justify-center md:block md:h-auto md:pt-9">
+          <a
+            href="#top"
+            data-reveal="wordmark"
+            className="reveal relative z-30 -me-[0.16em] block text-center text-[1.45rem] leading-none font-normal tracking-[0.16em] lowercase sm:text-[1.6rem] md:text-[1.9rem]"
+          >
+            {tCommon("siteName")}
+          </a>
 
-        {/* Editorial rule separating the wordmark from the links row. It only
-            appears alongside the row itself, so it is hidden on small screens. */}
+          <button
+            type="button"
+            data-reveal="bar"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? t("closeMenu") : t("openMenu")}
+            className="reveal absolute inset-y-0 end-[-0.625rem] z-30 my-auto flex h-11 w-11 flex-col items-center justify-center gap-[7px] md:hidden"
+          >
+            <span
+              className={cn(
+                "h-px w-[22px] bg-current transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                open && "translate-y-[4px] rotate-45",
+              )}
+            />
+            <span
+              className={cn(
+                "h-px w-[22px] bg-current transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                open && "-translate-y-[4px] -rotate-45",
+              )}
+            />
+          </button>
+        </div>
+
+        {/* Full-bleed rule: the bar's bottom edge on small screens, the divider
+            between wordmark and links from md. It stays above the overlay so
+            the bar reads as intact while the menu is open. */}
         <div
-          data-reveal="link"
+          data-reveal="bar"
           aria-hidden="true"
-          className="reveal -mx-6 mt-5 hidden h-px bg-foreground/10 md:mt-6 md:block"
+          className="reveal relative z-30 -mx-4 h-px bg-foreground/10 sm:-mx-6 md:-mx-8 md:mt-6 lg:-mx-12"
         />
 
         <nav
           aria-label={tCommon("siteName")}
-          className="mt-5 hidden justify-center md:mt-6 md:flex"
+          className="hidden md:mt-6 md:flex md:justify-center"
         >
-          <ul className="flex items-center gap-9 text-[0.7rem] lg:gap-14">
+          <ul className="flex items-center gap-8 text-[0.7rem] lg:gap-14">
             {links.map((item) => (
               <li key={item.key}>
                 <a
                   href={item.href}
                   data-reveal="link"
-                  className={cn("reveal tracking-[0.2em]", linkBase)}
+                  className={cn("reveal", barLink)}
                 >
                   {item.label}
                 </a>
@@ -144,54 +202,30 @@ export function SiteNav() {
             ))}
             <li
               data-reveal="link"
-              className="reveal border-s border-foreground/15 ps-9 lg:ps-14"
+              className="reveal border-s border-foreground/15 ps-8 lg:ps-14"
             >
-              <LanguageToggle
-                label={t("switchLanguage")}
-                className={cn("tracking-[0.2em]", linkBase)}
-              />
+              <LanguageToggle label={t("switchLanguage")} className={barLink} />
             </li>
           </ul>
         </nav>
-
-        <button
-          type="button"
-          data-reveal="link"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? t("closeMenu") : t("openMenu")}
-          className="reveal absolute end-5 top-0 bottom-0 z-30 my-auto flex h-8 w-8 flex-col items-center justify-center gap-[7px] md:hidden"
-        >
-          <span
-            className={cn(
-              "h-px w-[22px] bg-current transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              open && "translate-y-[4px] rotate-45",
-            )}
-          />
-          <span
-            className={cn(
-              "h-px w-[22px] bg-current transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              open && "-translate-y-[4px] -rotate-45",
-            )}
-          />
-        </button>
       </div>
 
+      {/* Small-screen menu. It fills the page beneath the bar, which stays
+          visible above it, so the hamburger doubles as the close affordance. */}
       <div
         id="mobile-menu"
         ref={overlayRef}
-        className="invisible fixed inset-0 z-20 flex flex-col items-center justify-center bg-background text-foreground opacity-0 md:hidden"
+        className="invisible fixed inset-0 z-20 flex flex-col items-center justify-center bg-background px-6 pt-18 text-foreground opacity-0 md:hidden"
       >
-        <nav aria-label={tCommon("siteName")}>
-          <ul className="flex flex-col items-center gap-9 text-center text-[0.95rem]">
+        <nav aria-label={tCommon("siteName")} className="w-full max-w-xs">
+          <ul className="flex flex-col items-center gap-3 text-center text-[1.05rem]">
             {links.map((item) => (
               <li key={item.key}>
                 <a
                   href={item.href}
                   onClick={close}
                   data-reveal="overlay-link"
-                  className={cn("tracking-[0.26em]", linkBase)}
+                  className={overlayLink}
                 >
                   {item.label}
                 </a>
@@ -199,12 +233,12 @@ export function SiteNav() {
             ))}
             <li
               data-reveal="overlay-link"
-              className="mt-4 border-t border-foreground/15 pt-9"
+              className="mt-6 w-full border-t border-foreground/15 pt-6"
             >
               <LanguageToggle
                 label={t("switchLanguage")}
                 onNavigate={close}
-                className={cn("text-[0.8rem] tracking-[0.26em]", linkBase)}
+                className={cn(overlayLink, "text-[0.85rem]")}
               />
             </li>
           </ul>

@@ -49,11 +49,11 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="px-4 pb-4 md:px-8 md:pb-8 lg:px-12 lg:pb-10">
+    <section className="px-4 pb-4 sm:px-6 sm:pb-6 md:px-8 md:pb-8 lg:px-12 lg:pb-10">
       <div
         ref={panelRef}
         data-reveal="panel"
-        className="reveal relative mx-auto h-[72svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 md:h-[82svh] lg:h-[88svh]"
+        className="reveal relative mx-auto h-[54svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 sm:h-[64svh] md:h-[82svh] lg:h-[88svh]"
       >
         {/* Shares its URL with the video's poster attribute, so it is fetched once. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}

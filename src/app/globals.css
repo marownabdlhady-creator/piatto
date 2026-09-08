@@ -49,7 +49,16 @@ video {
 }
 
 /* Letter-spacing breaks the connected letterforms of Arabic script, so the
-   tracked nav labels drop it on /ar. */
+   tracked labels drop it on /ar. Arabic also reads small at the sizes the
+   Latin nav is set in, so nudge it up a touch; the relative unit keeps that
+   in step with every breakpoint. */
 html[lang="ar"] .tracked-label {
   letter-spacing: normal;
+  font-size: 1.08em;
+}
+
+/* Nothing in the layout should scroll sideways at any width. */
+html,
+body {
+  overflow-x: clip;
 }
