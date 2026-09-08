@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ENTRANCE, entranceScale } from "@/lib/entrance";
 
 const PARAGRAPHS = ["p1", "p2", "p3"] as const;
-const LOGO_SLOTS = [0, 1, 2, 3];
+const LOGO_SLOTS = [0, 1];
 
 /**
  * Placeholder About section: centred copy over an off-white ground, with a row
@@ -70,7 +70,7 @@ export function About() {
         ))}
       </div>
 
-      <ul className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-5 md:mt-28 md:grid-cols-4 md:gap-10">
+      <ul className="mx-auto mt-20 grid max-w-md grid-cols-2 gap-5 md:mt-28 md:max-w-xl md:gap-10">
         {LOGO_SLOTS.map((slot) => (
           <li key={slot} data-reveal="about" className="reveal">
             <div className="tracked-label flex h-20 items-center justify-center border border-foreground/15 text-[0.62rem] tracking-[0.2em] uppercase opacity-40 md:h-24">
