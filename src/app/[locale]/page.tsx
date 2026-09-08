@@ -12,9 +12,11 @@ export default async function Home({ params }: HomeProps) {
   setRequestLocale(locale);
 
   return (
-    <main className="relative">
-      <Hero />
+    <>
       <SiteNav />
-    </main>
+      <main>
+        <Hero />
+      </main>
+    </>
   );
 }

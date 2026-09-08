@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 
 /**
- * Full-viewport video hero. The poster is always rendered as the base layer so
- * it paints immediately (and stands in when JavaScript is unavailable); the
- * video mounts on top only when the visitor has not asked for reduced motion,
- * which also keeps the download off those connections entirely.
+ * Framed hero panel: the video sits inset from the page edges so the warm
+ * off-white background reads as a margin around it. The poster is always
+ * rendered as the base layer so it paints immediately (and stands in when
+ * JavaScript is unavailable); the video mounts on top only when the visitor
+ * has not asked for reduced motion, which also keeps the download off those
+ * connections entirely.
  */
 export function Hero() {
   const [playVideo, setPlayVideo] = useState(false);
@@ -21,38 +23,35 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="top" className="relative h-svh w-full overflow-hidden bg-foreground">
-      {/* Shares its URL with the video's poster attribute, so it is fetched once. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/hero-poster.jpg"
-        alt=""
-        aria-hidden="true"
-        fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-
-      {playVideo && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/hero-poster.jpg"
+    <section className="px-4 py-4 md:px-8 md:py-8 lg:px-12 lg:py-10">
+      <div className="relative mx-auto h-[58svh] w-full max-w-[1600px] overflow-hidden bg-foreground/5 md:h-[68svh] lg:h-[74svh]">
+        {/* Shares its URL with the video's poster attribute, so it is fetched once. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-poster.jpg"
+          alt=""
           aria-hidden="true"
-          tabIndex={-1}
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/hero.webm" type="video/webm" />
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-      )}
+        />
 
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/20 to-black/40"
-      />
+        {playVideo && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/hero-poster.jpg"
+            aria-hidden="true"
+            tabIndex={-1}
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/hero.webm" type="video/webm" />
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
+        )}
+      </div>
     </section>
   );
 }

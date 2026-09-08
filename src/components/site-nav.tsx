@@ -11,7 +11,8 @@ import { cn } from "@/lib/utils";
 const EASE = "power4.out";
 
 const linkBase =
-  "tracked-label relative inline-block uppercase transition-opacity duration-500 " +
+  "tracked-label relative inline-block uppercase opacity-70 transition-opacity " +
+  "duration-500 hover:opacity-100 " +
   "after:absolute after:inset-x-0 after:-bottom-1.5 after:h-px after:origin-center " +
   "after:scale-x-0 after:bg-current after:transition-transform after:duration-500 " +
   "after:ease-[cubic-bezier(0.22,1,0.36,1)] after:content-[''] hover:after:scale-x-100";
@@ -101,25 +102,26 @@ export function SiteNav() {
 
   return (
     <header
+      id="top"
       ref={rootRef}
-      className="absolute inset-x-0 top-0 z-20 text-background"
+      className="relative z-20 border-b border-foreground/10 bg-background text-foreground"
     >
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>
 
-      <div className="relative px-6 pt-8 md:pt-10">
+      <div className="relative px-6 py-7 md:py-9">
         <a
           href="#top"
           data-reveal="wordmark"
-          className="reveal -me-[0.4em] block text-center text-[1.7rem] leading-none font-normal tracking-[0.4em] lowercase md:text-[2.1rem]"
+          className="reveal -me-[0.16em] block text-center text-[1.6rem] leading-none font-normal tracking-[0.16em] lowercase md:text-[1.9rem]"
         >
           {tCommon("siteName")}
         </a>
 
         <nav
           aria-label={tCommon("siteName")}
-          className="mt-6 hidden justify-center md:mt-8 md:flex"
+          className="mt-5 hidden justify-center md:mt-6 md:flex"
         >
           <ul className="flex items-center gap-9 text-[0.7rem] lg:gap-14">
             {links.map((item) => (
@@ -127,10 +129,7 @@ export function SiteNav() {
                 <a
                   href={item.href}
                   data-reveal="link"
-                  className={cn(
-                    "reveal tracking-[0.22em] opacity-80 hover:opacity-100",
-                    linkBase,
-                  )}
+                  className={cn("reveal tracking-[0.2em]", linkBase)}
                 >
                   {item.label}
                 </a>
@@ -138,14 +137,11 @@ export function SiteNav() {
             ))}
             <li
               data-reveal="link"
-              className="reveal border-s border-background/25 ps-9 lg:ps-14"
+              className="reveal border-s border-foreground/15 ps-9 lg:ps-14"
             >
               <LanguageToggle
                 label={t("switchLanguage")}
-                className={cn(
-                  "tracking-[0.22em] opacity-80 hover:opacity-100",
-                  linkBase,
-                )}
+                className={cn("tracking-[0.2em]", linkBase)}
               />
             </li>
           </ul>
@@ -158,7 +154,7 @@ export function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? t("closeMenu") : t("openMenu")}
-          className="reveal absolute end-6 top-8 z-30 flex h-8 w-8 flex-col items-center justify-center gap-[7px] md:hidden"
+          className="reveal absolute end-5 top-1/2 z-30 flex h-8 w-8 -translate-y-1/2 flex-col items-center justify-center gap-[7px] md:hidden"
         >
           <span
             className={cn(
@@ -178,7 +174,7 @@ export function SiteNav() {
       <div
         id="mobile-menu"
         ref={overlayRef}
-        className="invisible fixed inset-0 z-20 flex flex-col items-center justify-center bg-foreground text-background opacity-0 md:hidden"
+        className="invisible fixed inset-0 z-20 flex flex-col items-center justify-center bg-background text-foreground opacity-0 md:hidden"
       >
         <nav aria-label={tCommon("siteName")}>
           <ul className="flex flex-col items-center gap-9 text-center text-[0.95rem]">
@@ -188,7 +184,7 @@ export function SiteNav() {
                   href={item.href}
                   onClick={close}
                   data-reveal="overlay-link"
-                  className={cn("tracking-[0.28em]", linkBase)}
+                  className={cn("tracking-[0.26em]", linkBase)}
                 >
                   {item.label}
                 </a>
@@ -196,12 +192,12 @@ export function SiteNav() {
             ))}
             <li
               data-reveal="overlay-link"
-              className="mt-4 border-t border-background/20 pt-9"
+              className="mt-4 border-t border-foreground/15 pt-9"
             >
               <LanguageToggle
                 label={t("switchLanguage")}
                 onNavigate={close}
-                className={cn("text-[0.8rem] tracking-[0.28em]", linkBase)}
+                className={cn("text-[0.8rem] tracking-[0.26em]", linkBase)}
               />
             </li>
           </ul>
