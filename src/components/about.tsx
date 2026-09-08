@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import gsap from "gsap";
 
-import { ENTRANCE, entranceScale } from "@/lib/entrance";
+import { useRevealOnScroll } from "@/lib/use-reveal-on-scroll";
 
 const PARAGRAPHS = ["p1", "p2", "p3"] as const;
 const LOGO_SLOTS = [0, 1];
@@ -17,40 +16,7 @@ export function About() {
   const t = useTranslations("about");
   const rootRef = useRef<HTMLElement>(null);
 
-  // Reveals once, the first time the section comes into view.
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const targets = root.querySelectorAll("[data-reveal='about']");
-
-    if (entranceScale() === 0) {
-      gsap.set(targets, { opacity: 1, y: 0 });
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        gsap.fromTo(
-          targets,
-          { opacity: 0, y: 22 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.3,
-            stagger: 0.09,
-            ease: ENTRANCE.ease,
-          },
-        );
-      },
-      { rootMargin: "0px 0px -12% 0px" },
-    );
-
-    observer.observe(root);
-    return () => observer.disconnect();
-  }, []);
+  useRevealOnScroll(rootRef, "[data-reveal='about']");
 
   return (
     <section

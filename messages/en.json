@@ -22,5 +22,10 @@
     "p2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "p3": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
     "logo": "Logo"
+  },
+  "spaces": {
+    "restaurant": "The Restaurant",
+    "privateRoom": "The Private Room",
+    "garden": "The Garden"
   }
 }
