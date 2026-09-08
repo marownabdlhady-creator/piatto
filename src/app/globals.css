@@ -8,10 +8,15 @@
   /* Resolved to the Arabic face on /ar (see below). */
   --font-primary: var(--font-latin);
 
-  /* Heights of the two stacked bars. The small-screen menu offsets itself by
-     their sum, so they are declared once here rather than per component. */
+  /* Heights of the stacked bars. Declared once here because the small-screen
+     menu offsets itself by their total. The 3px covers the hairlines: the
+     grid's top and inner rules, and the one under the wordmark row. */
   --bar-top-h: 2.5rem;
+  --grid-cell-h: 3.5rem;
   --bar-main-h: 4rem;
+  --bars-h: calc(
+    var(--bar-top-h) + 2 * var(--grid-cell-h) + var(--bar-main-h) + 3px
+  );
 }
 
 html[lang="ar"] {

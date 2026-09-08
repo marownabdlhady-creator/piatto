@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 
+import { QuickGrid } from "@/components/quick-grid";
 import { TopBar } from "@/components/top-bar";
 import { ENTRANCE, entranceScale } from "@/lib/entrance";
 import { navItems, navUnderline } from "@/lib/nav";
@@ -47,6 +48,12 @@ export function SiteNav() {
           { opacity: 0, y: ENTRANCE.topBar.y },
           { opacity: 1, y: 0, duration: ENTRANCE.topBar.duration * scale },
           ENTRANCE.topBar.at * scale,
+        )
+        .fromTo(
+          "[data-reveal='grid']",
+          { opacity: 0, y: ENTRANCE.grid.y },
+          { opacity: 1, y: 0, duration: ENTRANCE.grid.duration * scale },
+          ENTRANCE.grid.at * scale,
         )
         .fromTo(
           "[data-reveal='wordmark']",
@@ -137,6 +144,7 @@ export function SiteNav() {
       </noscript>
 
       <TopBar />
+      <QuickGrid />
 
       <div className="relative px-4 text-foreground sm:px-6 md:px-8 lg:px-12">
         {/* Small screens: wordmark on the inline start, hamburger on the
@@ -209,7 +217,7 @@ export function SiteNav() {
       <div
         id="mobile-menu"
         ref={overlayRef}
-        className="invisible fixed inset-x-0 bottom-0 top-[calc(var(--bar-top-h)_+_var(--bar-main-h)_+_1px)] z-20 flex flex-col items-center overflow-y-auto bg-background px-6 py-10 text-foreground opacity-0 md:hidden"
+        className="invisible fixed inset-x-0 bottom-0 top-[var(--bars-h)] z-20 flex flex-col items-center overflow-y-auto bg-background px-6 py-10 text-foreground opacity-0 md:hidden"
       >
         <nav aria-label={tCommon("siteName")} className="my-auto w-full max-w-xs">
           <ul className="flex flex-col items-center gap-3 text-center text-[1.05rem]">

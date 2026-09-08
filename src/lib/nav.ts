@@ -26,3 +26,14 @@ export const navUnderline =
   "relative inline-block after:absolute after:inset-x-0 after:h-px after:origin-center " +
   "after:scale-x-0 after:bg-current after:transition-transform after:duration-500 " +
   "after:ease-[cubic-bezier(0.22,1,0.36,1)] after:content-[''] hover:after:scale-x-100";
+
+/**
+ * Shortcut grid shown under the action strip on small screens only. The
+ * WhatsApp cell is a placeholder anchor until the real wa.me link exists.
+ */
+export const quickLinks = [
+  { key: "menu", href: "#menu" },
+  { key: "gallery", href: "#gallery" },
+  { key: "about", href: "#about" },
+  { key: "whatsapp", href: "#whatsapp" },
+] as const;
