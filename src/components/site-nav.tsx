@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 
+import { CompactBar } from "@/components/compact-bar";
 import { LanguageToggle } from "@/components/language-toggle";
 import { QuickGrid } from "@/components/quick-grid";
 import { TopBar } from "@/components/top-bar";
@@ -28,6 +29,9 @@ export function SiteNav() {
   const tCommon = useTranslations("common");
 
   const rootRef = useRef<HTMLElement>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const collapsibleRef = useRef<HTMLDivElement>(null);
+  const compactRef = useRef<HTMLDivElement>(null);
   const scrimRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -35,6 +39,8 @@ export function SiteNav() {
   const drawerTimeline = useRef<gsap.core.Timeline | null>(null);
   const hasOpened = useRef(false);
   const [open, setOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [collapsibleHeight, setCollapsibleHeight] = useState(0);
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -133,6 +139,55 @@ export function SiteNav() {
     if (hasOpened.current) triggerRef.current?.focus();
   }, [open]);
 
+  // Small screens collapse to the wordmark row plus a two-cell dark bar once
+  // the page moves. The dark blocks above are slid out of view rather than
+  // removed from flow, so the bar's box - and everything below it - never
+  // shifts. On desktop those blocks are display:none, the measured distance is
+  // zero, and the compact bar is hidden, so nothing moves.
+  useEffect(() => {
+    const element = collapsibleRef.current;
+    if (!element) return;
+
+    const measure = () => setCollapsibleHeight(element.offsetHeight);
+    const observer = new ResizeObserver(measure);
+
+    measure();
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      // Hysteresis, so a scroll that hovers on the threshold cannot flicker.
+      setCollapsed((current) => (current ? y > 12 : y > 56));
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const shell = shellRef.current;
+    const compact = compactRef.current;
+    if (!shell || !compact) return;
+
+    const scale = entranceScale();
+    const settings = { ease: ENTRANCE.ease, overwrite: "auto" } as const;
+
+    gsap.to(shell, {
+      ...settings,
+      y: collapsed ? -collapsibleHeight : 0,
+      duration: 0.6 * scale,
+    });
+    gsap.to(compact, {
+      ...settings,
+      autoAlpha: collapsed ? 1 : 0,
+      duration: 0.45 * scale,
+    });
+  }, [collapsed, collapsibleHeight]);
+
   // Lock scrolling and allow Escape to dismiss while the drawer is open.
   useEffect(() => {
     if (!open) return;
@@ -155,87 +210,108 @@ export function SiteNav() {
   const shortcuts = quickLinks.map((item) => ({ ...item, label: t(item.key) }));
 
   return (
-    <header id="top" ref={rootRef} className="sticky top-0 z-40 bg-background">
+    <header
+      id="top"
+      ref={rootRef}
+      className="pointer-events-none sticky top-0 z-40"
+    >
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>
 
-      <TopBar />
-      <QuickGrid />
-
-      <div className="relative px-4 text-foreground sm:px-6 md:px-8 md:pt-9 lg:px-12">
-        {/* The wordmark is centred at every width; the hamburger sits at the
-            inline end of the same row, so it mirrors on /ar. */}
-        <div className="relative z-30 flex h-[var(--bar-main-h)] items-center justify-center md:h-auto">
-          <a
-            href="#top"
-            data-reveal="wordmark"
-            className="reveal -me-[0.16em] block text-center text-[1.45rem] leading-none font-normal tracking-[0.16em] lowercase sm:text-[1.6rem] md:text-[1.9rem]"
-          >
-            {tCommon("siteName")}
-          </a>
-
-          <button
-            ref={triggerRef}
-            type="button"
-            data-reveal="bar"
-            onClick={() => setOpen((value) => !value)}
-            aria-expanded={open}
-            aria-controls="site-menu"
-            aria-label={t("openMenu")}
-            className="reveal absolute inset-y-0 end-[-7px] my-auto flex h-12 w-12 flex-col items-center justify-center gap-[10px]"
-          >
-            <span className="h-px w-[34px] bg-current" />
-            <span className="h-px w-[34px] bg-current" />
-          </button>
+      {/* Shell: the part that slides up out of view when the bar collapses. */}
+      <div
+        ref={shellRef}
+        className="pointer-events-auto relative bg-background"
+      >
+        <div ref={collapsibleRef}>
+          <TopBar />
+          <QuickGrid />
         </div>
 
-        {/* Full-bleed rule: the bar's bottom edge on small screens, the
-            divider between wordmark and links from md. */}
-        <div
-          data-reveal="bar"
-          aria-hidden="true"
-          className="reveal relative z-30 -mx-4 h-px bg-foreground/10 sm:-mx-6 md:-mx-8 md:mt-6 lg:-mx-12"
-        />
+        <div className="relative px-4 text-foreground sm:px-6 md:px-8 md:pt-9 lg:px-12">
+          {/* The wordmark is centred at every width; the hamburger sits at the
+            inline end of the same row, so it mirrors on /ar. */}
+          <div className="relative z-30 flex h-[var(--bar-main-h)] items-center justify-center md:h-auto">
+            <a
+              href="#top"
+              data-reveal="wordmark"
+              className="reveal -me-[0.16em] block text-center text-[1.45rem] leading-none font-normal tracking-[0.16em] lowercase sm:text-[1.6rem] md:text-[1.9rem]"
+            >
+              {tCommon("siteName")}
+            </a>
 
-        {/* Curated desktop row. The complete set of sections lives in the
+            <button
+              ref={triggerRef}
+              type="button"
+              data-reveal="bar"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              aria-label={t("openMenu")}
+              className="reveal absolute inset-y-0 end-[-7px] my-auto flex h-12 w-12 flex-col items-center justify-center gap-[10px]"
+            >
+              <span className="h-px w-[34px] bg-current" />
+              <span className="h-px w-[34px] bg-current" />
+            </button>
+          </div>
+
+          {/* Full-bleed rule: the bar's bottom edge on small screens, the
+            divider between wordmark and links from md. */}
+          <div
+            data-reveal="bar"
+            aria-hidden="true"
+            className="reveal relative z-30 -mx-4 h-px bg-foreground/10 sm:-mx-6 md:-mx-8 md:mt-6 lg:-mx-12"
+          />
+
+          {/* Curated desktop row. The complete set of sections lives in the
             drawer behind the hamburger. */}
-        <nav
-          aria-label={tCommon("siteName")}
-          className="hidden md:mt-6 md:flex md:justify-center"
-        >
-          <ul className="flex items-center gap-8 text-[0.7rem] lg:gap-12">
-            {shortcuts.map((item) => (
-              <li key={item.key}>
-                <a
-                  href={item.href}
+          <nav
+            aria-label={tCommon("siteName")}
+            className="hidden md:mt-6 md:flex md:justify-center"
+          >
+            <ul className="flex items-center gap-8 text-[0.7rem] lg:gap-12">
+              {shortcuts.map((item) => (
+                <li key={item.key}>
+                  <a
+                    href={item.href}
+                    data-reveal="link"
+                    className={cn("reveal", barLink)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/reservations"
                   data-reveal="link"
                   className={cn("reveal", barLink)}
                 >
-                  {item.label}
-                </a>
+                  {t("reservations")}
+                </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                href="/reservations"
+              <li
                 data-reveal="link"
-                className={cn("reveal", barLink)}
+                className="reveal border-s border-foreground/15 ps-8 lg:ps-12"
               >
-                {t("reservations")}
-              </Link>
-            </li>
-            <li
-              data-reveal="link"
-              className="reveal border-s border-foreground/15 ps-8 lg:ps-12"
-            >
-              <LanguageToggle
-                label={t("switchLanguage")}
-                labelClassName={barLink}
-              />
-            </li>
-          </ul>
-        </nav>
+                <LanguageToggle
+                  label={t("switchLanguage")}
+                  labelClassName={barLink}
+                />
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        {/* Sits just under the shell, so it comes into view as the dark blocks
+            above slide out. Small screens only. */}
+        <div
+          ref={compactRef}
+          className="invisible absolute inset-x-0 top-full opacity-0 md:hidden"
+        >
+          <CompactBar />
+        </div>
       </div>
 
       {/* Scrim: dims the page, which stays visible beside the panel. */}
@@ -243,7 +319,7 @@ export function SiteNav() {
         ref={scrimRef}
         onClick={close}
         aria-hidden="true"
-        className="invisible fixed inset-0 z-40 bg-foreground/25 opacity-0"
+        className="pointer-events-auto invisible fixed inset-0 z-40 bg-foreground/25 opacity-0"
       />
 
       {/* Slim drawer anchored to the inline end, so it enters from the same
@@ -253,7 +329,7 @@ export function SiteNav() {
         ref={drawerRef}
         role="dialog"
         aria-label={tCommon("siteName")}
-        className="invisible fixed inset-y-0 end-0 z-50 flex w-[76%] max-w-80 flex-col overflow-y-auto bg-background text-foreground opacity-0 md:w-80"
+        className="pointer-events-auto invisible fixed inset-y-0 end-0 z-50 flex w-[76%] max-w-80 flex-col overflow-y-auto bg-background text-foreground opacity-0 md:w-80"
       >
         <div className="flex justify-end px-6 py-5 md:px-8">
           <button

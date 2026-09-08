@@ -2,10 +2,8 @@
 
 import { useTranslations } from "next-intl";
 
-import { quickLinks } from "@/lib/nav";
+import { darkCell, darkCellRule, quickLinks } from "@/lib/nav";
 import { cn } from "@/lib/utils";
-
-const hairline = "border-background/20";
 
 /**
  * Small-screen shortcut grid: four dark cells sitting under the action strip,
@@ -21,7 +19,7 @@ export function QuickGrid() {
       data-reveal="grid"
       className={cn(
         "reveal relative z-30 grid grid-cols-2 border-t bg-foreground text-background md:hidden",
-        hairline,
+        darkCellRule,
       )}
     >
       {quickLinks.map((item, index) => (
@@ -29,9 +27,10 @@ export function QuickGrid() {
           key={item.key}
           href={item.href}
           className={cn(
-            "tracked-label flex h-[var(--grid-cell-h)] items-center justify-center px-3 text-center text-[0.62rem] tracking-[0.18em] uppercase opacity-80 transition-opacity duration-500 hover:opacity-100",
-            index % 2 === 0 && cn("border-e", hairline),
-            index < 2 && cn("border-b", hairline),
+            darkCell,
+            "h-[var(--grid-cell-h)]",
+            index % 2 === 0 && cn("border-e", darkCellRule),
+            index < 2 && cn("border-b", darkCellRule),
           )}
         >
           {t(item.key)}

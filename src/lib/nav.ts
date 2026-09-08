@@ -38,3 +38,20 @@ export const quickLinks = [
   { key: "about", href: "#about" },
   { key: "whatsapp", href: "#whatsapp" },
 ] as const;
+
+/** Hairline colour used to divide the dark shortcut cells. */
+export const darkCellRule = "border-background/20";
+
+/** Shared type treatment for the dark shortcut cells, grid and compact bar. */
+export const darkCell =
+  "tracked-label flex items-center justify-center px-3 text-center " +
+  "text-[0.62rem] tracking-[0.18em] uppercase opacity-80 " +
+  "transition-opacity duration-500 hover:opacity-100";
+
+/**
+ * The two shortcuts that survive into the collapsed small-screen bar.
+ */
+export const compactLinks = [
+  { key: "menu", href: "#menu" },
+  { key: "whatsapp", href: "#whatsapp" },
+] as const;

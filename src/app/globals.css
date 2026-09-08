@@ -70,11 +70,11 @@ body {
   overflow-x: clip;
 }
 
-/* The bar is sticky, so in-page anchors need to clear it. These are the bar
-   stack's height rounded up: the tall small-screen stack (strip, grid, row)
-   and the shorter desktop one. */
+/* The bar is sticky, so in-page anchors need to clear it. Any anchor jump
+   leaves the page scrolled, which on small screens means the collapsed bar -
+   the wordmark row plus the two-cell strip - is what the target has to clear. */
 html {
-  scroll-padding-top: 14rem;
+  scroll-padding-top: 7rem;
 }
 
 @media (min-width: 48rem) {
