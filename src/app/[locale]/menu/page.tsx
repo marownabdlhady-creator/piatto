@@ -34,6 +34,7 @@ export default async function Menu({ params }: MenuProps) {
           title={t("menu")}
           image="/feature-menu.jpg"
           menu={getMenuDocument("menu", locale)}
+          sectionsLabel={tPage("sections")}
           crossLink={{ href: "/drinks", label: tPage("viewDrinks") }}
         />
       </main>

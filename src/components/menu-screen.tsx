@@ -91,6 +91,8 @@ type MenuScreenProps = {
   title: string;
   image: string;
   menu: MenuDocument;
+  /** Opens the section list on the screens too narrow for the chip row. */
+  sectionsLabel: string;
   /** The other menu, linked once at the foot of the page. */
   crossLink: { href: string; label: string };
 };
@@ -105,6 +107,7 @@ export function MenuScreen({
   title,
   image,
   menu,
+  sectionsLabel,
   crossLink,
 }: MenuScreenProps) {
   const sections = menu.sections.map(({ id, title: label }) => ({
@@ -140,7 +143,11 @@ export function MenuScreen({
         ) : null}
       </header>
 
-      <MenuNav sections={sections} label={title} />
+      <MenuNav
+        sections={sections}
+        label={title}
+        sectionsLabel={sectionsLabel}
+      />
 
       <div className="px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[72rem]">

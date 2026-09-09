@@ -44,6 +44,7 @@
     "about": "About"
   },
   "menuPage": {
+    "sections": "Sections",
     "viewDrinks": "View Drinks",
     "viewMenu": "View Menu"
   },

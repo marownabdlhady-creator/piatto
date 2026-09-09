@@ -15,28 +15,46 @@ export type MenuNavSection = {
   title: string;
 };
 
+type MenuNavProps = {
+  sections: MenuNavSection[];
+  /** Names the bar for assistive tech: the page's own title. */
+  label: string;
+  /** The word on the control that opens the list on small screens. */
+  sectionsLabel: string;
+};
+
+const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
+
+/** Small screens get the list on demand; the row only ever shows from md. */
+const MOBILE_QUERY = "(min-width: 48rem)";
+
 /**
- * Sticky category bar: one chip per section, parked just under the site nav.
+ * Sticky category bar, parked just under the site nav.
  *
- * The chip for the section currently under the bar is marked active. That is
+ * From md it is a row of chips, one per section. Below that the row would run
+ * off the side of the screen and hide half the menu, so the same sections sit
+ * behind a single control that opens them as one vertical list.
+ *
+ * Either way the section currently under the bar is marked active. That is
  * read off a one-pixel band placed exactly at the bar's lower edge - the
  * sections run flush into each other, so precisely one of them crosses that
  * line at a time, and the observer only wakes when the crossing changes.
- *
- * The row scrolls sideways once the chips outrun the screen, which is the
- * usual case on a phone; the active chip is kept in view, and both that and
- * the jump to a section are instant under reduced motion.
  */
-export function MenuNav({
-  sections,
-  label,
-}: {
-  sections: MenuNavSection[];
-  label: string;
-}) {
+export function MenuNav({ sections, label, sectionsLabel }: MenuNavProps) {
   const barRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(sections[0]?.id ?? "");
+  const [open, setOpen] = useState(false);
+
+  const activeTitle =
+    sections.find((section) => section.id === active)?.title ?? "";
+
+  // The lock is set from the handlers rather than an effect, so a tap that
+  // both closes the panel and scrolls has scrolling back before it moves.
+  const close = useCallback(() => {
+    setOpen(false);
+    document.body.style.overflow = "";
+  }, []);
 
   /** Where the bar's lower edge sits once it is stuck. */
   const threshold = useCallback(() => {
@@ -79,8 +97,37 @@ export function MenuNav({
     };
   }, [sections, threshold]);
 
-  // Keeps the active chip reachable on the narrow screens where the row
-  // scrolls. scrollIntoView handles the reversed axis on /ar, which hand-set
+  // The panel belongs to the small-screen layout only, so it goes away with it.
+  useEffect(() => {
+    const query = window.matchMedia(MOBILE_QUERY);
+    const sync = () => {
+      if (query.matches) close();
+    };
+
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, [close]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open, close]);
+
+  // Nothing should be left holding the page still if this unmounts open.
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  // Keeps the active chip reachable in the row, which can outrun even a wide
+  // screen. scrollIntoView handles the reversed axis on /ar, which hand-set
   // scroll offsets do not.
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -102,60 +149,156 @@ export function MenuNav({
 
     event.preventDefault();
     setActive(id);
+    close();
     section.scrollIntoView({
       behavior: prefersReducedMotion() ? "auto" : "smooth",
       block: "start",
     });
   };
 
-  return (
-    <div
-      ref={barRef}
-      className={cn(
-        "sticky top-[6.75rem] z-30 border-y border-foreground/10 bg-background md:top-[9.5rem]",
-        // Covers the sliver between the site nav and this bar, so nothing
-        // scrolls through the join. A sticky box is already positioned, so
-        // the cover hangs off it directly.
-        "before:absolute before:inset-x-0 before:bottom-full before:h-10 before:bg-background",
-      )}
-    >
-      <nav
-        ref={scrollerRef}
-        aria-label={label}
-        className="no-scrollbar overflow-x-auto overscroll-x-contain"
-      >
-        <ul className="mx-auto flex w-max min-w-full items-stretch justify-center gap-7 px-4 sm:px-6 md:gap-10 md:px-8 lg:px-12">
-          {sections.map((section) => {
-            const current = section.id === active;
+  const toggle = () => {
+    if (open) {
+      close();
+      return;
+    }
 
-            return (
-              <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  data-chip={section.id}
-                  aria-current={current ? "true" : undefined}
-                  onClick={(event) => jump(event, section.id)}
-                  className={cn(
-                    "tracked-label block py-4 text-[0.62rem] tracking-[0.18em] whitespace-nowrap uppercase",
-                    "transition-opacity duration-300",
-                    current ? "opacity-100" : "opacity-45 hover:opacity-80",
-                  )}
-                >
-                  <span
+    setOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  return (
+    <>
+      {/* Dims the page under the panel. It sits below the bar, so the bar and
+          the site nav above it stay at full strength. */}
+      <div
+        aria-hidden="true"
+        onClick={close}
+        className={cn(
+          "fixed inset-0 z-20 bg-foreground/20 md:hidden",
+          "transition-[opacity,visibility] duration-500 motion-reduce:transition-none",
+          EASE,
+          open ? "visible opacity-100" : "invisible opacity-0",
+        )}
+      />
+
+      <div
+        ref={barRef}
+        className={cn(
+          "sticky top-[6.75rem] z-30 border-y border-foreground/10 bg-background md:top-[9.5rem]",
+          // Covers the sliver between the site nav and this bar, so nothing
+          // scrolls through the join. A sticky box is already positioned, so
+          // the cover hangs off it directly.
+          "before:absolute before:inset-x-0 before:bottom-full before:h-10 before:bg-background",
+        )}
+      >
+        <nav aria-label={label} className="md:hidden">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-expanded={open}
+            aria-controls="menu-sections"
+            className="flex w-full items-center justify-between gap-4 px-4 py-4 text-start sm:px-6"
+          >
+            <span className="flex min-w-0 items-baseline gap-3">
+              <span className="tracked-label text-[0.6rem] tracking-[0.18em] uppercase opacity-45">
+                {sectionsLabel}
+              </span>
+              <span className="tracked-label min-w-0 truncate text-[0.68rem] tracking-[0.16em] uppercase">
+                {activeTitle}
+              </span>
+            </span>
+
+            <svg
+              viewBox="0 0 12 8"
+              aria-hidden="true"
+              className={cn(
+                "h-2 w-3 shrink-0 transition-transform duration-500",
+                "motion-reduce:transition-none",
+                EASE,
+                open && "rotate-180",
+              )}
+            >
+              <path
+                d="M1 1.5 6 6.5 11 1.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+              />
+            </svg>
+          </button>
+
+          <div
+            id="menu-sections"
+            className={cn(
+              "absolute inset-x-0 top-full max-h-[62svh] overflow-y-auto overscroll-contain",
+              "border-b border-foreground/10 bg-background",
+              "transition-[opacity,transform,visibility] duration-500",
+              "motion-reduce:transition-none",
+              EASE,
+              open
+                ? "visible translate-y-0 opacity-100"
+                : "invisible -translate-y-2 opacity-0",
+            )}
+          >
+            <ul className="px-4 pb-4 sm:px-6">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a
+                    href={`#${section.id}`}
+                    aria-current={section.id === active ? "true" : undefined}
+                    onClick={(event) => jump(event, section.id)}
                     className={cn(
-                      "block border-b pb-1.5",
-                      current ? "border-current" : "border-transparent",
+                      "tracked-label block border-t border-foreground/10 py-4",
+                      "text-[0.68rem] tracking-[0.16em] uppercase",
+                      section.id === active ? "opacity-100" : "opacity-50",
                     )}
                   >
                     {section.title}
-                  </span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        <nav
+          ref={scrollerRef}
+          aria-label={label}
+          className="no-scrollbar hidden overflow-x-auto overscroll-x-contain md:block"
+        >
+          <ul className="mx-auto flex w-max min-w-full items-stretch justify-center gap-7 px-4 sm:px-6 md:gap-10 md:px-8 lg:px-12">
+            {sections.map((section) => {
+              const current = section.id === active;
+
+              return (
+                <li key={section.id}>
+                  <a
+                    href={`#${section.id}`}
+                    data-chip={section.id}
+                    aria-current={current ? "true" : undefined}
+                    onClick={(event) => jump(event, section.id)}
+                    className={cn(
+                      "tracked-label block py-4 text-[0.62rem] tracking-[0.18em] whitespace-nowrap uppercase",
+                      "transition-opacity duration-300",
+                      current ? "opacity-100" : "opacity-45 hover:opacity-80",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "block border-b pb-1.5",
+                        current ? "border-current" : "border-transparent",
+                      )}
+                    >
+                      {section.title}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 }
 
