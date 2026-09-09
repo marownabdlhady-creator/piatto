@@ -16,7 +16,42 @@
     "switchLanguage": "Switch language"
   },
   "reservations": {
-    "title": "Reservations"
+    "title": "Reservations",
+    "heading": "Reserve a Table",
+    "intro": "Tell us when you are coming and the table will be ready. Sending the form opens WhatsApp with your details written out, for you to send to us.",
+    "imageAlt": "The dining room, laid and lit for the evening",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Who the table is for",
+      "phone": "Phone",
+      "phonePlaceholder": "+970 00 000 0000",
+      "guests": "Guests",
+      "guestsPlaceholder": "How many",
+      "date": "Date",
+      "time": "Time",
+      "notes": "Notes",
+      "notesHint": "Optional — an occasion, a seating preference, anything else.",
+      "notesPlaceholder": "Anything we should know",
+      "submit": "Reserve via WhatsApp",
+      "opening": "Opening WhatsApp — send the message and we will confirm your table."
+    },
+    "errors": {
+      "name": "Please tell us who the table is for.",
+      "phone": "Please add a number we can reach you on.",
+      "guests": "Please choose how many are coming.",
+      "date": "Please choose a date.",
+      "past": "Please choose today or a day after it.",
+      "time": "Please choose a time."
+    },
+    "message": {
+      "intro": "New reservation request",
+      "name": "Name",
+      "phone": "Phone",
+      "guests": "Guests",
+      "date": "Date",
+      "time": "Time",
+      "notes": "Notes"
+    }
   },
   "about": {
     "line1": "Piatto means “plate” in Italian — where flavors, people, and beautiful moments come together around the table.",
