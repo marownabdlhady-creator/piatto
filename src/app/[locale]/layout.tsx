@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 
+import { Footer } from "@/components/footer";
 import { fontVariables } from "@/lib/fonts";
 import { localeDirections, routing } from "@/i18n/routing";
 
@@ -41,7 +42,11 @@ export default async function LocaleLayout({
       className={`${fontVariables} h-full`}
     >
       <body className="min-h-full">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {children}
+          {/* Closes out every route, so no page has to carry it. */}
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

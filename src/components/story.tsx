@@ -120,7 +120,7 @@ export function Story() {
         <Frame image={storyImages.table} />
       </div>
 
-      {/* Room for the footer, which is built in a later step. */}
+      {/* Run-out: keeps the closing still clear of the footer below. */}
       <div className="h-24 md:h-32" />
     </article>
   );

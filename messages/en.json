@@ -42,5 +42,17 @@
     "menu": "Menu",
     "drinks": "Drinks",
     "about": "About"
+  },
+  "footer": {
+    "address": "Address — to be provided",
+    "tel": "Tel: <n>+000 000 0000</n>",
+    "fax": "Fax: — to be provided",
+    "hours": "Opening Hours",
+    "hoursWeekdays": "Sun–Thu: <n>00:00–00:00</n>",
+    "hoursWeekend": "Fri–Sat: <n>00:00–00:00</n>",
+    "contact": "Contact Us",
+    "contactTel": "Tel: <n>+000 000 0000</n>",
+    "whatsapp": "WhatsApp: <n>+000 000 0000</n>",
+    "logo": "Logo"
   }
 }
