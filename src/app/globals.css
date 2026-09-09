@@ -99,3 +99,13 @@ html {
 html[lang="ar"] .display-tight {
   letter-spacing: normal;
 }
+
+/* Horizontal scrollers that are swiped rather than dragged - the sticky
+   category bar on the menus - keep their scrollbar out of the design. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

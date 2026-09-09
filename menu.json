@@ -1,0 +1,1126 @@
+{
+  "en": {
+    "currency": "₪",
+    "sections": [
+      {
+        "id": "breakfast",
+        "title": "Breakfast",
+        "items": [
+          {
+            "name": "Breakfast for Two",
+            "description": "A selection of assorted spreads and dips, served with warm focaccia from the taboon and a fresh salad. Add eggs your way: sunny-side up, omelette, or soft-boiled. Includes a hot and a cold drink per person of your choice. Hot drinks: Arabic coffee, Nescafé, cappuccino, or espresso. Cold drinks: soft drinks or fresh juice (orange or carrot).",
+            "price": 125
+          },
+          {
+            "name": "Breakfast for One",
+            "description": "A selection of assorted spreads and dips, served with warm focaccia from the taboon and a fresh salad. Add eggs your way: sunny-side up, omelette, or soft-boiled. Includes a hot and a cold drink of your choice. Hot drinks: Arabic coffee, Nescafé, cappuccino, or espresso. Cold drinks: soft drinks or fresh juice (orange or carrot).",
+            "price": 65
+          },
+          {
+            "name": "Shakshuka",
+            "description": "A rich red tomato shakshuka with two eggs, served with warm focaccia from the taboon and a fresh salad. Includes a hot and a cold drink of your choice. Hot drinks: Arabic coffee, Nescafé, cappuccino, or espresso. Cold drinks: soft drinks or fresh juice (orange or carrot).",
+            "price": 58
+          },
+          {
+            "name": "Shakshuka with Arabic Sausage",
+            "description": "A rich red tomato shakshuka with Arabic sausage and two eggs, served with warm focaccia from the taboon and a fresh salad.",
+            "price": 58
+          },
+          {
+            "name": "Meat Fatteh",
+            "description": "Lamb seasoned with cumin and parsley, with garlic confit, roasted tomatoes and sunny-side-up eggs, served with tahini and warm taboon focaccia and a fresh salad.",
+            "price": 54
+          },
+          {
+            "name": "Foul Bab El-Amoud",
+            "description": "Hummus, tahini, grilled eggplant and labneh, with cumin-seasoned soft-boiled egg, served with a fresh salad and warm Jerusalem ka'ak from the taboon.",
+            "price": 48
+          },
+          {
+            "name": "Stuffed Fatayer",
+            "description": "Pastry filled with Arabic cheese, mozzarella and green za'atar, baked in the taboon. Served with labneh, olive tapenade and fresh vegetables.",
+            "price": 49
+          },
+          {
+            "name": "Arabic Fatayer",
+            "description": "Pastry filled with labneh, za'atar, olive oil and boiled egg, baked in the taboon. Served with fresh tomatoes, cucumber and green olives.",
+            "price": 48
+          },
+          {
+            "name": "Stuffed Ka'ak",
+            "description": "Jerusalem ka'ak filled with pesto, mozzarella, Kalamata olives and sun-dried tomatoes, baked in the taboon until hot and crisp.",
+            "price": 42
+          },
+          {
+            "name": "Manaqish Platter",
+            "description": "A selection of manaqish baked in the taboon in three flavors: za'atar, salty cheese, and tomato with onion. Served with fresh vegetables.",
+            "price": 45
+          },
+          {
+            "name": "Manqousha with Eggs & Arabic Cheese",
+            "description": "Za'atar manqousha from the taboon, with sunny-side-up eggs and pieces of fried Arabic cheese. Served with fresh vegetables.",
+            "price": 54
+          },
+          {
+            "name": "Taboon Ejjeh",
+            "description": "Taboon focaccia filled with ejjeh, labneh, olive tapenade, lettuce and tomato. Served with fresh vegetables.",
+            "price": 25
+          },
+          {
+            "name": "Taboon Halloumi",
+            "description": "Taboon focaccia filled with grilled halloumi, tomato tapenade, arugula and tomato. Served with fresh vegetables.",
+            "price": 28
+          },
+          {
+            "name": "Nostalgic Breakfast",
+            "description": "A breakfast with the flavor of the old days, inspired by our grandmothers' table and the warmth of home. Includes a selection of fried Arabic cheese with qarshalleh, hummus, labneh in assorted flavors, fresh vegetables, and a variety of manaqish baked in the taboon.",
+            "price": 48
+          },
+          {
+            "name": "Roast Beef Roma",
+            "description": "Taboon focaccia filled with warm roast beef, mozzarella, pesto, lettuce and arugula, with sun-dried cherry tomatoes and a touch of thick balsamic. Served with hot fries and parmesan.",
+            "price": 38
+          }
+        ]
+      },
+      {
+        "id": "pizza",
+        "title": "Pizza, Focaccia & Fresh Bakes from the Taboon",
+        "items": [
+          {
+            "name": "Alfredo Pizza",
+            "description": "Taboon pizza with herb-infused cream sauce, mozzarella, chicken breast pieces and fresh mushrooms.",
+            "price": 64
+          },
+          {
+            "name": "Pepperoni Pizza",
+            "description": "Taboon pizza with tomato sauce, mozzarella and pepperoni slices, with a touch of grated parmesan.",
+            "price": 60
+          },
+          {
+            "name": "Galilee Pizza",
+            "description": "Taboon pizza with fresh pesto, mozzarella, goat cheese slices and cherry tomatoes, with Kalamata olives and a touch of fresh green za'atar.",
+            "price": 69
+          },
+          {
+            "name": "Umm El-Zeitoun",
+            "description": "Taboon pizza dough topped with kofta, tahini and roasted tomato pieces, with parsley, purple onion, hot pepper and pine nuts. Served with green olives.",
+            "price": 72
+          },
+          {
+            "name": "Bella Curry",
+            "description": "Taboon pizza with curry-marinated chicken pieces, mozzarella and a touch of fresh green onion.",
+            "price": 58
+          },
+          {
+            "name": "Margherita Pizza",
+            "description": "Classic taboon pizza with tomato sauce and mozzarella.",
+            "price": 48
+          },
+          {
+            "name": "Pizza Your Way",
+            "description": "Choose your favorite flavors and build your pizza to your taste, with a selection of toppings: olives, tomato, onion, corn, pepper and salami.",
+            "price": 58
+          },
+          {
+            "name": "Taboon Kebab",
+            "description": "Taboon focaccia with kebab and grilled vegetables, tahini and amba. Served with house pickles and green olives.",
+            "price": 59
+          },
+          {
+            "name": "Meat on Dough",
+            "description": "Lamb and veal seasoned with a blend of spices and herbs, baked on fresh dough in the taboon. Served with fresh vegetables and tahini.",
+            "price": 59
+          },
+          {
+            "name": "Musakhan on Focaccia",
+            "description": "Taboon focaccia with sumac-seasoned chicken, onion and tahini, with a touch of fresh parsley. Served with vegetables and green olives.",
+            "price": 58
+          },
+          {
+            "name": "Cheese Focaccia",
+            "description": "Taboon focaccia with a blend of cream cheese, mozzarella and feta. Served with fresh vegetables and olives.",
+            "price": 48
+          },
+          {
+            "name": "Garlic Bread",
+            "description": "Garlic-flavored taboon focaccia, served with olives and balsamic olive oil. Available with or without melted mozzarella.",
+            "priceOptions": [
+              { "label": "With mozzarella", "price": 45 },
+              { "label": "Without cheese", "price": 39 }
+            ]
+          },
+          {
+            "name": "Za'atar Manqousha",
+            "description": "Za'atar prepared on pizza dough and baked in the taboon. Served with labneh and fresh vegetables.",
+            "price": 39
+          },
+          {
+            "name": "Pesto Focaccia",
+            "description": "Taboon focaccia with fresh pesto, mozzarella pieces and cherry tomatoes.",
+            "price": 39
+          },
+          {
+            "name": "Burrata Pizza",
+            "description": "Taboon pizza with creamy burrata, arugula and cherry tomatoes marinated in lemon and olive oil, with a touch of thick balsamic.",
+            "price": 60
+          },
+          {
+            "name": "Sophia Loren",
+            "description": "Taboon pizza with mozzarella and roast beef slices, arugula and a touch of thick balsamic.",
+            "price": 68
+          }
+        ]
+      },
+      {
+        "id": "starters",
+        "title": "Starters",
+        "items": [
+          {
+            "name": "House Bread",
+            "description": "Three focaccia fingers from the taboon in assorted sesame and herb flavors, with olive oil and salt. Served with a selection of house dips: garlic confit with balsamic, salt-and-lemon eggplant, and hummus with labneh and tahini, plus green olives.",
+            "price": 38
+          },
+          {
+            "name": "Caprese",
+            "description": "Cherry tomatoes with mozzarella and Kalamata olives, marinated in olive oil and balsamic, with a touch of fresh basil. Served with hot taboon bread.",
+            "price": 52
+          },
+          {
+            "name": "Mushroom with Cheese",
+            "description": "Fresh mushrooms baked in the taboon in a rich creamy sauce with a blend of cheeses, with a touch of za'atar.",
+            "price": 56
+          },
+          {
+            "name": "Arancini",
+            "description": "Za'atar, Persian mushroom, natural mushroom, kemhini and parmesan risotto balls, served on Neapolitan sauce, with goat cheese and a touch of parmesan.",
+            "price": 46
+          },
+          {
+            "name": "Sultan's Eggplant",
+            "description": "Eggplant grilled in the taboon, seasoned with date molasses and garnished with a selection of creamy cheeses and fresh greens, flavored with thick balsamic. Served with hot focaccia.",
+            "price": 54
+          },
+          {
+            "name": "Arayes Sultan",
+            "description": "Toasted arayes, served with house pickles, tahini and green olives.",
+            "price": 56
+          },
+          {
+            "name": "Kibbeh",
+            "description": "Five kibbeh balls, served on a salad of chickpeas and cherry tomatoes, with labneh cream and tahini.",
+            "price": 48
+          },
+          {
+            "name": "Hummus with Meat",
+            "description": "Hummus with pieces of veal fillet and toasted pine nuts, served with taboon focaccia.",
+            "price": 49
+          },
+          {
+            "name": "Halloumi Fingers",
+            "description": "Halloumi fingers seasoned with za'atar, mint and basil, coated in a crisp qarshalleh crust, fried and served hot.",
+            "price": 43
+          },
+          {
+            "name": "Eggplant Carpaccio with Cheese",
+            "description": "Grilled eggplant served with tomato, nuts, tahini, labneh and garlic confit. Served with taboon bread.",
+            "price": 48
+          },
+          {
+            "name": "Tabbouleh Dnis",
+            "description": "Bulgur seasoned with dill, parsley, mint and basil, with sea bream pieces, jujube, cucumber, tomato and seasonal fruit, served on labneh with toasted pine nuts and green basil oil.",
+            "price": 48
+          },
+          {
+            "name": "Italian Bruschetta",
+            "description": "Slices of ciabatta flavored with olive oil, garlic and roasted tomato in the taboon, with fresh tomatoes seasoned with basil and Persian za'atar, flavored with balsamic and parmesan.",
+            "price": 45
+          },
+          {
+            "name": "Sea Bass Ceviche",
+            "description": "Ceviche of fresh sea bass with cucumber, red onion, radish, mint and parsley, and a touch of seasonal fruit. Served on roasted ciabatta with lemon-and-oil seasoned labneh, garnished with green onion, hot red pepper and parmesan.",
+            "price": 50
+          },
+          {
+            "name": "Calamari Tempura",
+            "description": "Crisp tempura calamari, served on labneh with a touch of basil oil.",
+            "price": 55
+          }
+        ]
+      },
+      {
+        "id": "salads",
+        "title": "Salads",
+        "items": [
+          {
+            "name": "Syrian Tabbouleh",
+            "description": "Fresh tabbouleh of parsley and bulgur, with green onion, mint and tomato, and a touch of nuts.",
+            "price": 42
+          },
+          {
+            "name": "Al-Souq Salad",
+            "description": "A selection of fresh vegetables with fried, crisp labneh balls, in a citrus vinaigrette.",
+            "price": 49
+          },
+          {
+            "name": "Quinoa Salad",
+            "description": "White quinoa with cucumber, cherry tomatoes, jujube and seasonal fruit, with a fresh herb mix (parsley, mint, dill and basil), seasoned with olive oil and lemon and garnished with pine nuts.",
+            "price": 49
+          },
+          {
+            "name": "Caesar Salad",
+            "description": "Fresh romaine hearts with roasted bread and parmesan, in a classic Caesar dressing. Add chicken pieces on request.",
+            "priceOptions": [
+              { "label": "Plain", "price": 43 },
+              { "label": "With chicken", "price": 51 }
+            ]
+          },
+          {
+            "name": "Fattoush",
+            "description": "A salad of tomato, cucumber and radish, with green onion, purple onion, parsley and toasted bread, seasoned with sumac. Served with Arabic cheese and a touch of fresh parsley.",
+            "price": 45
+          },
+          {
+            "name": "Bethany Salad",
+            "description": "Tomato and cucumber with purple onion and feta, served with fried, crisp shraak bread and sumac.",
+            "price": 49
+          },
+          {
+            "name": "Halloumi Salad",
+            "description": "Fresh lettuce with carrot, sweet pepper, cherry tomatoes and fried halloumi, seasoned with mint vinaigrette.",
+            "price": 50
+          },
+          {
+            "name": "Teriyaki Mushroom Salad",
+            "description": "A selection of hot mushrooms with veal fillet slices, in teriyaki sauce with a touch of fresh green onion.",
+            "price": 75
+          },
+          {
+            "name": "Thai Salad",
+            "description": "A selection of lettuce with sweet potato, cherry tomatoes, mushroom and carrot, with fried shrimp in a sweet chili sauce and lemon pieces, garnished with a touch of toasted almonds.",
+            "price": 75
+          },
+          {
+            "name": "Teriyaki Noodles",
+            "description": "Noodles with chicken pieces and sautéed vegetables, in teriyaki and soy sauce, with a touch of fresh green onion.",
+            "priceOptions": [
+              { "label": "With chicken", "price": 64 },
+              { "label": "Without chicken", "price": 56 }
+            ]
+          },
+          {
+            "name": "Aurora Salad",
+            "description": "A selection of lettuce and baby arugula with carrot, cucumber, tomato and sweet potato, with feta cheese, garnished with crisp sweet potato chips, nuts and seasonal fruit.",
+            "price": 48
+          },
+          {
+            "name": "Burrata Salad",
+            "description": "Burrata with cherry tomatoes, arugula and basil, seasoned with lemon and olive oil, and served with taboon focaccia.",
+            "price": 50
+          }
+        ]
+      },
+      {
+        "id": "italian",
+        "title": "From Italy",
+        "items": [
+          {
+            "name": "Frikeh with Cabbage",
+            "description": "Frikeh seasoned with white cabbage, beetroot, carrot and mushroom, with sweet pepper and chicken breast pieces. Served hot.",
+            "price": 58
+          },
+          {
+            "name": "Tortellini Ricotta & Spinach",
+            "description": "Tortellini filled with spinach and ricotta, in a creamy sauce with a touch of basil oil.",
+            "price": 58
+          },
+          {
+            "name": "Spaghetti Pomodoro",
+            "description": "Spaghetti in tomato sauce, with fresh cherry tomatoes sautéed in garlic, parmesan and fresh basil.",
+            "price": 45
+          },
+          {
+            "name": "Pappardelle Salmon",
+            "description": "Pappardelle in a creamy sauce, with grilled salmon pieces, broccoli and green peas, served with parmesan on the side.",
+            "price": 75
+          },
+          {
+            "name": "Pesto Gnocchi with Goat Cheese",
+            "description": "Potato gnocchi in a creamy pesto sauce, with goat cheese.",
+            "price": 58
+          },
+          {
+            "name": "Shrimp Fettuccine",
+            "description": "Fettuccine in a creamy sauce with shrimp. Green peas can be added on request. Served with parmesan on the side.",
+            "price": 88
+          },
+          {
+            "name": "Sweet Potato Ravioli",
+            "description": "Ravioli filled with sweet potato, in a creamy chestnut sauce with sweet potato pieces, and a touch of basil and parmesan.",
+            "price": 58
+          },
+          {
+            "name": "Beetroot & Goat Cheese Ravioli",
+            "description": "Ravioli filled with beetroot and goat cheese, in a creamy sauce with grated beetroot, garnished with green peas and parmesan.",
+            "price": 58
+          },
+          {
+            "name": "Toscana Gnocchi",
+            "description": "Potato gnocchi in a creamy sauce with mushroom, truffle and walnut, flavored with za'atar and a touch of parmesan, garnished with pistachio.",
+            "price": 56
+          },
+          {
+            "name": "Fettuccine Alfredo",
+            "description": "Fettuccine in creamy Alfredo sauce, with fresh mushroom and parmesan.",
+            "price": 58
+          },
+          {
+            "name": "Seafood Fettuccine",
+            "description": "Fettuccine in a creamy sauce, with a selection of seafood and a touch of fresh herbs.",
+            "price": 85
+          },
+          {
+            "name": "Cheese Ravioli",
+            "description": "Ravioli filled with goat cheese and basil, in a creamy sauce flavored with Persian za'atar, with sweet potato and chestnut pieces.",
+            "price": 58
+          },
+          {
+            "name": "Bolognese Tortellini",
+            "description": "Tortellini pasta with minced veal, slow-cooked with a blend of spices, and a touch of pine nuts and parmesan.",
+            "price": 63
+          },
+          {
+            "name": "Lasagna",
+            "description": "Layers of lasagna with minced veal seasoned with a blend of spices, and creamy béchamel with tomato sauce, baked in the taboon. A large dish, ideal for two.",
+            "price": 90
+          }
+        ]
+      },
+      {
+        "id": "chicken",
+        "title": "Mains — Chicken",
+        "items": [
+          {
+            "name": "Roast Beef Steak",
+            "description": "300g of grilled sliced chicken thighs, served with baby potatoes, green beans and broccoli.",
+            "price": 73
+          },
+          {
+            "name": "Chicken Steak",
+            "description": "280g of grilled chicken breast, served with white potato and roasted sweet potato in the taboon, broccoli and a creamy mushroom sauce.",
+            "price": 65
+          },
+          {
+            "name": "Cordon Bleu",
+            "description": "280g of chicken breast stuffed with smoked turkey slices, mozzarella, sun-dried tomatoes and Persian za'atar, served with puree potato, seasonal vegetables and a creamy mushroom sauce.",
+            "price": 65
+          },
+          {
+            "name": "Chicken Fingers",
+            "description": "Fresh chicken breast slices in a golden crisp coating, served with a fresh salad or fries of your choice.",
+            "price": 44
+          },
+          {
+            "name": "Piatto Chicken Sandwich",
+            "description": "Ciabatta filled with grilled chicken breast and fresh vegetables, with honey, mayonnaise and mustard sauce. Served with a fresh salad or fries of your choice.",
+            "price": 44
+          },
+          {
+            "name": "Fajita",
+            "description": "Ciabatta sandwich filled with chicken fajita and vegetables, served with potato wedges, jalapeño and house pickles.",
+            "price": 49
+          },
+          {
+            "name": "Zinger",
+            "description": "Crisp chicken zinger sandwich, served with potato wedges, jalapeño, olives and coleslaw.",
+            "price": 45
+          },
+          {
+            "name": "Shish Taouk",
+            "description": "Grilled shish taouk skewer, served on potato puree with green beans and cherry tomatoes, and a touch of toasted almonds.",
+            "price": 55
+          },
+          {
+            "name": "Baladi Focaccia",
+            "description": "Taboon focaccia with a blend of eggplant, grilled onion and tomato pieces, seasoned with olive oil and salt. Served with grilled burghul skewers.",
+            "price": 70
+          },
+          {
+            "name": "Caesar Schnitzel",
+            "description": "Taboon focaccia sandwich with chicken schnitzel and Caesar salad, served with cherry tomatoes, jalapeño and olives.",
+            "price": 39
+          }
+        ]
+      },
+      {
+        "id": "meat",
+        "title": "Mains — Meat",
+        "items": [
+          {
+            "name": "Veal Fillet",
+            "description": "250g of veal fillet, served with roasted vegetables: potato, zucchini, carrot, onion, broccoli and asparagus, alongside sweet potato cream. Served with chimichurri sauce or creamy black pepper sauce of your choice.",
+            "price": 110
+          },
+          {
+            "name": "Lamb Chops",
+            "description": "Grilled lamb chops, served with hot frikeh seasoned with onion and garlic confit, garnished with parsley.",
+            "price": 110
+          },
+          {
+            "name": "Entrecôte",
+            "description": "300g of entrecôte, served with a selection of roasted root vegetables in the taboon, with chimichurri sauce or creamy black pepper sauce of your choice.",
+            "price": 120
+          },
+          {
+            "name": "Beef Stroganoff",
+            "description": "Slices of veal fillet sautéed with onion, mushroom and sweet pepper, in a creamy mustard sauce with crisp pickle. Served with rice.",
+            "price": 90
+          },
+          {
+            "name": "Mushroom Risotto",
+            "description": "Creamy risotto with mushroom, truffle and parmesan, served with 150g of veal fillet and garnished with green peas.",
+            "price": 110
+          },
+          {
+            "name": "Burger",
+            "description": "200g veal burger, served with a fresh salad or fries of your choice.",
+            "price": 49
+          },
+          {
+            "name": "Veal Gnocchi",
+            "description": "Potato gnocchi in a creamy sauce with green beans and chestnut, served with grilled veal fillet pieces, garnished with green peas, paprika oil and basil oil.",
+            "price": 80
+          }
+        ]
+      },
+      {
+        "id": "fish",
+        "title": "Mains — Fish",
+        "items": [
+          {
+            "name": "Salmon",
+            "description": "250g of fresh salmon fillet, served with roasted potato and broccoli, in a creamy sun-dried tomato sauce, alongside sweet potato cream, garnished with asparagus.",
+            "price": 94
+          },
+          {
+            "name": "Taboon Shrimp",
+            "description": "Shrimp grilled in the taboon with garlic confit and sun-dried tomatoes, seasoned with olive oil, lemon and Persian za'atar. Served with taboon focaccia.",
+            "price": 89
+          },
+          {
+            "name": "Sea Bream Fillet",
+            "description": "Sea bream fillet grilled in the taboon, served with a bulgur and black lentil salad, with parsley and sweet potato pieces, alongside sweet potato cream and lemon pieces.",
+            "price": 75
+          },
+          {
+            "name": "Saffron Shrimp",
+            "description": "Shrimp with potato gnocchi in a rich creamy saffron sauce.",
+            "price": 85
+          },
+          {
+            "name": "Seafood Platter",
+            "description": "A selection of shrimp, calamari and clams, your choice: sautéed in garlic and lemon sauce, or fried in a crisp qarshalleh crust.",
+            "price": 90
+          },
+          {
+            "name": "Frikeh Risotto & Seafood",
+            "description": "Hot frikeh with shrimp, calamari and clams, seasoned with lemon, served with sweet potato cream and garnished with parsley.",
+            "price": 85
+          },
+          {
+            "name": "Salmon Gnocchi",
+            "description": "250g of fresh grilled salmon fillet in the taboon, served on potato gnocchi in a herb-infused creamy sauce, garnished with salted pistachio.",
+            "price": 95
+          },
+          {
+            "name": "Sea Bass",
+            "description": "Grilled sea bass fillet in the taboon, served on a tomato-and-pepper sauce, with taboon focaccia.",
+            "price": 78
+          },
+          {
+            "name": "Fish & Chips",
+            "description": "Crisp tempura sea bass fillet pieces, served with tempura potato wedges and tartar sauce.",
+            "price": 80
+          }
+        ]
+      },
+      {
+        "id": "desserts",
+        "title": "Desserts",
+        "items": [
+          { "name": "Taboon Sufganiyah", "description": "", "price": 42 },
+          { "name": "Apple Crumble", "description": "", "price": 42 },
+          { "name": "Cheesecake", "description": "", "price": 38 },
+          { "name": "Kunafa", "description": "", "price": 28 },
+          { "name": "Tiramisu", "description": "", "price": 40 },
+          { "name": "Croissant Pudding with Caramel", "description": "", "price": 40 },
+          { "name": "Chocolate Fondant", "description": "", "price": 42 },
+          { "name": "Toffee Crunch", "description": "", "price": 38 },
+          { "name": "Oreo Sushi", "description": "", "price": 42 }
+        ]
+      }
+    ]
+  },
+  "ar": {
+    "currency": "₪",
+    "sections": [
+      {
+        "id": "breakfast",
+        "title": "الفطور",
+        "items": [
+          {
+            "name": "صباحك زوجي",
+            "description": "تشكيلة مختارة من المقبّلات والتغميسات المتنوعة، تُقدَّم مع خبز الفوكاتشا الساخن من الطابون وسلطة طازجة، بالإضافة إلى البيض حسب الاختيار: بيض عيون، أومليت أو بيض مسلوق. تشمل الوجبة لكل شخص مشروبًا ساخنًا ومشروبًا باردًا حسب الاختيار. المشروبات الساخنة: قهوة عربية، نسكافيه، كابتشينو أو إسبريسو. المشروبات الباردة: مشروبات خفيفة أو عصير طبيعي (برتقال أو جزر).",
+            "price": 125
+          },
+          {
+            "name": "صباحك فردي",
+            "description": "تشكيلة مختارة من المقبّلات والتغميسات المتنوعة، تُقدَّم مع خبز الفوكاتشا الساخن من الطابون وسلطة طازجة، بالإضافة إلى البيض حسب الاختيار: بيض عيون، أومليت أو بيض مسلوق. تشمل الوجبة مشروبًا ساخنًا ومشروبًا باردًا حسب الاختيار. المشروبات الساخنة: قهوة عربية، نسكافيه، كابتشينو أو إسبريسو. المشروبات الباردة: مشروبات خفيفة أو عصير طبيعي (برتقال أو جزر).",
+            "price": 65
+          },
+          {
+            "name": "شكشوكة",
+            "description": "شكشوكة حمراء غنية بالطماطم، مع بيضتين، تُقدَّم مع خبز الفوكاتشا الساخن من الطابون وسلطة طازجة. تشمل الوجبة مشروبًا ساخنًا ومشروبًا باردًا حسب الاختيار. المشروبات الساخنة: قهوة عربية، نسكافيه، كابتشينو أو إسبريسو. المشروبات الباردة: مشروبات خفيفة أو عصير طبيعي (برتقال أو جزر).",
+            "price": 58
+          },
+          {
+            "name": "شكشوكة بالسجق",
+            "description": "شكشوكة حمراء غنية بالطماطم مع السجق العربي وبيضتين، تُقدَّم مع خبز الفوكاتشا الساخن من الطابون وسلطة طازجة.",
+            "price": 58
+          },
+          {
+            "name": "فتّة لحمة",
+            "description": "لحم خروف متبّل بالكمون والبقدونس، مع ثوم كونفي، طماطم مشوية وبيض عيون، يُقدَّم مع الطحينة، وخبز الفوكاتشا الساخن من الطابون وسلطة طازجة.",
+            "price": 54
+          },
+          {
+            "name": "فول باب العامود",
+            "description": "حمص، طحينة، باذنجان مشوي ولبنة، مع بيض مسلوق متبّل بالكمون، يُقدَّم مع سلطة طازجة وكعك القدس الساخن من الطابون.",
+            "price": 48
+          },
+          {
+            "name": "فطاير محشي",
+            "description": "فطيرة محشوة بالجبنة العربية، جبنة الموتزاريلا والزعتر الأخضر، مخبوزة في الطابون. تُقدَّم مع اللبنة، تابناد الزيتون والخضراوات الطازجة.",
+            "price": 49
+          },
+          {
+            "name": "فطاير عربي",
+            "description": "فطيرة محشوة باللبنة، الزعتر، زيت الزيتون والبيض المسلوق، مخبوزة في الطابون. تُقدَّم مع الطماطم الطازجة، الخيار والزيتون الأخضر.",
+            "price": 48
+          },
+          {
+            "name": "كعك محشي",
+            "description": "كعك القدس محشو بالبيستو، جبنة الموتزاريلا، زيتون كالاماتا والطماطم المجففة، ومخبوز في الطابون حتى يصبح ساخنًا ومقرمشًا.",
+            "price": 42
+          },
+          {
+            "name": "صحن مناقيش",
+            "description": "تشكيلة من المناقيش المخبوزة في الطابون بثلاث نكهات: الزعتر، الجبنة المالحة، والطماطم مع البصل. تُقدَّم مع الخضراوات الطازجة.",
+            "price": 45
+          },
+          {
+            "name": "منقوشة بيض وجبنة عربية",
+            "description": "منقوشة زعتر من الطابون، مع بيض عيون وقطع من الجبنة العربية المقلية، تُقدَّم مع الخضراوات الطازجة.",
+            "price": 54
+          },
+          {
+            "name": "عجّة طابون",
+            "description": "فوكاتشا من الطابون، محشوة بالعجّة، اللبنة، تابناد الزيتون وأوراق الخس والبندورة، تُقدَّم مع خضراوات طازجة.",
+            "price": 25
+          },
+          {
+            "name": "حلومي طابون",
+            "description": "فوكاتشا من الطابون، محشوة بجبنة الحلومي المشوية، تابناد الطماطم، أوراق الجرجير والبندورة، تُقدَّم مع خضراوات طازجة.",
+            "price": 28
+          },
+          {
+            "name": "فطور زمان",
+            "description": "فطور بنكهة زمان، مستوحى من سفرة ستّاتنا ودفء البيت، يضمّ تشكيلة من الجبنة العربية المقلية مع قرشلة، الحمص، اللبنة بنكهات متنوعة، الخضراوات الطازجة، ومجموعة من المناقيش بنكهات مختلفة والمخبوزة في الطابون.",
+            "price": 48
+          },
+          {
+            "name": "روما روست",
+            "description": "فوكاتشا من الطابون، محشوة بشرائح الروست بيف الساخنة، جبنة الموتزاريلا، البيستو، أوراق الخس والجرجير، مع طماطم كرزية مجففة ولمسة من البلسميك المكثّف. تُقدَّم مع بطاطا مقلية ساخنة وجبنة البارميزان.",
+            "price": 38
+          }
+        ]
+      },
+      {
+        "id": "pizza",
+        "title": "من طابون بياتو — بيتزا، فوكاتشا ومخبوزات طازجة",
+        "items": [
+          {
+            "name": "بيتزا ألفريدو",
+            "description": "بيتزا من الطابون بصلصة الكريمة المنكّهة بالأعشاب، جبنة الموتزاريلا، قطع صدر الدجاج والفطر الطازج.",
+            "price": 64
+          },
+          {
+            "name": "بيتزا بيروني",
+            "description": "بيتزا من الطابون بصلصة الطماطم، جبنة الموتزاريلا وشرائح الببروني، مع لمسة من جبنة البارميزان المبشورة.",
+            "price": 60
+          },
+          {
+            "name": "بيتزا الجليل",
+            "description": "بيتزا من الطابون مع البيستو الطازج، جبنة الموتزاريلا، شرائح جبنة الماعز والطماطم الكرزية، مع زيتون كالاماتا ولمسة من الزعتر الأخضر الطازج.",
+            "price": 69
+          },
+          {
+            "name": "أم الزيتون",
+            "description": "عجينة بيتزا من الطابون، مغطاة بالكفتة والطحينة وقطع الطماطم المشوية، مع البقدونس، البصل الأرجواني، الفلفل الحار والصنوبر. تُقدَّم مع الزيتون الأخضر.",
+            "price": 72
+          },
+          {
+            "name": "بيلا كاري",
+            "description": "بيتزا من الطابون مع قطع الدجاج المتبّلة بالكاري، جبنة الموتزاريلا ولمسة من البصل الأخضر الطازج.",
+            "price": 58
+          },
+          {
+            "name": "بيتزا مارغريتا",
+            "description": "بيتزا كلاسيكية من الطابون، بصلصة الطماطم وجبنة الموتزاريلا.",
+            "price": 48
+          },
+          {
+            "name": "بيتزا على ذوقك",
+            "description": "اختار نكهاتك المفضّلة وركّب البيتزا على ذوقك من الطابون، مع تشكيلة من الإضافات حسب الاختيار: الزيتون، الطماطم، البصل، الذرة، الفلفل والسلامي.",
+            "price": 58
+          },
+          {
+            "name": "كباب طابون",
+            "description": "فوكاتشا من الطابون مع الكباب والخضراوات المشوية، الطحينة والعمبة. تُقدَّم مع مخللات البيت والزيتون الأخضر.",
+            "price": 59
+          },
+          {
+            "name": "لحمة بعجين",
+            "description": "لحمة خروف وعجل متبّلة بمزيج من البهارات والأعشاب، مخبوزة على عجينة طازجة في الطابون. تُقدَّم مع الخضراوات الطازجة والطحينة.",
+            "price": 59
+          },
+          {
+            "name": "مسخّن على الفوكاتشا",
+            "description": "فوكاتشا من الطابون مع دجاج متبّل بالسماق والبصل، والطحينة، مع لمسة من البقدونس الطازج. تُقدَّم مع الخضراوات والزيتون الأخضر.",
+            "price": 58
+          },
+          {
+            "name": "فوكاتشا الجبان",
+            "description": "فوكاتشا من الطابون مع مزيج من جبنة الكريمة، الموتزاريلا والفيتا، تُقدَّم مع الخضراوات الطازجة والزيتون.",
+            "price": 48
+          },
+          {
+            "name": "خبز بالثوم",
+            "description": "فوكاتشا من الطابون بنكهة الثوم، تُقدَّم مع الزيتون وزيت البلسمك، ويمكن اختيارها مع جبنة الموتزاريلا الذائبة أو بدونها.",
+            "priceOptions": [
+              { "label": "مع جبنة الموتزاريلا", "price": 45 },
+              { "label": "بدون جبنة", "price": 39 }
+            ]
+          },
+          {
+            "name": "منقوشة زعتر",
+            "description": "منقوشة زعتر، محضّرة على عجينة البيتزا ومخبوزة في الطابون، تُقدَّم مع اللبنة والخضراوات الطازجة.",
+            "price": 39
+          },
+          {
+            "name": "فوكاتشا بيستو",
+            "description": "فوكاتشا من الطابون مع البيستو الطازج، قطع جبنة الموتزاريلا والطماطم الكرزية.",
+            "price": 39
+          },
+          {
+            "name": "بيتزا بوراتا",
+            "description": "بيتزا من الطابون مع جبنة البوراتا الكريمية، أوراق الجرجير والطماطم الكرزية المتبّلة بالليمون وزيت الزيتون، مع لمسة من البلسمك المكثّف.",
+            "price": 60
+          },
+          {
+            "name": "صوفيا لورين",
+            "description": "بيتزا من الطابون مع جبنة الموتزاريلا وشرائح الروست بيف، أوراق الجرجير ولمسة من البلسمك المكثّف.",
+            "price": 68
+          }
+        ]
+      },
+      {
+        "id": "starters",
+        "title": "مقبّلات",
+        "items": [
+          {
+            "name": "خبز البيت",
+            "description": "ثلاث أصابع فوكاتشا من الطابون بنكهات متنوعة من السمسم والأعشاب، وزيت الزيتون والملح. تُقدَّم مع تشكيلة من تغميسات البيت: ثوم كونفي بالبلسمك، باذنجان متبّل بالملح والليمون، وحمص مع اللبنة والطحينة، وزيتون أخضر.",
+            "price": 38
+          },
+          {
+            "name": "كابريزي",
+            "description": "طماطم كرزية مع جبنة الموتزاريلا وزيتون كالاماتا، متبّلة بزيت الزيتون والبلسمك، مع لمسة من أوراق الريحان الطازج. تُقدَّم مع خبز طابون ساخن.",
+            "price": 52
+          },
+          {
+            "name": "فطر بالأجبان",
+            "description": "فطر طازج مخبوز في الطابون بصلصة كريمية غنية ومزيج من الأجبان، مع لمسة من الزعتر.",
+            "price": 56
+          },
+          {
+            "name": "أرانشيني",
+            "description": "كرات ريزوتو بالزعتر الفارسي والفطر الطبيعي والكمهيني والبرمزان، تُقدَّم على صلصة نابوليتانا، مع جبنة الماعز ولمسة من جبنة البارميزان.",
+            "price": 46
+          },
+          {
+            "name": "باذنجان السلطان",
+            "description": "باذنجان مشوي في الطابون متبل بدبس التمر ومزين بتشكيلة من الأجبان الكريمية والأوراق الخضراء الطازجة ومنكه بالبلساميك المكثف، ويُقدَّم مع فوكاتشا ساخنة.",
+            "price": 54
+          },
+          {
+            "name": "عرايس السلطان",
+            "description": "عرايس محمّصة، تُقدَّم مع مكابيس البيت والطحينة والزيتون الأخضر.",
+            "price": 56
+          },
+          {
+            "name": "كبة",
+            "description": "خمس حبات كبة، تُقدَّم على سلطة من حبوب الحمص والطماطم الكرزية، مع كريمة اللبنة والطحينة.",
+            "price": 48
+          },
+          {
+            "name": "حمص مع لحمة",
+            "description": "حمص مع قطع من فيليه العجل والصنوبر المحمّص، يُقدَّم مع فوكاتشا من الطابون.",
+            "price": 49
+          },
+          {
+            "name": "أصابع حلومي",
+            "description": "أصابع من جبنة الحلومي المتبّلة بالزعتر والنعناع والريحان، مغطاة بطبقة مقرمشة من القرشلة، مقلية وتُقدَّم ساخنة.",
+            "price": 43
+          },
+          {
+            "name": "كاربتشيو باذنجان بالأجبان",
+            "description": "باذنجان مشوي في الطابون يُقدَّم مع الطماطم والمكسرات، إلى جانب الطحينة واللبنة وحبات من الثوم الكونفي. يُقدَّم مع فوكاتشا من الطابون.",
+            "price": 48
+          },
+          {
+            "name": "تبولة دنيس",
+            "description": "برغل متبّل بالشبت والبقدونس والنعناع والريحان، مع قطع سمك الدنيس والعنّاب والخيار والبندورة والفاكهة الموسمية، يُقدَّم على اللبنة مع لمسة من الصنوبر المحمّص وزيت الريحان الأخضر.",
+            "price": 48
+          },
+          {
+            "name": "بروسكيتا إيطاليانو",
+            "description": "شرائح خبز الجباتا المنكّهة بزيت الزيتون والثوم والمحمّصة في الطابون، مع طماطم طازجة متبّلة بالريحان والزعتر الفارسي، ومنكهة بلمسة من البلسمك وجبنة البارميزان.",
+            "price": 45
+          },
+          {
+            "name": "بروسكيتا سيفيتشي اللبراك",
+            "description": "سيفيتشي من سمك اللبراك الطازج مع الخيار، البصل الأحمر، الفجل، النعناع والبقدونس، ولمسة من فواكه الموسم. يُقدَّم على خبز الجباتا المحمّص والمتبّل بزيت الزيتون والثوم مع اللبنة العربية، ويُزيَّن بالبصل الأخضر، الفلفل الأحمر الحار وجبنة البارميزان.",
+            "price": 50
+          },
+          {
+            "name": "كلماري تمبورا",
+            "description": "قطع كلماري مقرمشة بطبقة تمبورا، تُقدَّم على اللبنة مع لمسة من زيت الريحان.",
+            "price": 55
+          }
+        ]
+      },
+      {
+        "id": "salads",
+        "title": "سلطات",
+        "items": [
+          {
+            "name": "تبولة سورية",
+            "description": "تبولة طازجة من البقدونس والبرغل، مع البصل الأخضر، النعناع والطماطم، ولمسة من المكسرات.",
+            "price": 42
+          },
+          {
+            "name": "سلطة السوق",
+            "description": "تشكيلة من الخضراوات الطازجة مع كرات اللبنة المقلية والمقرمشة، بصلصة فينيغريت الحمضيات.",
+            "price": 49
+          },
+          {
+            "name": "كينوا",
+            "description": "كينوا بيضاء مع الخيار والطماطم الكرزية، العنّاب وفاكهة موسمية، مع خلطة من الأعشاب الطازجة (بقدونس، نعنع، شبت وريحان)، متبّلة بزيت الزيتون والليمون ومزينة بالصنوبر.",
+            "price": 49
+          },
+          {
+            "name": "قيصر",
+            "description": "قلوب الخس الطازجة مع الخبز المحمّص وجبنة البارميزان، بصلصة القيصر الكلاسيكية. يمكن إضافة قطع الدجاج حسب الاختيار.",
+            "priceOptions": [
+              { "label": "عادي", "price": 43 },
+              { "label": "مع الدجاج", "price": 51 }
+            ]
+          },
+          {
+            "name": "فتوش",
+            "description": "سلطة من الطماطم والخيار والفجل، مع البصل الأخضر والبصل الأرجواني والبقدونس والخبز المحمّص، تُقدَّم مع الجبنة العربية والسماق ولمسة من أوراق البقدونس الطازجة.",
+            "price": 45
+          },
+          {
+            "name": "بيثانية",
+            "description": "طماطم وخيار مع البصل الأرجواني وجبنة الفيتا، تُقدَّم مع خبز الشراك المقلي والمقرمش والسماق.",
+            "price": 49
+          },
+          {
+            "name": "حلومي",
+            "description": "خس طازج مع الجزر، الفلفل الحلو والطماطم الكرزية وجبنة الحلومي المقلية، متبّلة بفينيغريت النعناع.",
+            "price": 50
+          },
+          {
+            "name": "فطر بالترياكي",
+            "description": "تشكيلة من الفطر الساخن مع شرائح فيليه العجل، بصلصة الترياكي ولمسة من البصل الأخضر الطازج.",
+            "price": 75
+          },
+          {
+            "name": "تاي",
+            "description": "تشكيلة من أوراق الخس مع البطاطا الحلوة، الطماطم الكرزية، الفطر والجزر، مع الجمبري المقلي بصلصة الفلفل الحلو وقطع الليمون، ومزينه بلمسة من اللوز المحمّص.",
+            "price": 75
+          },
+          {
+            "name": "نودلز",
+            "description": "نودلز مع قطع الدجاج وخضراوات مشوّحة، بصلصة الترياكي والصويا، مع البصل الأخضر الطازج.",
+            "priceOptions": [
+              { "label": "مع الدجاج", "price": 64 },
+              { "label": "بدون دجاج", "price": 56 }
+            ]
+          },
+          {
+            "name": "أورجينالو",
+            "description": "تشكيلة من الخس والجرجير البيبي مع الجزر، الخيار، الطماطم والبطاطا الحلوة، مع جبنة الفيتا، ومزينة برقائق البطاطا الحلوة المقرمشة، المكسرات وفواكه موسمية.",
+            "price": 48
+          },
+          {
+            "name": "بوراتا",
+            "description": "جبنة البوراتا مع الطماطم الكرزية، الجرجير والريحان، متبّلة بالليمون وزيت الزيتون، وتُقدَّم مع خبزة فوكاتشا من الطابون.",
+            "price": 50
+          }
+        ]
+      },
+      {
+        "id": "italian",
+        "title": "من إيطاليا",
+        "items": [
+          {
+            "name": "فريكة بالملفوف",
+            "description": "فريكة متبّلة مع الملفوف الأبيض، الشمندر، الجزر والفطر، فلفل حلو مع قطع من صدر الدجاج، وتُقدَّم ساخنة.",
+            "price": 58
+          },
+          {
+            "name": "تورتيليني ريكوتا وسبانخ",
+            "description": "تورتيليني محشوة بالسبانخ وجبنة الريكوتا، بصلصة كريمية ولمسة من زيت الريحان.",
+            "price": 58
+          },
+          {
+            "name": "سباغيتي طماطم",
+            "description": "سباغيتي بصلصة الطماطم، مع طماطم كرزية طازجة مشوّحة بالثوم، جبنة البارميزان والريحان الطازج.",
+            "price": 45
+          },
+          {
+            "name": "بابارديلي سلمون",
+            "description": "باستا بابارديلي بصلصة كريمية، مع قطع السلمون المشوية، البروكلي والبازيلاء الخضراء، وتُقدَّم مع جبنة البارميزان جانبًا.",
+            "price": 75
+          },
+          {
+            "name": "نيوكي بيستو مع جبنة الماعز",
+            "description": "نيوكي بطاطا بصلصة البيستو الكريمية، مع جبنة الماعز.",
+            "price": 58
+          },
+          {
+            "name": "فيتوتشيني بالجمبري",
+            "description": "باستا فيتوتشيني بصلصة كريمية مع الجمبري، ويمكن إضافة البازيلاء الخضراء حسب الطلب. تُقدَّم مع جبنة البارميزان جانبًا.",
+            "price": 88
+          },
+          {
+            "name": "رافيولي بطاطا حلوة",
+            "description": "رافيولي محشو بالبطاطا الحلوة، بصلصة كريمية بالكستناء مع قطع من البطاطا الحلوة، ولمسة من الريحان الطازج وجبنة البارميزان.",
+            "price": 58
+          },
+          {
+            "name": "رافيولي بنجر وجبنة الماعز",
+            "description": "رافيولي محشو بالبنجر وجبنة الماعز، بصلصة كريمية مع قطع من البنجر المبشور ومزين بأوراق البازيلا وجبنة البرمزان.",
+            "price": 58
+          },
+          {
+            "name": "نيوكي توسكانا",
+            "description": "نيوكي البطاطا بصلصة كريمية مع الفطر والكمأة والجوز، بنكهة الزعتر ولمسة من جبنة البارميزان ومزينة بالفستق.",
+            "price": 56
+          },
+          {
+            "name": "فيتوتشيني ألفريدو",
+            "description": "باستا فيتوتشيني بصلصة ألفريدو الكريمية، مع الفطر الطازج وجبنة البارميزان.",
+            "price": 58
+          },
+          {
+            "name": "فيتوتشيني فواكه بحر",
+            "description": "باستا فيتوتشيني بصلصة كريمية، مع تشكيلة من فواكه البحر ولمسة من الأعشاب الطازجة.",
+            "price": 85
+          },
+          {
+            "name": "رافيولي جبنة",
+            "description": "رافيولي محشو بجبنة الماعز والريحان، بصلصة كريمية منكهة بالزعتر الفارسي، مع قطع البطاطا الحلوة والكستناء.",
+            "price": 58
+          },
+          {
+            "name": "بولونيز تورتيليني",
+            "description": "باستا تورتيليني مع لحم العجل المفروم، المطهو ببطء مع مزيج من التوابل، ولمسة من الصنوبر وجبنة البارميزان.",
+            "price": 63
+          },
+          {
+            "name": "لازانيا",
+            "description": "طبقات من شرائح اللازانيا مع لحم العجل المفروم والمتبّل بمزيج من البهارات، وصلصة بشاميل كريمية مع صلصة الطماطم، مخبوزة في الطابون. طبق كبير مناسب لشخصين.",
+            "price": 90
+          }
+        ]
+      },
+      {
+        "id": "chicken",
+        "title": "أطباق رئيسية — دجاج",
+        "items": [
+          {
+            "name": "ستيك روست بيف",
+            "description": "300 غرام من أفخاذ الدجاج المسحبة المشوية، يُقدَّم مع بطاطا البيبي، الفاصولياء الخضراء والبروكلي.",
+            "price": 73
+          },
+          {
+            "name": "ستيك دجاج",
+            "description": "280 غرام من صدر الدجاج المشوي، يُقدَّم مع البطاطا البيضاء والبطاطا الحلوة المشوية في الطابون والبروكولي، وصلصة الفطر الكريمية.",
+            "price": 65
+          },
+          {
+            "name": "كوردن بلو",
+            "description": "280 غرام من صدر الدجاج المحشو بشرائح الحبش المدخّن، جبنة الموتزاريلا، الطماطم المجففة والزعتر الفارسي، يُقدَّم مع بطاطا البيريه، خضراوات موسمية وصلصة الفطر الكريمية.",
+            "price": 65
+          },
+          {
+            "name": "أصابع الدجاج",
+            "description": "شرائح طازجة من صدر الدجاج بطبقة ذهبية مقرمشة، تُقدَّم مع سلطة طازجة أو بطاطا مقلية حسب الاختيار.",
+            "price": 44
+          },
+          {
+            "name": "بياتو تشيكن ساندويش",
+            "description": "خبز الجباتا محشو بصدر الدجاج المشوي والخضراوات الطازجة، مع صلصة العسل، المايونيز والخردل. يُقدَّم مع سلطة طازجة أو بطاطا مقلية حسب الاختيار.",
+            "price": 44
+          },
+          {
+            "name": "فاهيتا",
+            "description": "ساندويش فوكاتشا محشو بفاهيتا الدجاج والخضراوات، يُقدَّم مع بطاطا ويدجز، فلفل الهالبينو ومكابيس البيت.",
+            "price": 49
+          },
+          {
+            "name": "زنجر",
+            "description": "ساندويش دجاج زنجر مقرمش، يُقدَّم مع بطاطا ويدجز، فلفل الهالبينو، الزيتون وسلطة الكولسلو.",
+            "price": 45
+          },
+          {
+            "name": "شيش طاووق",
+            "description": "سيخ شيش طاووق مشوي، يُقدَّم على بيوريه البطاطا مع الفاصولياء الخضراء والطماطم الكرزية، ولمسة من اللوز المحمّص.",
+            "price": 55
+          },
+          {
+            "name": "فوكاتشا بلدي",
+            "description": "فوكاتشا من الطابون، مع خلطة من الباذنجان والبصل المشوي وقطع الطماطم، متبّلة بزيت الزيتون والملح، وتُقدَّم مع أسياخ البرغيت المشوية.",
+            "price": 70
+          },
+          {
+            "name": "سيزار شنيتسل",
+            "description": "ساندويش فوكاتشا من الطابون مع شنيتسل الدجاج وسلطة السيزار، يُقدَّم مع الطماطم الكرزية، فلفل الهالبينو والزيتون.",
+            "price": 39
+          }
+        ]
+      },
+      {
+        "id": "meat",
+        "title": "أطباق رئيسية — لحوم",
+        "items": [
+          {
+            "name": "فيليه عجل",
+            "description": "250 غرام من فيليه العجل، يُقدَّم مع الخضراوات المشوية: البطاطا، الكوسا، الجزر، البصل، البروكلي والاسبراغوس، إلى جانب كريمة البطاطا الحلوة. يُقدَّم مع صلصة التشيميتشوري أو صلصة الفلفل الأسود الكريمية حسب الاختيار.",
+            "price": 110
+          },
+          {
+            "name": "ريش خاروف",
+            "description": "ريش خاروف مشوية، تُقدَّم مع فريكة ساخنة متبّلة بالبصل والثوم الكونفي ومزينة بأوراق البقدونس.",
+            "price": 110
+          },
+          {
+            "name": "أنتركوت",
+            "description": "300 غرام من لحم الأنتركوت، يُقدَّم مع تشكيلة من الخضراوات الجذرية المشوية في الطابون، مع صلصة التشيميتشوري أو صلصة الفلفل الأسود الكريمية حسب الاختيار.",
+            "price": 120
+          },
+          {
+            "name": "بيف ستروجانوف",
+            "description": "شرائح من فيليه العجل مشوّحة مع البصل، الفطر والفلفل الحلو، بصلصة كريمية بالخردل مع المخلل المقرمش، وتُقدَّم مع الأرز.",
+            "price": 90
+          },
+          {
+            "name": "ريزوتو فطر",
+            "description": "ريزوتو كريمي بالفطر والكمأة وجبنة البارميزان، يُقدَّم مع 150 غرام من فيليه العجل ومزين بأوراق البازيلا.",
+            "price": 110
+          },
+          {
+            "name": "برغر",
+            "description": "200 غرام من برغر لحم العجل، يُقدَّم مع سلطة طازجة أو بطاطا مقلية حسب الاختيار.",
+            "price": 49
+          },
+          {
+            "name": "نيوكي فيليه عجل",
+            "description": "نيوكي البطاطا بصلصة كريمية مع الفاصولياء الخضراء والكستناء، يُقدَّم مع قطع من فيليه العجل المشوي، ومزيّن بالبازيلاء، زيت البابريكا وزيت الريحان.",
+            "price": 80
+          }
+        ]
+      },
+      {
+        "id": "fish",
+        "title": "أطباق رئيسية — أسماك",
+        "items": [
+          {
+            "name": "سلمون",
+            "description": "250 غرام من فيليه السلمون الطازج، يُقدَّم مع البطاطا المشوية والبروكلي، بصلصة كريمية مع الطماطم المجففة، إلى جانب كريمة البطاطا الحلوة، ومزيّن بالاسبراغوس.",
+            "price": 94
+          },
+          {
+            "name": "جمبري بالطابون",
+            "description": "جمبري مشوي في الطابون مع ثوم الكونفي والطماطم المجففة، متبّل بزيت الزيتون والليمون والزعتر الفارسي، ويُقدَّم مع فوكاتشا من الطابون.",
+            "price": 89
+          },
+          {
+            "name": "فيليه دنيس",
+            "description": "فيليه دنيس مشوي في الطابون، يُقدَّم مع سلطة البرغل والعدس الأسود، مع البقدونس وقطع البطاطا الحلوة، إلى جانب كريمة البطاطا الحلوة وقطع الليمون.",
+            "price": 75
+          },
+          {
+            "name": "شريمس بالزعفران",
+            "description": "شريمس مع نيوكي البطاطا بصلصة كريمية غنية بالزعفران.",
+            "price": 85
+          },
+          {
+            "name": "مكس فواكه بحر",
+            "description": "تشكيلة من الجمبري، الكلماري والصدف، حسب الاختيار: سوتيه بصلصة الثوم والليمون، أو مقلية بطبقة مقرمشة من القرشلة.",
+            "price": 90
+          },
+          {
+            "name": "ريزوتو فريكة وفواكه بحر",
+            "description": "فريكة ساخنة مع الجمبري، الكلماري والصدف، متبّلة بالليمون، وتُقدَّم مع كريمة البطاطا الحلوة ومزينة بأوراق البقدونس.",
+            "price": 85
+          },
+          {
+            "name": "نيوكي سلمون",
+            "description": "250 غرام من فيليه السلمون الطازج المشوي في الطابون، يُقدَّم على نيوكي البطاطا بصلصة كريمية منكهة بالأعشاب، ومزيّن بالفستق المملّح.",
+            "price": 95
+          },
+          {
+            "name": "لبراك",
+            "description": "فيليه اللبراك المشوي في الطابون، يُقدَّم على صلصة من الطماطم الكرزية والفلفل، مع فوكاتشا من الطابون.",
+            "price": 78
+          },
+          {
+            "name": "فيش أند تشيبس",
+            "description": "قطع من فيليه اللبراك بتمبورا مقرمشة، تُقدَّم مع بطاطا ويدجز بتمبورا وصلصة التارتار.",
+            "price": 80
+          }
+        ]
+      },
+      {
+        "id": "desserts",
+        "title": "حلويات",
+        "items": [
+          { "name": "سوفليه من الطابون", "description": "", "price": 42 },
+          { "name": "كرامبل تفاح", "description": "", "price": 42 },
+          { "name": "تشيز كيك", "description": "", "price": 38 },
+          { "name": "كنافة", "description": "", "price": 28 },
+          { "name": "تيراميسو", "description": "", "price": 40 },
+          { "name": "بودينغ كرواسون بورايه مع الكراميل", "description": "", "price": 40 },
+          { "name": "حفلة الشوكولاتة", "description": "", "price": 42 },
+          { "name": "توفي كرانش", "description": "", "price": 38 },
+          { "name": "سوشي أوريو", "description": "", "price": 42 }
+        ]
+      }
+    ]
+  }
+}

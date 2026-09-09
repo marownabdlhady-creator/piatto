@@ -1,0 +1,312 @@
+{
+  "en": {
+    "currency": "₪",
+    "note": "Ginger can be added to any drink for ₪2. Flavors can also be combined to taste (orange & carrot, apple & carrot, etc.).",
+    "sections": [
+      {
+        "id": "fresh-juice",
+        "title": "Fresh Juices",
+        "items": [
+          { "name": "Green Apple", "price": 18 },
+          { "name": "Orange", "price": 15 },
+          { "name": "Carrot", "price": 15 },
+          { "name": "Beetroot", "price": 15 },
+          { "name": "Lemon & Mint", "price": 15 }
+        ]
+      },
+      {
+        "id": "smoothie",
+        "title": "Smoothies",
+        "items": [
+          { "name": "Tropical Sun", "description": "Passion fruit, mango, banana and date molasses.", "price": 25 },
+          { "name": "Happiness", "description": "Strawberry, banana, milk and a touch of vanilla.", "price": 25 },
+          { "name": "Lotus Banana", "description": "Banana, milk, Lotus spread and a touch of cinnamon.", "price": 25 },
+          { "name": "Pink Yogurt", "description": "Strawberry, pineapple, yogurt, honey and chia seeds.", "price": 25 },
+          { "name": "Wild Berry", "description": "Strawberry, blueberry, raspberry, banana and milk.", "price": 25 },
+          { "name": "Mango Passion", "description": "Mango, pineapple, passion fruit and orange juice.", "price": 25 },
+          { "name": "Avocado Honey", "description": "Avocado, banana, milk, honey and a touch of cinnamon.", "price": 25 },
+          { "name": "Halva Smoothie", "description": "Tahini, banana, dates, milk, walnut and a touch of date molasses.", "price": 25 },
+          { "name": "Green Tropical", "description": "Pineapple, mango, spinach, mint, ginger, chia seeds and orange juice.", "price": 25 },
+          { "name": "Green Apple", "description": "Green apple, pineapple, spinach, lemon, mint and apple juice.", "price": 25 }
+        ]
+      },
+      {
+        "id": "milkshake",
+        "title": "Milkshakes",
+        "items": [
+          { "name": "Chocolate", "price": 24 },
+          { "name": "Vanilla", "price": 24 },
+          { "name": "Strawberry", "price": 24 },
+          { "name": "Oreo", "price": 24 },
+          { "name": "Snickers", "price": 24 },
+          { "name": "Ferrero Rocher", "price": 24 },
+          { "name": "Lotus", "price": 24 },
+          { "name": "Mango", "price": 24 },
+          { "name": "Passion Fruit", "price": 24 },
+          { "name": "Pistachio", "price": 24 }
+        ]
+      },
+      {
+        "id": "special-cold",
+        "title": "Special Cold Drinks",
+        "items": [
+          { "name": "Mojito", "description": "Available in assorted sweet and sour flavors — ask the waiter about available flavors.", "price": 25 },
+          { "name": "Iced Coffee", "price": 15 },
+          { "name": "Iced Americano", "price": 12 },
+          { "name": "Iced Spanish Latte", "price": 18 },
+          { "name": "Iced Pistachio Latte", "price": 18 },
+          { "name": "Iced Salted Caramel Latte", "price": 18 },
+          { "name": "Iced Mocha", "price": 18 },
+          { "name": "Iced Peach Tea", "price": 15 },
+          { "name": "Iced Passion Fruit Tea", "price": 17 }
+        ]
+      },
+      {
+        "id": "soft-drinks",
+        "title": "Soft Drinks",
+        "items": [
+          { "name": "Small Mineral Water", "price": 5 },
+          { "name": "Large Mineral Water", "price": 10 },
+          { "name": "Soda", "price": 8 },
+          { "name": "Coca-Cola", "price": 7 },
+          { "name": "Coca-Cola Zero", "price": 7 },
+          { "name": "Sprite", "price": 7 },
+          { "name": "Fanta", "price": 7 },
+          { "name": "Grape Juice", "price": 8 },
+          { "name": "Grapefruit Juice", "price": 8 },
+          { "name": "Schweppes Grape", "price": 9 },
+          { "name": "XL", "price": 10 },
+          { "name": "Bavaria Apple", "price": 12 },
+          { "name": "Blue Dee", "price": 10 },
+          { "name": "Blue Mint", "price": 10 }
+        ]
+      },
+      {
+        "id": "hot-coffee",
+        "title": "Hot Drinks — Coffee",
+        "items": [
+          { "name": "Short Espresso", "price": 8 },
+          { "name": "Long Espresso", "price": 10 },
+          { "name": "Double Espresso", "price": 12 },
+          { "name": "Small Cappuccino", "price": 12 },
+          { "name": "Large Cappuccino", "price": 15 },
+          { "name": "Nescafé", "price": 12 },
+          { "name": "Café Latte", "price": 12 },
+          { "name": "Americano", "price": 12 },
+          { "name": "Affogato", "price": 14 },
+          { "name": "Mocha", "price": 18 }
+        ]
+      },
+      {
+        "id": "flavored-latte",
+        "title": "Specialty Lattes",
+        "items": [
+          { "name": "Hot Spanish Latte", "price": 18 },
+          { "name": "Pistachio Latte", "price": 18 },
+          { "name": "Salted Caramel Latte", "price": 18 },
+          { "name": "Hazelnut Latte", "price": 18 },
+          { "name": "Tiramisu Latte", "price": 18 },
+          { "name": "Chai Latte", "price": 15 }
+        ]
+      },
+      {
+        "id": "tea",
+        "title": "Tea & Herbs",
+        "items": [
+          { "name": "Mint or Sage Tea", "price": 12 },
+          { "name": "Abu Eissa Tea", "price": 15 },
+          { "name": "Hibiscus / Chamomile / Green Tea / Flowers / Anise / Lemonette", "price": 15 }
+        ]
+      },
+      {
+        "id": "special-hot",
+        "title": "Special Hot Drinks",
+        "items": [
+          { "name": "Cider", "price": 15 },
+          { "name": "Sahlab", "price": 18 },
+          { "name": "Choco", "price": 15 },
+          { "name": "Choco Marshmallow", "price": 16 },
+          { "name": "Hot Chocolate", "price": 17 },
+          { "name": "Pistachio Hot Chocolate", "price": 18 },
+          { "name": "Salted Caramel Hot Chocolate", "price": 18 },
+          { "name": "Hazelnut Hot Chocolate", "price": 18 },
+          { "name": "Ferrero Rocher Hot Chocolate", "price": 18 },
+          { "name": "French Vanilla Hot Chocolate", "price": 18 },
+          { "name": "Lotus Hot Chocolate", "price": 18 },
+          { "name": "Pistachio Sahlab", "price": 22 }
+        ]
+      },
+      {
+        "id": "hookah",
+        "title": "Hookah",
+        "note": "Prices shown as regular / fresh.",
+        "items": [
+          { "name": "Nakhla Two Apples", "priceText": "35 / 40" },
+          { "name": "Mazaya Two Apples", "priceText": "35 / 40" },
+          { "name": "Lemon & Mint", "priceText": "35 / 40" },
+          { "name": "Watermelon & Mint", "priceText": "35 / 40" },
+          { "name": "Blueberry", "priceText": "35 / 40" },
+          { "name": "Muska & Cinnamon", "priceText": "35 / 40" },
+          { "name": "Piatto Mix", "priceText": "35 / 40" },
+          { "name": "Love 66", "priceText": "35 / 40" },
+          { "name": "Head Change", "priceText": "15 / 20" }
+        ]
+      }
+    ]
+  },
+  "ar": {
+    "currency": "₪",
+    "note": "يمكن إضافة الزنجبيل لأي مشروب مقابل ₪2. يمكن أيضًا دمج النكهات حسب الرغبة (برتقال وجزر، تفاح وجزر وغيرها).",
+    "sections": [
+      {
+        "id": "fresh-juice",
+        "title": "عصائر طبيعية",
+        "items": [
+          { "name": "تفاح أخضر", "price": 18 },
+          { "name": "برتقال", "price": 15 },
+          { "name": "جزر", "price": 15 },
+          { "name": "بنجر", "price": 15 },
+          { "name": "ليمون ونعناع", "price": 15 }
+        ]
+      },
+      {
+        "id": "smoothie",
+        "title": "سموذي",
+        "items": [
+          { "name": "تروبيكال سان", "description": "باشن فروت، مانجا، موز ودبس تمر.", "price": 25 },
+          { "name": "هابينس", "description": "فراولة، موز، حليب ولمسة فانيلا.", "price": 25 },
+          { "name": "لوتس بانا", "description": "موز، حليب، زبدة لوتس ولمسة قرفة.", "price": 25 },
+          { "name": "بينك يوغرت", "description": "فراولة، أناناس، يوغرت، عسل وبذور الشيا.", "price": 25 },
+          { "name": "وايلد بيري", "description": "فراولة، توت أزرق، توت العليق، موز وحليب.", "price": 25 },
+          { "name": "مانجو باشن", "description": "مانجا، أناناس، باشن فروت وعصير برتقال.", "price": 25 },
+          { "name": "أفوكادو بالعسل", "description": "أفوكادو، موز، حليب، عسل ولمسة قرفة.", "price": 25 },
+          { "name": "سموذي حلاوة", "description": "طحينة، موز، تمر، حليب، جوز ولمسة من دبس التمر.", "price": 25 },
+          { "name": "جرين تروبيكال", "description": "أناناس، مانجا، سبانخ، نعنع، زنجبيل، بذور الشيا وعصير برتقال.", "price": 25 },
+          { "name": "جرين آبل", "description": "تفاح أخضر، أناناس، سبانخ، ليمون، نعنع وعصير تفاح.", "price": 25 }
+        ]
+      },
+      {
+        "id": "milkshake",
+        "title": "ميلك شيك",
+        "items": [
+          { "name": "شوكولاته", "price": 24 },
+          { "name": "فانيلا", "price": 24 },
+          { "name": "فراولة", "price": 24 },
+          { "name": "أوريو", "price": 24 },
+          { "name": "سنيكرز", "price": 24 },
+          { "name": "فيريرو روشي", "price": 24 },
+          { "name": "لوتوس", "price": 24 },
+          { "name": "مانجو", "price": 24 },
+          { "name": "باشن فروت", "price": 24 },
+          { "name": "بستاشيو", "price": 24 }
+        ]
+      },
+      {
+        "id": "special-cold",
+        "title": "مشروبات باردة خاصة",
+        "items": [
+          { "name": "موهيتو", "description": "متوفر بنكهات حلوة وحامضة متنوعة — اسأل النادل عن النكهات المتوفرة.", "price": 25 },
+          { "name": "آيس كوفي", "price": 15 },
+          { "name": "آيس أمريكانو", "price": 12 },
+          { "name": "آيس سبانش لاتيه", "price": 18 },
+          { "name": "آيس لاتيه بستاشيو", "price": 18 },
+          { "name": "آيس لاتيه كراميل مملّح", "price": 18 },
+          { "name": "آيس موكا", "price": 18 },
+          { "name": "آيس تي خوخ", "price": 15 },
+          { "name": "آيس تي باشن فروت", "price": 17 }
+        ]
+      },
+      {
+        "id": "soft-drinks",
+        "title": "مشروبات خفيفة",
+        "items": [
+          { "name": "مياه معدنية صغيرة", "price": 5 },
+          { "name": "مياه معدنية كبيرة", "price": 10 },
+          { "name": "صودا", "price": 8 },
+          { "name": "كوكا كولا", "price": 7 },
+          { "name": "كوكا كولا زيرو", "price": 7 },
+          { "name": "سبرايت", "price": 7 },
+          { "name": "فانتا", "price": 7 },
+          { "name": "عصير عنب", "price": 8 },
+          { "name": "عصير جريب فروت", "price": 8 },
+          { "name": "شويبس عنب", "price": 9 },
+          { "name": "XL", "price": 10 },
+          { "name": "بفاريا تفاح", "price": 12 },
+          { "name": "بلو دي", "price": 10 },
+          { "name": "بلو نعناع", "price": 10 }
+        ]
+      },
+      {
+        "id": "hot-coffee",
+        "title": "مشروبات ساخنة — القهوة",
+        "items": [
+          { "name": "إسبريسو قصير", "price": 8 },
+          { "name": "إسبريسو طويل", "price": 10 },
+          { "name": "دبل إسبريسو", "price": 12 },
+          { "name": "كابتشينو صغير", "price": 12 },
+          { "name": "كابتشينو كبير", "price": 15 },
+          { "name": "نسكافيه", "price": 12 },
+          { "name": "قهوة لاتيه", "price": 12 },
+          { "name": "أمريكانو", "price": 12 },
+          { "name": "أفوغاتو", "price": 14 },
+          { "name": "موكا", "price": 18 }
+        ]
+      },
+      {
+        "id": "flavored-latte",
+        "title": "لاتيه بنكهات مميزة",
+        "items": [
+          { "name": "سبانش لاتيه ساخن", "price": 18 },
+          { "name": "لاتيه بستاشيو", "price": 18 },
+          { "name": "لاتيه كراميل مملّح", "price": 18 },
+          { "name": "لاتيه بندق", "price": 18 },
+          { "name": "لاتيه تيراميسو", "price": 18 },
+          { "name": "شاي لاتيه", "price": 15 }
+        ]
+      },
+      {
+        "id": "tea",
+        "title": "الشاي والأعشاب",
+        "items": [
+          { "name": "شاي بالنعناع أو الميرمية", "price": 12 },
+          { "name": "شاي أبو عيسى", "price": 15 },
+          { "name": "كركديه / بابونج / شاي أخضر / زهورات / يانسون / ليمونيت", "price": 15 }
+        ]
+      },
+      {
+        "id": "special-hot",
+        "title": "مشروبات ساخنة خاصة",
+        "items": [
+          { "name": "سايدر", "price": 15 },
+          { "name": "سحلب", "price": 18 },
+          { "name": "شوكو", "price": 15 },
+          { "name": "شوكو مارشميلو", "price": 16 },
+          { "name": "هوت شوكليت", "price": 17 },
+          { "name": "هوت شوكليت بستاشيو", "price": 18 },
+          { "name": "هوت شوكليت كراميل مملّح", "price": 18 },
+          { "name": "هوت شوكليت بندق", "price": 18 },
+          { "name": "هوت شوكليت فيريرو روشي", "price": 18 },
+          { "name": "هوت فرنش فانيلا", "price": 18 },
+          { "name": "هوت لوتوس", "price": 18 },
+          { "name": "سحلب بستاشيو", "price": 22 }
+        ]
+      },
+      {
+        "id": "hookah",
+        "title": "أراجيل",
+        "note": "الأسعار معروضة عادي / فريش.",
+        "items": [
+          { "name": "نخلة تفاحتين", "priceText": "35 / 40" },
+          { "name": "مزايا تفاحتين", "priceText": "35 / 40" },
+          { "name": "ليمون ونعنع", "priceText": "35 / 40" },
+          { "name": "بطيخ ونعنع", "priceText": "35 / 40" },
+          { "name": "بلوبري", "priceText": "35 / 40" },
+          { "name": "مسكا وقرفة", "priceText": "35 / 40" },
+          { "name": "خلطة بياتو", "priceText": "35 / 40" },
+          { "name": "Love 66", "priceText": "35 / 40" },
+          { "name": "تغيير راس", "priceText": "15 / 20" }
+        ]
+      }
+    ]
+  }
+}

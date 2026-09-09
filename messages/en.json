@@ -43,6 +43,10 @@
     "drinks": "Drinks",
     "about": "About"
   },
+  "menuPage": {
+    "viewDrinks": "View Drinks",
+    "viewMenu": "View Menu"
+  },
   "footer": {
     "address": "Address — to be provided",
     "tel": "Tel: <n>+000 000 0000</n>",
