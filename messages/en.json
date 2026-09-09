@@ -27,5 +27,10 @@
     "restaurant": "The Restaurant",
     "privateRoom": "The Private Room",
     "garden": "The Garden"
+  },
+  "features": {
+    "menu": "Menu",
+    "drinks": "Drinks",
+    "about": "About"
   }
 }

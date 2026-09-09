@@ -83,10 +83,9 @@ html {
   }
 }
 
-/* Soft state for the Spaces panels' inner layer. Declared here so the panels
-   never paint sharp for a frame before their entrance runs; the tween writes
-   the final values back over it. */
-.reveal-soft {
-  filter: blur(10px);
-  transform: scale(1.06);
+/* Rise state for the image panels, paired with .reveal's opacity. Declared
+   here so the panels never paint in place for a frame before their entrance
+   runs; the tween writes the final values back over it. */
+.reveal-rise {
+  transform: translate3d(0, 28px, 0);
 }

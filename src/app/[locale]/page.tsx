@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 
 import { About } from "@/components/about";
+import { Features } from "@/components/features";
 import { Hero } from "@/components/hero";
 import { SiteNav } from "@/components/site-nav";
 import { Spaces } from "@/components/spaces";
@@ -20,6 +21,7 @@ export default async function Home({ params }: HomeProps) {
         <Hero />
         <About />
         <Spaces />
+        <Features />
       </main>
     </>
   );
