@@ -48,6 +48,11 @@
     "viewDrinks": "View Drinks",
     "viewMenu": "View Menu"
   },
+  "reserve": {
+    "heading": "Reserve a Table",
+    "line": "Join us for an unforgettable dining experience.",
+    "cta": "Book Now"
+  },
   "footer": {
     "address": "Address — to be provided",
     "tel": "Tel: <n>+000 000 0000</n>",
