@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { NavAnchor } from "@/components/nav-anchor";
 import { darkCell, darkCellRule, quickLinks } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
@@ -23,9 +24,9 @@ export function QuickGrid() {
       )}
     >
       {quickLinks.map((item, index) => (
-        <a
+        <NavAnchor
           key={item.key}
-          href={item.href}
+          item={item}
           className={cn(
             darkCell,
             "h-[var(--grid-cell-h)]",
@@ -34,7 +35,7 @@ export function QuickGrid() {
           )}
         >
           {t(item.key)}
-        </a>
+        </NavAnchor>
       ))}
     </div>
   );

@@ -6,6 +6,7 @@ import gsap from "gsap";
 
 import { CompactBar } from "@/components/compact-bar";
 import { LanguageToggle } from "@/components/language-toggle";
+import { NavAnchor } from "@/components/nav-anchor";
 import { QuickGrid } from "@/components/quick-grid";
 import { TopBar } from "@/components/top-bar";
 import { Link } from "@/i18n/navigation";
@@ -284,13 +285,13 @@ export function SiteNav() {
               </li>
               {shortcuts.map((item) => (
                 <li key={item.key}>
-                  <a
-                    href={item.href}
-                    data-reveal="link"
+                  <NavAnchor
+                    item={item}
+                    reveal="link"
                     className={cn("reveal", barLink)}
                   >
                     {item.label}
-                  </a>
+                  </NavAnchor>
                 </li>
               ))}
               <li>
@@ -372,14 +373,14 @@ export function SiteNav() {
             </li>
             {sections.map((item) => (
               <li key={item.key}>
-                <a
-                  href={item.href}
+                <NavAnchor
+                  item={item}
                   onClick={close}
-                  data-reveal="drawer-link"
+                  reveal="drawer-link"
                   className={drawerLink}
                 >
                   {item.label}
-                </a>
+                </NavAnchor>
               </li>
             ))}
           </ul>

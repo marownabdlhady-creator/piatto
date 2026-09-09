@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { Link } from "@/i18n/navigation";
+import { NavAnchor } from "@/components/nav-anchor";
 import { compactLinks, darkCell, darkCellRule } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
@@ -16,23 +16,19 @@ export function CompactBar() {
 
   return (
     <div className="grid grid-cols-3 bg-foreground text-background">
-      {compactLinks.map((item, index) => {
-        const className = cn(
-          darkCell,
-          "h-11",
-          index < compactLinks.length - 1 && cn("border-e", darkCellRule),
-        );
-
-        return item.route ? (
-          <Link key={item.key} href={item.href} className={className}>
-            {t(item.key)}
-          </Link>
-        ) : (
-          <a key={item.key} href={item.href} className={className}>
-            {t(item.key)}
-          </a>
-        );
-      })}
+      {compactLinks.map((item, index) => (
+        <NavAnchor
+          key={item.key}
+          item={item}
+          className={cn(
+            darkCell,
+            "h-11",
+            index < compactLinks.length - 1 && cn("border-e", darkCellRule),
+          )}
+        >
+          {t(item.key)}
+        </NavAnchor>
+      ))}
     </div>
   );
 }

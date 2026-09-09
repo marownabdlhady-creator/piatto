@@ -43,6 +43,28 @@
     "viewDrinks": "View Drinks",
     "viewMenu": "View Menu"
   },
+  "galleryPage": {
+    "heading": "Gallery",
+    "intro": "Moments from the room — the oven, the table, and the hours in between.",
+    "openImage": "Open image",
+    "close": "Close",
+    "next": "Next image",
+    "previous": "Previous image",
+    "alt": {
+      "served": "A plated dish set down at a candlelit table",
+      "pasta": "Fresh tagliatelle finished in the pan",
+      "room": "The dining room, laid and waiting for service",
+      "bread": "Loaves fresh from the taboon, dusted with flour",
+      "pizza": "A pizza straight from the oven, just cut",
+      "guests": "A long table in full swing, mid-service",
+      "cocktail": "A signature cocktail resting on the bar",
+      "table": "A shared table laid for breakfast, seen from above",
+      "hall": "The main hall, warm under low light",
+      "window": "The room seen through its window after dark",
+      "aperitivo": "A berry aperitivo over crushed ice",
+      "toast": "Glasses raised across the table"
+    }
+  },
   "interlude": {
     "line1": "Every plate tells a story.",
     "line2": "Italian roots, Middle Eastern soul.",
