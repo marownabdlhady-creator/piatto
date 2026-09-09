@@ -7,11 +7,11 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useRevealOnScroll } from "@/lib/use-reveal-on-scroll";
 
-/** The dining room, the one picture on the page that is about the table. */
-const IMAGE = "/feature-decor-2.jpg";
+/** An evening table, set and waiting - the picture the invitation rests on. */
+const IMAGE = "/reserve-table.jpg";
 
 /**
- * The invitation that closes the page: a full-bleed room under a scrim, with
+ * The invitation that closes the page: a full-bleed table under a scrim, with
  * the heading, one line and the way to the reservations page centred over it.
  * Everything is centred and logically spaced, so it reads the same in both
  * directions.

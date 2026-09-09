@@ -38,15 +38,20 @@
     "privateRoom": "الغرفة الخاصة",
     "garden": "الحديقة"
   },
-  "features": {
-    "menu": "القائمة",
-    "drinks": "المشروبات",
-    "about": "من نحن"
-  },
   "menuPage": {
     "sections": "الأقسام",
     "viewDrinks": "عرض المشروبات",
     "viewMenu": "عرض القائمة"
+  },
+  "interlude": {
+    "line1": "كل طبق يحكي حكاية.",
+    "line2": "جذور إيطالية، وروح شرقية.",
+    "line3": "صُنع ليُشارَك."
+  },
+  "features": {
+    "menu": "القائمة",
+    "drinks": "المشروبات",
+    "about": "من نحن"
   },
   "reserve": {
     "heading": "احجز طاولتك",

@@ -50,14 +50,16 @@ function Panel({ image, sizes, className, title, href }: PanelProps) {
 }
 
 const WIDE = "aspect-[3/2] md:aspect-auto md:h-[80svh]";
-const BAND = "aspect-[3/2] md:aspect-auto md:h-[70svh]";
+const HALF = "aspect-[3/2] md:aspect-auto md:h-[70svh]";
 
 /**
- * The run of full-bleed panels after the Spaces row: the three rooms of the
- * site anyone might be looking for, each behind its own picture. The shorter
- * middle band keeps the run from reading as three identical blocks.
- * Everything is edge to edge with no gaps, and stacks on small screens.
- * Static by design - no hover state.
+ * The run of full-bleed panels after the Interlude: the three rooms of the
+ * site anyone might be looking for, each behind its own picture. Menu takes
+ * the full width; Drinks and About share the row below it, splitting it in
+ * half from md and stacking under each other below that. The columns follow
+ * the inline direction, so the pair mirrors on /ar.
+ *
+ * Everything is edge to edge with no gaps. Static by design - no hover state.
  */
 export function Features() {
   const t = useTranslations("features");
@@ -77,21 +79,23 @@ export function Features() {
         className={WIDE}
       />
 
-      <Panel
-        image={features.drinks.image}
-        href={features.drinks.href}
-        title={t("drinks")}
-        sizes="100vw"
-        className={BAND}
-      />
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <Panel
+          image={features.drinks.image}
+          href={features.drinks.href}
+          title={t("drinks")}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className={HALF}
+        />
 
-      <Panel
-        image={features.about.image}
-        href={features.about.href}
-        title={t("about")}
-        sizes="100vw"
-        className={WIDE}
-      />
+        <Panel
+          image={features.about.image}
+          href={features.about.href}
+          title={t("about")}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className={HALF}
+        />
+      </div>
     </section>
   );
 }

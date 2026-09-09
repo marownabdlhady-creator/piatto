@@ -38,15 +38,20 @@
     "privateRoom": "The Private Room",
     "garden": "The Garden"
   },
-  "features": {
-    "menu": "Menu",
-    "drinks": "Drinks",
-    "about": "About"
-  },
   "menuPage": {
     "sections": "Sections",
     "viewDrinks": "View Drinks",
     "viewMenu": "View Menu"
+  },
+  "interlude": {
+    "line1": "Every plate tells a story.",
+    "line2": "Italian roots, Middle Eastern soul.",
+    "line3": "Made to be shared."
+  },
+  "features": {
+    "menu": "Menu",
+    "drinks": "Drinks",
+    "about": "About"
   },
   "reserve": {
     "heading": "Reserve a Table",
