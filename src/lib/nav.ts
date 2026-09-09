@@ -48,10 +48,19 @@ export const darkCell =
   "text-[0.62rem] tracking-[0.18em] uppercase opacity-80 " +
   "transition-opacity duration-500 hover:opacity-100";
 
+export type CompactLink = {
+  key: string;
+  href: string;
+  /** Set when the href is a route rather than an in-page anchor. */
+  route?: boolean;
+};
+
 /**
- * The two shortcuts that survive into the collapsed small-screen bar.
+ * The three shortcuts that survive into the collapsed small-screen bar. Home
+ * leads, so the way back out of a section page is the first thing in reach.
  */
-export const compactLinks = [
+export const compactLinks: readonly CompactLink[] = [
+  { key: "home", href: "/", route: true },
   { key: "menu", href: "#menu" },
   { key: "whatsapp", href: "#whatsapp" },
-] as const;
+];

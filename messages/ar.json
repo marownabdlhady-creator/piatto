@@ -3,6 +3,7 @@
     "siteName": "piatto"
   },
   "nav": {
+    "home": "الرئيسية",
     "contact": "تواصل معنا",
     "workingHours": "ساعات العمل",
     "menu": "القائمة",

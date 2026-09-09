@@ -25,9 +25,11 @@ export function About() {
     <section
       id="about"
       ref={rootRef}
-      className="bg-background px-4 py-24 text-foreground sm:px-6 md:px-8 md:py-32 lg:px-12 lg:py-40"
+      className="bg-background px-4 py-20 text-foreground sm:px-6 md:px-8 md:py-28 lg:px-12"
     >
-      <div className="mx-auto max-w-[44rem] text-center">
+      {/* One centred group - two lines, the way through, then the plates - so
+          the section reads as a single block with even air around it. */}
+      <div className="mx-auto flex max-w-[44rem] flex-col items-center text-center">
         <p
           data-reveal="about"
           className="reveal text-[1.15rem] leading-[1.85] text-balance md:text-[1.45rem] md:leading-[1.8]"
@@ -44,7 +46,7 @@ export function About() {
           {t("line2")}
         </p>
 
-        <div data-reveal="about" className="reveal mt-12 md:mt-16">
+        <div data-reveal="about" className="reveal mt-10 md:mt-12">
           <Link
             href="/about"
             className="tracked-label inline-block border border-foreground/25 px-9 py-4 text-[0.66rem] tracking-[0.22em] uppercase transition-colors duration-500 hover:border-foreground/70"
@@ -52,17 +54,17 @@ export function About() {
             {t("cta")}
           </Link>
         </div>
-      </div>
 
-      <ul className="mx-auto mt-20 grid max-w-md grid-cols-2 gap-5 md:mt-28 md:max-w-xl md:gap-10">
-        {LOGO_SLOTS.map((slot) => (
-          <li key={slot} data-reveal="about" className="reveal">
-            <div className="tracked-label flex h-20 items-center justify-center border border-foreground/15 text-[0.62rem] tracking-[0.2em] uppercase opacity-40 md:h-24">
-              {t("logo")}
-            </div>
-          </li>
-        ))}
-      </ul>
+        <ul className="mt-14 grid w-full max-w-md grid-cols-2 gap-5 md:mt-16 md:max-w-xl md:gap-10">
+          {LOGO_SLOTS.map((slot) => (
+            <li key={slot} data-reveal="about" className="reveal">
+              <div className="tracked-label flex h-20 items-center justify-center border border-foreground/15 text-[0.62rem] tracking-[0.2em] uppercase opacity-40 md:h-24">
+                {t("logo")}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

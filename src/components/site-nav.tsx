@@ -271,6 +271,17 @@ export function SiteNav() {
             className="hidden md:mt-6 md:flex md:justify-center"
           >
             <ul className="flex items-center gap-8 text-[0.7rem] lg:gap-12">
+              {/* The way back to the home page, ahead of the in-page shortcuts
+                  it sits beside - they only resolve once you are there. */}
+              <li>
+                <Link
+                  href="/"
+                  data-reveal="link"
+                  className={cn("reveal", barLink)}
+                >
+                  {t("home")}
+                </Link>
+              </li>
               {shortcuts.map((item) => (
                 <li key={item.key}>
                   <a
@@ -349,6 +360,16 @@ export function SiteNav() {
           className="px-8 pt-6 pb-12 md:px-9"
         >
           <ul className="flex flex-col items-start gap-2 text-start text-[1.05rem]">
+            <li>
+              <Link
+                href="/"
+                onClick={close}
+                data-reveal="drawer-link"
+                className={drawerLink}
+              >
+                {t("home")}
+              </Link>
+            </li>
             {sections.map((item) => (
               <li key={item.key}>
                 <a
