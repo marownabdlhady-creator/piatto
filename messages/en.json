@@ -18,14 +18,19 @@
     "title": "Reservations"
   },
   "about": {
+    "line1": "Piatto means “plate” in Italian — where flavors, people, and beautiful moments come together around the table.",
+    "line2": "Italian cuisine with Middle Eastern flavors, a Palestinian touch, and hospitality from the heart.",
+    "cta": "Read our story",
+    "logo": "Logo"
+  },
+  "aboutPage": {
     "heading": "Our Story",
     "p1": "Piatto means “plate” in Italian, and that’s where our story begins. To us, a plate is more than just food; it’s a place where flavors, people, and beautiful moments come together around the table.",
     "p2": "Piatto is, at its heart, an Italian restaurant, serving the Italian cuisine we love — from pasta and pizza to focaccia and freshly baked specialties straight from the taboon. We complement our Italian roots with Middle Eastern flavors and Palestinian touches, using local ingredients and spices to create dishes with Piatto’s own distinctive character.",
     "p3": "We believe that great food starts with fresh, high-quality ingredients. That’s why we pay attention to every detail — from selecting our ingredients and preparing each dish to the moment it reaches your table.",
     "p4": "Our day begins with a rich and varied selection of breakfast dishes and warm, freshly baked goods from the taboon, and continues through lunch and dinner with pasta, pizza, salads, signature dishes, desserts, and drinks.",
     "p5": "At Piatto, the experience wouldn’t be complete without the atmosphere. We’ve created a space that is stylish, warm, and comfortable — a place where you can feel at home, whether you’re joining us for a relaxed breakfast, meeting friends, enjoying dinner for two, spending quality time with family, or celebrating a special occasion.",
-    "signature": "Piatto — Italian cuisine with Middle Eastern flavors, a Palestinian touch, and hospitality from the heart.",
-    "logo": "Logo"
+    "signature": "Piatto — Italian cuisine with Middle Eastern flavors, a Palestinian touch, and hospitality from the heart."
   },
   "spaces": {
     "restaurant": "The Restaurant",

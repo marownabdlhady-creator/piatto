@@ -89,3 +89,13 @@ html {
 .reveal-rise {
   transform: translate3d(0, 28px, 0);
 }
+
+/* Tight tracking for the large display type. Latin only - pulling connected
+   Arabic letterforms together breaks them, so /ar opts out. */
+.display-tight {
+  letter-spacing: -0.02em;
+}
+
+html[lang="ar"] .display-tight {
+  letter-spacing: normal;
+}

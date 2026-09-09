@@ -9,22 +9,27 @@ import { ENTRANCE, entranceScale } from "@/lib/entrance";
 export const PANEL_SELECTOR = "[data-reveal='panel']";
 
 /**
- * The image-panel entrance shared by the Spaces and Features sections. Each
- * panel fades and rises once, the first time it scrolls into view. Only
- * opacity and transform animate - no filters, nothing that affects layout -
- * so the move stays on the compositor and nothing around the panels shifts.
+ * The image-panel entrance shared by the Spaces and Features sections, and by
+ * the story page, which passes its own selector. Each element fades and rises
+ * once, the first time it scrolls into view. Only opacity and transform
+ * animate - no filters, nothing that affects layout - so the move stays on the
+ * compositor and nothing around it shifts.
  *
- * Panels are watched one by one rather than by section, so a tall run of them
- * does not spend its whole entrance off-screen. Panels that arrive together -
- * a side-by-side row - are staggered against each other in DOM order, which is
- * reading order in both locales, so they cascade from the right on /ar.
+ * Elements are watched one by one rather than by section, so a tall run of
+ * them does not spend its whole entrance off-screen. Those that arrive
+ * together - a side-by-side row - are staggered against each other in DOM
+ * order, which is reading order in both locales, so they cascade from the
+ * right on /ar.
  */
-export function useSoftReveal(ref: RefObject<HTMLElement | null>) {
+export function useSoftReveal(
+  ref: RefObject<HTMLElement | null>,
+  selector: string = PANEL_SELECTOR,
+) {
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
 
-    const panels = Array.from(root.querySelectorAll(PANEL_SELECTOR));
+    const panels = Array.from(root.querySelectorAll(selector));
     if (panels.length === 0) return;
 
     // The hidden state is declared in CSS, so it cannot be dropped with
@@ -71,5 +76,5 @@ export function useSoftReveal(ref: RefObject<HTMLElement | null>) {
 
     for (const panel of panels) observer.observe(panel);
     return () => observer.disconnect();
-  }, [ref]);
+  }, [ref, selector]);
 }
