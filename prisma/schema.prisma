@@ -1,0 +1,92 @@
+// The menu lives in Postgres (Neon). Both menus — the food menu and the drinks
+// list — share one set of tables and are told apart by `domain`, so a single
+// dashboard can edit either one.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MenuDomain {
+  FOOD
+  DRINKS
+}
+
+/// Which of the three pricing shapes an item uses.
+enum PriceType {
+  /// A single amount, in `priceValue`.
+  SIMPLE
+  /// A set of labelled amounts, in the item's `priceOptions`.
+  OPTIONS
+  /// Already written out, in `priceText` ("35 / 40").
+  TEXT
+}
+
+/// Per-menu settings: the currency, and the note printed above the whole menu.
+model MenuMeta {
+  domain    MenuDomain @id
+  currency  String     @default("₪")
+  noteEn    String?
+  noteAr    String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Section {
+  id        String     @id @default(cuid())
+  domain    MenuDomain
+  /// Stable key used in anchors and links ("breakfast", "smoothie").
+  slug      String
+  titleEn   String
+  titleAr   String
+  noteEn    String?
+  noteAr    String?
+  /// Display position within its domain.
+  order     Int        @default(0)
+  items     Item[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@unique([domain, slug])
+  @@index([domain, order])
+}
+
+model Item {
+  id           String        @id @default(cuid())
+  sectionId    String
+  section      Section       @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  nameEn       String
+  nameAr       String
+  descEn       String?
+  descAr       String?
+  priceType    PriceType     @default(SIMPLE)
+  /// Set when priceType is SIMPLE. Prices are whole shekels.
+  priceValue   Int?
+  /// Set when priceType is TEXT.
+  priceText    String?
+  priceOptions PriceOption[]
+  /// Display position within its section.
+  order        Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([sectionId, order])
+}
+
+/// One labelled price of an item whose priceType is OPTIONS.
+model PriceOption {
+  id        String   @id @default(cuid())
+  itemId    String
+  item      Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  labelEn   String
+  labelAr   String
+  price     Int
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([itemId, order])
+}
