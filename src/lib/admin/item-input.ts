@@ -16,13 +16,6 @@ export const PRICE_TYPES = ["SIMPLE", "OPTIONS", "TEXT"] as const;
 
 export type PriceTypeValue = (typeof PRICE_TYPES)[number];
 
-/** What each pricing shape is called in the editor. */
-export const PRICE_TYPE_LABELS: Record<PriceTypeValue, string> = {
-  SIMPLE: "Single price",
-  OPTIONS: "Options",
-  TEXT: "Free text",
-};
-
 const NAME_MAX = 120;
 const DESCRIPTION_MAX = 600;
 const LABEL_MAX = 60;

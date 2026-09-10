@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
+import { useAdminStrings } from "./language";
+
 const FIELD =
   "mt-3 block w-full border border-foreground/20 bg-transparent px-4 py-3 " +
   "text-[0.9rem] outline-none transition-colors duration-300 " +
@@ -17,6 +19,7 @@ const LABEL =
  */
 export function LoginForm() {
   const router = useRouter();
+  const strings = useAdminStrings();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -39,7 +42,7 @@ export function LoginForm() {
       });
 
       if (!response.ok) {
-        setError("Invalid email or password.");
+        setError(strings.invalidCredentials);
         setPending(false);
         return;
       }
@@ -49,7 +52,7 @@ export function LoginForm() {
       router.replace("/admin");
       router.refresh();
     } catch {
-      setError("Could not reach the server. Try again.");
+      setError(strings.networkError);
       setPending(false);
     }
   }
@@ -57,24 +60,28 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} noValidate>
       <label className="block">
-        <span className={LABEL}>Email</span>
+        <span className={LABEL}>{strings.email}</span>
+        {/* Credentials are typed in Latin script whatever the interface
+            language is, so both fields stay left-to-right. */}
         <input
           name="email"
           type="email"
           autoComplete="username"
           required
           autoFocus
+          dir="ltr"
           className={FIELD}
         />
       </label>
 
       <label className="mt-8 block">
-        <span className={LABEL}>Password</span>
+        <span className={LABEL}>{strings.password}</span>
         <input
           name="password"
           type="password"
           autoComplete="current-password"
           required
+          dir="ltr"
           className={FIELD}
         />
       </label>
@@ -94,7 +101,7 @@ export function LoginForm() {
         disabled={pending}
         className="tracked-label mt-4 w-full border border-foreground/25 px-9 py-4 text-[0.66rem] tracking-[0.22em] uppercase transition-colors duration-500 hover:border-foreground/70 disabled:opacity-40"
       >
-        {pending ? "Signing in…" : "Sign in"}
+        {pending ? strings.signingIn : strings.signIn}
       </button>
     </form>
   );

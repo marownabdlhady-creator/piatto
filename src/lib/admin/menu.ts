@@ -4,7 +4,6 @@ import { revalidateTag } from "next/cache";
 
 import type { Prisma } from "@prisma/client";
 
-import type { ItemInput } from "@/lib/admin/item-input";
 import type { Domain, EditorMenu } from "@/lib/admin/menu-types";
 import { MENU_TAGS } from "@/lib/menu";
 import { prisma } from "@/lib/prisma";
@@ -66,43 +65,6 @@ export async function readEditorMenu(domain: Domain): Promise<EditorMenu> {
         hidden: item.hidden,
       })),
     })),
-  };
-}
-
-/**
- * The columns an item's pricing writes. Every save sets all three, so the two
- * that do not apply are cleared rather than left over from a previous shape —
- * a TEXT item that used to be SIMPLE must not keep its old number around.
- */
-function pricingColumns(input: ItemInput) {
-  return {
-    priceType: input.priceType,
-    priceValue: input.priceType === "SIMPLE" ? input.priceValue : null,
-    priceText: input.priceType === "TEXT" ? input.priceText : null,
-  };
-}
-
-/** An item's option rows, in the order the editor listed them. */
-export function optionRows(input: ItemInput) {
-  return input.priceType === "OPTIONS"
-    ? input.priceOptions.map((option, index) => ({
-        labelEn: option.labelEn,
-        labelAr: option.labelAr,
-        price: option.price,
-        order: index,
-      }))
-    : [];
-}
-
-/** The content columns shared by a create and an update. */
-export function contentColumns(input: ItemInput) {
-  return {
-    nameEn: input.nameEn,
-    nameAr: input.nameAr,
-    descEn: input.descEn,
-    descAr: input.descAr,
-    hidden: input.hidden,
-    ...pricingColumns(input),
   };
 }
 

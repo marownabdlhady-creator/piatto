@@ -1,5 +1,8 @@
+import { AdminLanguageToggle } from "@/components/admin/language";
 import { LogoutButton } from "@/components/admin/logout-button";
 import { MenuEditor } from "@/components/admin/menu-editor";
+import { adminStrings } from "@/lib/admin/i18n";
+import { readAdminLocale } from "@/lib/admin/locale";
 import { readEditorMenu } from "@/lib/admin/menu";
 import { DOMAINS } from "@/lib/admin/menu-types";
 import { requireAdminSession } from "@/lib/auth";
@@ -17,6 +20,7 @@ import { requireAdminSession } from "@/lib/auth";
  */
 export default async function AdminDashboard() {
   const admin = await requireAdminSession();
+  const strings = adminStrings(await readAdminLocale());
 
   const menus = await Promise.all(DOMAINS.map(readEditorMenu));
 
@@ -24,24 +28,29 @@ export default async function AdminDashboard() {
     <main className="mx-auto min-h-svh w-full max-w-[64rem] px-5 py-12 sm:px-8 md:px-10 md:py-16">
       <header className="flex flex-wrap items-baseline justify-between gap-6 border-b border-foreground/15 pb-8">
         <div>
-          <p className="tracked-label text-[0.6rem] tracking-[0.24em] uppercase opacity-40">
+          <p
+            lang="en"
+            dir="ltr"
+            className="tracked-label font-latin-serif text-[0.6rem] tracking-[0.24em] uppercase opacity-40"
+          >
             piatto
           </p>
           <h1 className="display-tight mt-3 text-[1.75rem] leading-[1.2] sm:text-[2rem]">
-            Menu
+            {strings.heading}
           </h1>
         </div>
 
         <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-          <span className="text-[0.78rem] text-foreground/50">
+          <span dir="ltr" className="text-[0.78rem] text-foreground/50">
             {admin.email}
           </span>
+          <AdminLanguageToggle />
           <LogoutButton />
         </div>
       </header>
 
       <p className="mt-6 max-w-[38rem] text-[0.82rem] leading-[1.8] text-foreground/50">
-        Changes go live on the public menu as soon as they are saved.
+        {strings.intro}
       </p>
 
       <div className="mt-10">

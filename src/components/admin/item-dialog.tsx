@@ -2,15 +2,16 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 
+import type { AdminStrings } from "@/lib/admin/i18n";
 import {
   firstIssue,
   itemInput,
-  PRICE_TYPE_LABELS,
   PRICE_TYPES,
   type PriceTypeValue,
 } from "@/lib/admin/item-input";
 import type { EditorItem } from "@/lib/admin/menu-types";
 
+import { useAdminStrings } from "./language";
 import { BUTTON, BUTTON_SMALL, BUTTON_SOLID, FIELD, LABEL } from "./ui";
 
 /**
@@ -18,6 +19,12 @@ import { BUTTON, BUTTON_SMALL, BUTTON_SOLID, FIELD, LABEL } from "./ui";
  * to. Everything an item has is on this one form: both languages of its name
  * and description, whichever of the three pricing shapes it uses, and whether
  * the public menu shows it.
+ *
+ * The interface language changes the labels around the fields and nothing
+ * inside them. Both languages of the content are always here to be edited, and
+ * each input keeps its own direction and typeface regardless — an Arabic name
+ * reads right-to-left on an English dashboard, and an English one reads
+ * left-to-right on an Arabic one.
  *
  * The form holds every value as a string, because that is what an input holds.
  * It is turned into the payload only on submit, and checked there against the
@@ -134,6 +141,27 @@ function toPayload(draft: Draft): unknown {
   }
 }
 
+/** What each pricing shape is called, in the interface language. */
+function priceTypeLabel(
+  type: PriceTypeValue,
+  strings: AdminStrings,
+): string {
+  switch (type) {
+    case "OPTIONS":
+      return strings.priceTypeOptions;
+    case "TEXT":
+      return strings.priceTypeText;
+    case "SIMPLE":
+    default:
+      return strings.priceTypeSimple;
+  }
+}
+
+/** English content, pinned left-to-right and to the Latin face. */
+const CONTENT_EN = "font-latin-serif";
+/** Arabic content, pinned right-to-left and to the Arabic face. */
+const CONTENT_AR = "font-arabic-sans";
+
 export type ItemDialogProps = {
   /** The item being edited, or null when this is a new one. */
   item: EditorItem | null;
@@ -152,6 +180,7 @@ export function ItemDialog({
   onSave,
   onClose,
 }: ItemDialogProps) {
+  const strings = useAdminStrings();
   const [draft, setDraft] = useState<Draft>(() => draftFrom(item));
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -231,71 +260,75 @@ export function ItemDialog({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label={item ? "Edit item" : "New item"}
+        aria-label={item ? strings.editItem : strings.newItem}
         className="max-h-[92svh] w-full max-w-[42rem] overflow-y-auto rounded-t-[4px] border border-foreground/15 bg-background sm:rounded-[4px]"
       >
         <form onSubmit={onSubmit} noValidate className="px-5 py-6 sm:px-8">
           <header className="border-b border-foreground/12 pb-5">
-            <p className={LABEL}>{item ? "Edit item" : "New item"}</p>
+            <p className={LABEL}>{item ? strings.editItem : strings.newItem}</p>
             <h2 className="display-tight mt-2 text-[1.25rem] leading-[1.3]">
               {item ? item.nameEn || item.nameAr : sectionTitle}
             </h2>
             {!item && (
               <p className="mt-1.5 text-[0.75rem] text-foreground/45">
-                Added to the end of this section.
+                {strings.appendNote}
               </p>
             )}
           </header>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <label className="block">
-              <span className={LABEL}>Name (EN)</span>
+              <span className={LABEL}>{strings.nameEn}</span>
               <input
                 value={draft.nameEn}
                 onChange={(event) => patch({ nameEn: event.target.value })}
                 autoFocus
-                className={FIELD}
+                dir="ltr"
+                lang="en"
+                className={`${FIELD} ${CONTENT_EN}`}
               />
             </label>
 
             <label className="block">
-              <span className={LABEL}>Name (AR)</span>
+              <span className={LABEL}>{strings.nameAr}</span>
               <input
                 value={draft.nameAr}
                 onChange={(event) => patch({ nameAr: event.target.value })}
                 dir="rtl"
                 lang="ar"
-                className={`${FIELD} font-arabic-sans`}
+                className={`${FIELD} ${CONTENT_AR}`}
               />
             </label>
 
             <label className="block">
-              <span className={LABEL}>Description (EN)</span>
+              <span className={LABEL}>{strings.descEn}</span>
               <textarea
                 value={draft.descEn}
                 onChange={(event) => patch({ descEn: event.target.value })}
                 rows={3}
-                className={`${FIELD} resize-y`}
+                dir="ltr"
+                lang="en"
+                className={`${FIELD} ${CONTENT_EN} resize-y`}
               />
             </label>
 
             <label className="block">
-              <span className={LABEL}>Description (AR)</span>
+              <span className={LABEL}>{strings.descAr}</span>
               <textarea
                 value={draft.descAr}
                 onChange={(event) => patch({ descAr: event.target.value })}
                 rows={3}
                 dir="rtl"
                 lang="ar"
-                className={`${FIELD} resize-y font-arabic-sans`}
+                className={`${FIELD} ${CONTENT_AR} resize-y`}
               />
             </label>
           </div>
 
           <fieldset className="mt-7 border-t border-foreground/12 pt-6">
-            <legend className="sr-only">Pricing</legend>
+            <legend className="sr-only">{strings.priceTypeLabel}</legend>
 
-            <span className={LABEL}>Price type</span>
+            <span className={LABEL}>{strings.priceTypeLabel}</span>
             <div className="mt-2 flex flex-wrap gap-2">
               {PRICE_TYPES.map((type) => {
                 const active = draft.priceType === type;
@@ -312,7 +345,7 @@ export function ItemDialog({
                         : "border-foreground/20 hover:border-foreground/60"
                     }`}
                   >
-                    {PRICE_TYPE_LABELS[type]}
+                    {priceTypeLabel(type, strings)}
                   </button>
                 );
               })}
@@ -320,13 +353,16 @@ export function ItemDialog({
 
             {draft.priceType === "SIMPLE" && (
               <label className="mt-5 block max-w-[16rem]">
-                <span className={LABEL}>Price ({currency})</span>
+                <span className={LABEL}>
+                  {strings.price} ({currency})
+                </span>
                 <input
                   value={draft.priceValue}
                   onChange={(event) =>
                     patch({ priceValue: event.target.value })
                   }
                   inputMode="numeric"
+                  dir="ltr"
                   placeholder="45"
                   className={FIELD}
                 />
@@ -335,22 +371,23 @@ export function ItemDialog({
 
             {draft.priceType === "TEXT" && (
               <label className="mt-5 block max-w-[20rem]">
-                <span className={LABEL}>Price text</span>
+                <span className={LABEL}>{strings.priceText}</span>
                 <input
                   value={draft.priceText}
                   onChange={(event) => patch({ priceText: event.target.value })}
+                  dir="ltr"
                   placeholder="35 / 40"
                   className={FIELD}
                 />
                 <span className="mt-2 block text-[0.72rem] text-foreground/45">
-                  Printed exactly as written, without the currency.
+                  {strings.priceTextHint}
                 </span>
               </label>
             )}
 
             {draft.priceType === "OPTIONS" && (
               <div className="mt-5">
-                <span className={LABEL}>Options</span>
+                <span className={LABEL}>{strings.options}</span>
 
                 <ul className="mt-2 grid gap-3">
                   {draft.options.map((option, index) => (
@@ -359,7 +396,7 @@ export function ItemDialog({
                       className="grid gap-3 border border-foreground/12 p-3 sm:grid-cols-[1fr_1fr_6rem_auto] sm:items-end"
                     >
                       <label className="block">
-                        <span className={LABEL}>Label (EN)</span>
+                        <span className={LABEL}>{strings.labelEn}</span>
                         <input
                           value={option.labelEn}
                           onChange={(event) =>
@@ -367,13 +404,15 @@ export function ItemDialog({
                               labelEn: event.target.value,
                             })
                           }
+                          dir="ltr"
+                          lang="en"
                           placeholder="Small"
-                          className={FIELD}
+                          className={`${FIELD} ${CONTENT_EN}`}
                         />
                       </label>
 
                       <label className="block">
-                        <span className={LABEL}>Label (AR)</span>
+                        <span className={LABEL}>{strings.labelAr}</span>
                         <input
                           value={option.labelAr}
                           onChange={(event) =>
@@ -383,12 +422,12 @@ export function ItemDialog({
                           }
                           dir="rtl"
                           lang="ar"
-                          className={`${FIELD} font-arabic-sans`}
+                          className={`${FIELD} ${CONTENT_AR}`}
                         />
                       </label>
 
                       <label className="block">
-                        <span className={LABEL}>Price</span>
+                        <span className={LABEL}>{strings.price}</span>
                         <input
                           value={option.price}
                           onChange={(event) =>
@@ -397,6 +436,7 @@ export function ItemDialog({
                             })
                           }
                           inputMode="numeric"
+                          dir="ltr"
                           placeholder="18"
                           className={FIELD}
                         />
@@ -409,10 +449,10 @@ export function ItemDialog({
                         // cannot be saved, so removing it would only be a way
                         // to reach an error.
                         disabled={draft.options.length === 1}
-                        aria-label={`Remove option ${index + 1}`}
+                        aria-label={`${strings.removeOption} ${index + 1}`}
                         className={`${BUTTON_SMALL} justify-self-start sm:mb-1`}
                       >
-                        Remove
+                        {strings.removeOption}
                       </button>
                     </li>
                   ))}
@@ -428,7 +468,7 @@ export function ItemDialog({
                   }
                   className={`${BUTTON_SMALL} mt-3`}
                 >
-                  Add option
+                  {strings.addOption}
                 </button>
               </div>
             )}
@@ -439,12 +479,12 @@ export function ItemDialog({
               type="checkbox"
               checked={!draft.hidden}
               onChange={(event) => patch({ hidden: !event.target.checked })}
-              className="h-4 w-4 accent-[var(--color-fg)]"
+              className="h-4 w-4 shrink-0 accent-[var(--color-fg)]"
             />
             <span className="text-[0.84rem]">
-              Show on the public menu
+              {strings.showOnPublicMenu}
               <span className="mt-0.5 block text-[0.72rem] text-foreground/45">
-                Hidden items stay here and stay in the database.
+                {strings.hiddenHint}
               </span>
             </span>
           </label>
@@ -464,10 +504,14 @@ export function ItemDialog({
               disabled={saving}
               className={BUTTON}
             >
-              Cancel
+              {strings.cancel}
             </button>
             <button type="submit" disabled={saving} className={BUTTON_SOLID}>
-              {saving ? "Saving…" : item ? "Save changes" : "Add item"}
+              {saving
+                ? strings.saving
+                : item
+                  ? strings.save
+                  : strings.addItem}
             </button>
           </div>
         </form>
