@@ -90,3 +90,14 @@ model PriceOption {
 
   @@index([itemId, order])
 }
+
+/// Someone who can sign in to the dashboard and edit the menu. One account is
+/// expected, but nothing here assumes that.
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  /// A bcrypt hash. The password itself is never stored.
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

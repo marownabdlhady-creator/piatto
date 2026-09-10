@@ -9,6 +9,8 @@ import { routing } from "./i18n/routing";
 export const proxy = createMiddleware(routing);
 
 export const config = {
-  // Match everything except API routes, Next.js internals and static files.
-  matcher: "/((?!api|_next|_vercel|.*\..*).*)",
+  // Match everything except the admin area, API routes, Next.js internals and
+  // static files. /admin is English-only and lives beside the bilingual site,
+  // so sending it through here would only bounce it to "/en/admin".
+  matcher: "/((?!admin|api|_next|_vercel|.*\..*).*)",
 };
