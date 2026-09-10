@@ -3,7 +3,7 @@
 :root {
   /* Placeholder monochrome editorial palette — tuned in the design step. */
   --color-bg: #f6f3ee; /* warm off-white */
-  --color-fg: #14120f; /* deep near-black */
+  --color-fg: #110e0b; /* deep near-black */
 
   /* Resolved to the Arabic face on /ar (see below). */
   --font-primary: var(--font-latin);
