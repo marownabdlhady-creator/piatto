@@ -37,6 +37,47 @@ export const ADMIN_LOCALE_NAMES: Record<AdminLocale, string> = {
   ar: "ع",
 };
 
+/** A piece of the menu, ready to render: the text and how to set it. */
+export type ContentField = {
+  text: string;
+  lang: AdminLocale;
+  dir: "ltr" | "rtl";
+};
+
+/**
+ * One bilingual field of the menu, in the language the dashboard is set to.
+ *
+ * The lists and headings follow the toggle so the menu can be reviewed in the
+ * language it will be read in — but a name has to say something, so a missing
+ * translation falls back to the other language rather than leaving a blank row
+ * where a dish should be. `lang` and `dir` come back alongside the text
+ * because they describe whichever language was actually chosen, which on a
+ * fallback is not the interface language.
+ *
+ * This is only about display. The editor shows both languages of every field,
+ * always, since editing them is the job.
+ */
+export function pickContent(
+  en: string,
+  ar: string,
+  locale: AdminLocale,
+): ContentField {
+  const wanted = locale === "ar" ? ar : en;
+  const other = locale === "ar" ? en : ar;
+  const lang: AdminLocale = wanted ? locale : locale === "ar" ? "en" : "ar";
+
+  return { text: wanted || other, lang, dir: adminDir(lang) };
+}
+
+/** The other language's version of the same field, for a secondary line. */
+export function otherContent(
+  en: string,
+  ar: string,
+  locale: AdminLocale,
+): ContentField {
+  return pickContent(en, ar, locale === "ar" ? "en" : "ar");
+}
+
 /**
  * Every string the dashboard shows. Written out as one type so a missing
  * Arabic translation is a type error rather than a hole on the screen.

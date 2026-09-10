@@ -44,12 +44,37 @@ export async function readJson(
 }
 
 /**
+ * The last line of a Prisma validation error, which is the sentence that names
+ * what was actually wrong. The rest is a dump of the whole query, worth having
+ * in the log and far too long for a toast.
+ */
+function lastLine(message: string): string {
+  const lines = message.split("\n").filter((line) => line.trim() !== "");
+  return lines.at(-1)?.trim() ?? message;
+}
+
+/**
  * Prisma failures that are really about the request rather than the server, so
  * the editor can say something true instead of "server error".
  */
 function knownFailure(
   error: unknown,
 ): { message: string; status: number } | null {
+  // A field the schema has but this process's client does not. The column and
+  // the migration are fine on disk; what is stale is the client held in
+  // memory, which `src/lib/prisma.ts` parks on globalThis and which therefore
+  // outlives every hot reload. Only restarting the server picks up a client
+  // regenerated since it booted, so the message says so rather than sending
+  // anyone back to look at the database.
+  if (error instanceof Prisma.PrismaClientValidationError) {
+    return {
+      message:
+        `${lastLine(error.message)} — if that field is in schema.prisma, ` +
+        "this server booted before the migration that added it. Restart it.",
+      status: 500,
+    };
+  }
+
   if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return null;
 
   switch (error.code) {

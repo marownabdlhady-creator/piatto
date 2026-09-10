@@ -2,7 +2,11 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 
-import type { AdminStrings } from "@/lib/admin/i18n";
+import {
+  pickContent,
+  type AdminStrings,
+  type ContentField,
+} from "@/lib/admin/i18n";
 import {
   firstIssue,
   itemInput,
@@ -11,8 +15,15 @@ import {
 } from "@/lib/admin/item-input";
 import type { EditorItem } from "@/lib/admin/menu-types";
 
-import { useAdminStrings } from "./language";
-import { BUTTON, BUTTON_SMALL, BUTTON_SOLID, FIELD, LABEL } from "./ui";
+import { useAdminLocale, useAdminStrings } from "./language";
+import {
+  BUTTON,
+  BUTTON_SMALL,
+  BUTTON_SOLID,
+  CONTENT_FONT,
+  FIELD,
+  LABEL,
+} from "./ui";
 
 /**
  * The editor for one item — the same panel whether the item exists or is about
@@ -157,16 +168,19 @@ function priceTypeLabel(
   }
 }
 
-/** English content, pinned left-to-right and to the Latin face. */
-const CONTENT_EN = "font-latin-serif";
-/** Arabic content, pinned right-to-left and to the Arabic face. */
-const CONTENT_AR = "font-arabic-sans";
+/**
+ * The content fields are pinned to their own language — both are always here,
+ * and each keeps its own direction and typeface however the interface is set.
+ * That is the point of the editor: the admin writes both.
+ */
+const CONTENT_EN = CONTENT_FONT.en;
+const CONTENT_AR = CONTENT_FONT.ar;
 
 export type ItemDialogProps = {
   /** The item being edited, or null when this is a new one. */
   item: EditorItem | null;
-  /** Where a new item is going, shown so the section is never a guess. */
-  sectionTitle: string;
+  /** Where a new item is going, already in the interface language. */
+  sectionTitle: ContentField;
   currency: string;
   /** Returns an error to show in the dialog, or null once the write landed. */
   onSave: (payload: unknown) => Promise<string | null>;
@@ -181,6 +195,7 @@ export function ItemDialog({
   onClose,
 }: ItemDialogProps) {
   const strings = useAdminStrings();
+  const locale = useAdminLocale();
   const [draft, setDraft] = useState<Draft>(() => draftFrom(item));
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -248,6 +263,12 @@ export function ItemDialog({
     // On success the parent closes the dialog, so there is nothing to reset.
   }
 
+  // An existing item is named; a new one is announced by its section, which
+  // the editor has already resolved to the interface language.
+  const heading = item
+    ? pickContent(item.nameEn, item.nameAr, locale)
+    : sectionTitle;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/35 p-0 sm:items-center sm:p-6"
@@ -266,8 +287,14 @@ export function ItemDialog({
         <form onSubmit={onSubmit} noValidate className="px-5 py-6 sm:px-8">
           <header className="border-b border-foreground/12 pb-5">
             <p className={LABEL}>{item ? strings.editItem : strings.newItem}</p>
-            <h2 className="display-tight mt-2 text-[1.25rem] leading-[1.3]">
-              {item ? item.nameEn || item.nameAr : sectionTitle}
+            {/* Only the heading follows the interface language. The fields
+                below always show both, whatever it is set to. */}
+            <h2
+              lang={heading.lang}
+              dir={heading.dir}
+              className={`display-tight mt-2 ${CONTENT_FONT[heading.lang]} text-[1.25rem] leading-[1.3]`}
+            >
+              {heading.text}
             </h2>
             {!item && (
               <p className="mt-1.5 text-[0.75rem] text-foreground/45">

@@ -10,6 +10,16 @@
 export const LABEL =
   "tracked-label block text-[0.6rem] tracking-[0.18em] uppercase opacity-45";
 
+/**
+ * The typeface for a piece of the menu, picked by the language that piece is
+ * written in rather than by the interface language — an English dish name
+ * stays in the Latin face on an Arabic dashboard, and the other way round.
+ */
+export const CONTENT_FONT = {
+  en: "font-latin-serif",
+  ar: "font-arabic-sans",
+} as const;
+
 export const FIELD =
   "mt-2 block w-full rounded-[2px] border border-foreground/20 bg-transparent " +
   "px-3 py-2.5 text-[0.88rem] leading-[1.5] outline-none transition-colors " +

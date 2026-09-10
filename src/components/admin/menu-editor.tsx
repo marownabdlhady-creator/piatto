@@ -3,7 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
-import type { AdminStrings } from "@/lib/admin/i18n";
+import {
+  otherContent,
+  pickContent,
+  type AdminLocale,
+  type AdminStrings,
+  type ContentField,
+} from "@/lib/admin/i18n";
 import {
   DOMAINS,
   type Domain,
@@ -13,9 +19,9 @@ import {
 } from "@/lib/admin/menu-types";
 
 import { ItemDialog } from "./item-dialog";
-import { useAdminStrings } from "./language";
+import { useAdminLocale, useAdminStrings } from "./language";
 import { jsonBody, send } from "./send";
-import { BUTTON_DANGER, BUTTON_SMALL, LABEL } from "./ui";
+import { BUTTON_DANGER, BUTTON_SMALL, CONTENT_FONT, LABEL } from "./ui";
 
 /**
  * The menu editor: both menus, their sections, and every item under them.
@@ -34,7 +40,7 @@ type Target = {
   /** Forces a fresh form when the dialog is opened on a different item. */
   key: string;
   sectionId: string;
-  sectionTitle: string;
+  sectionTitle: ContentField;
   /** Null for a new item. */
   item: EditorItem | null;
 };
@@ -62,18 +68,26 @@ function nextSerial(): number {
   return serialSeed;
 }
 
-/** An item's pricing, said in one line for the row it sits on. */
+/**
+ * An item's pricing, said in one line for the row it sits on. Option labels
+ * follow the interface language like every other piece of the menu; the
+ * numbers and the currency read the same either way.
+ */
 function priceSummary(
   item: EditorItem,
   currency: string,
   strings: AdminStrings,
+  locale: AdminLocale,
 ): string {
   switch (item.priceType) {
     case "OPTIONS":
       return item.priceOptions.length === 0
         ? strings.noOptionsSet
         : item.priceOptions
-            .map((option) => `${option.labelEn} ${option.price}`)
+            .map(
+              (option) =>
+                `${pickContent(option.labelEn, option.labelAr, locale).text} ${option.price}`,
+            )
             .join("  ·  ") + ` ${currency}`;
 
     case "TEXT":
@@ -90,6 +104,7 @@ function priceSummary(
 export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
   const router = useRouter();
   const strings = useAdminStrings();
+  const locale = useAdminLocale();
 
   const [domain, setDomain] = useState<Domain>(DOMAINS[0]);
   const [target, setTarget] = useState<Target | null>(null);
@@ -128,7 +143,7 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
     setTarget({
       key: `new:${section.id}:${nextSerial()}`,
       sectionId: section.id,
-      sectionTitle: section.titleEn,
+      sectionTitle: pickContent(section.titleEn, section.titleAr, locale),
       item: null,
     });
   }
@@ -138,9 +153,14 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
     setTarget({
       key: `edit:${item.id}:${nextSerial()}`,
       sectionId: section.id,
-      sectionTitle: section.titleEn,
+      sectionTitle: pickContent(section.titleEn, section.titleAr, locale),
       item,
     });
+  }
+
+  /** How an item is referred to in a message about it. */
+  function itemName(item: EditorItem): string {
+    return pickContent(item.nameEn, item.nameAr, locale).text;
   }
 
   /** Handed to the dialog: the error to show, or null once it has landed. */
@@ -185,7 +205,7 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
       return;
     }
 
-    const name = item.nameEn || item.nameAr;
+    const name = itemName(item);
     notify(
       "ok",
       item.hidden ? strings.itemShown(name) : strings.itemHidden(name),
@@ -213,7 +233,7 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
       return;
     }
 
-    notify("ok", strings.itemDeleted(item.nameEn || item.nameAr));
+    notify("ok", strings.itemDeleted(itemName(item)));
     refresh();
   }
 
@@ -263,23 +283,37 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
         </p>
       ) : (
         <div className="mt-10 grid gap-12">
-          {menu.sections.map((section) => (
+          {menu.sections.map((section) => {
+            // The selected language leads; the other stays underneath, so a
+            // section is still recognisable to someone reading either one.
+            const title = pickContent(
+              section.titleEn,
+              section.titleAr,
+              locale,
+            );
+            const altTitle = otherContent(
+              section.titleEn,
+              section.titleAr,
+              locale,
+            );
+
+            return (
             <section key={section.id}>
               <header className="flex flex-wrap items-baseline justify-between gap-4 border-b border-foreground/15 pb-3">
                 <div className="min-w-0">
                   <h2
-                    lang="en"
-                    dir="ltr"
-                    className="display-tight font-latin-serif text-[1.1rem] leading-[1.3]"
+                    lang={title.lang}
+                    dir={title.dir}
+                    className={`display-tight ${CONTENT_FONT[title.lang]} text-[1.1rem] leading-[1.3]`}
                   >
-                    {section.titleEn}
+                    {title.text}
                   </h2>
                   <p
-                    dir="rtl"
-                    lang="ar"
-                    className="mt-1 font-arabic-sans text-[0.8rem] text-foreground/45"
+                    lang={altTitle.lang}
+                    dir={altTitle.dir}
+                    className={`mt-1 ${CONTENT_FONT[altTitle.lang]} text-[0.8rem] text-foreground/45`}
                   >
-                    {section.titleAr}
+                    {altTitle.text}
                   </p>
                 </div>
 
@@ -300,6 +334,7 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
                 <ul>
                   {section.items.map((item) => {
                     const pending = busy === item.id;
+                    const name = pickContent(item.nameEn, item.nameAr, locale);
 
                     return (
                       <li
@@ -310,16 +345,17 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
                       >
                         <div className="min-w-0 flex-1 basis-[14rem]">
                           <p className="flex flex-wrap items-center gap-2 text-[0.92rem] leading-[1.4]">
-                            {/* The item's own name, in its own language and
-                                direction, whatever the interface is set to. */}
+                            {/* Whichever language the dashboard is set to,
+                                marked up as the language it turned out to be
+                                — a fallback is not the interface language. */}
                             <span
-                              lang={item.nameEn ? "en" : "ar"}
-                              dir={item.nameEn ? "ltr" : "rtl"}
-                              className={`${item.nameEn ? "font-latin-serif" : "font-arabic-sans"} ${
+                              lang={name.lang}
+                              dir={name.dir}
+                              className={`${CONTENT_FONT[name.lang]} ${
                                 item.hidden ? "opacity-45" : ""
                               }`}
                             >
-                              {item.nameEn || item.nameAr}
+                              {name.text}
                             </span>
                             {item.hidden && (
                               <span className="tracked-label rounded-[2px] border border-foreground/20 px-1.5 py-0.5 text-[0.52rem] tracking-[0.16em] uppercase opacity-50">
@@ -327,11 +363,14 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
                               </span>
                             )}
                           </p>
+                          {/* dir="auto" so an Arabic option label leads a
+                              right-to-left line while a bare "45 ₪" still
+                              reads left-to-right on either dashboard. */}
                           <p
-                            dir="ltr"
-                            className="mt-1 text-[0.75rem] text-foreground/45 rtl:text-right"
+                            dir="auto"
+                            className="mt-1 text-[0.75rem] text-foreground/45"
                           >
-                            {priceSummary(item, menu.currency, strings)}
+                            {priceSummary(item, menu.currency, strings, locale)}
                           </p>
                         </div>
 
@@ -390,7 +429,8 @@ export function MenuEditor({ menus }: { menus: EditorMenu[] }) {
                 </ul>
               )}
             </section>
-          ))}
+            );
+          })}
         </div>
       )}
 
