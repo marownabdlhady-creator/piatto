@@ -68,6 +68,9 @@ model Item {
   /// Set when priceType is TEXT.
   priceText    String?
   priceOptions PriceOption[]
+  /// Kept off the public menu without being deleted — a dish that is off for
+  /// the season, a drink that is out of stock. The dashboard still lists it.
+  hidden       Boolean       @default(false)
   /// Display position within its section.
   order        Int           @default(0)
   createdAt    DateTime      @default(now())

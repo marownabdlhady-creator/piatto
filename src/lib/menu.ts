@@ -135,6 +135,9 @@ async function readMenu(
       orderBy: { order: "asc" },
       include: {
         items: {
+          // Hidden items are still in the table and still in the dashboard;
+          // they are simply not part of the menu anyone reads.
+          where: { hidden: false },
           orderBy: { order: "asc" },
           include: { priceOptions: { orderBy: { order: "asc" } } },
         },
