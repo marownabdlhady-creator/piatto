@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
+import { Logo } from "@/components/logo";
+
 /**
  * Isolates the runs that carry digits. A phone number or a time range has no
  * strongly-directional characters of its own, so inside Arabic copy the bidi
@@ -15,18 +17,22 @@ const HEADING =
 
 const LINES = "mt-6 space-y-2 text-[0.85rem] leading-[1.9] text-foreground/70";
 
-/** The same empty plate the home teaser uses, stacked here from md. */
+/** The same plate the home teaser uses, stacked here from md. */
 const PLATE =
-  "tracked-label flex h-20 items-center justify-center border " +
-  "border-foreground/15 text-[0.62rem] tracking-[0.2em] uppercase " +
-  "opacity-40 md:h-24";
+  "relative h-20 overflow-hidden border border-foreground/15 md:h-24";
 
-const LOGO_SLOTS = [0, 1];
+/**
+ * The client's two images, which repeat between here and the home teaser.
+ * Square artwork in a wide, short plate, so they are fitted rather than
+ * cropped - `contain` keeps all of both, which is the whole point of showing
+ * them.
+ */
+const PLATE_IMAGES = ["/piatto-img1.jpg", "/piatto-img2.jpg"];
 
 /**
  * Site footer: the wordmark and address, opening hours, contact, and the two
- * empty logo plates at the inline end - a row of columns from md, a single
- * stack below it. Every string is a placeholder until the real details land.
+ * image plates at the inline end - a row of columns from md, a single stack
+ * below it. Every string is a placeholder until the real details land.
  *
  * The pattern is a real image rather than a CSS background so it goes through
  * the image pipeline; it is decorative, and lazy, so it never competes with
@@ -50,9 +56,10 @@ export async function Footer() {
       <div className="px-4 py-20 sm:px-6 md:px-8 md:py-24 lg:px-12">
         <div className="mx-auto grid max-w-[84rem] gap-x-8 gap-y-14 md:grid-cols-12 md:gap-y-0">
           <div className="md:col-span-4">
-            <p className="text-[1.45rem] leading-none tracking-[0.16em] lowercase md:text-[1.7rem]">
-              {tCommon("siteName")}
-            </p>
+            <Logo
+              alt={tCommon("siteName")}
+              className="h-12 w-auto md:h-14"
+            />
 
             <ul className={LINES}>
               <li>{t.rich("address", isolate)}</li>
@@ -80,9 +87,19 @@ export async function Footer() {
           </div>
 
           <ul className="grid grid-cols-2 gap-4 md:col-span-2 md:grid-cols-1">
-            {LOGO_SLOTS.map((slot) => (
-              <li key={slot}>
-                <div className={PLATE}>{t("logo")}</div>
+            {PLATE_IMAGES.map((src) => (
+              <li key={src}>
+                <div className={PLATE}>
+                  {/* Decorative: the plates carry no information the copy
+                      beside them does not already give. */}
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="96px"
+                    className="object-contain p-2 md:p-3"
+                  />
+                </div>
               </li>
             ))}
           </ul>

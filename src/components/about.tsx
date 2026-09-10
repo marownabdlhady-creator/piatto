@@ -1,16 +1,21 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { useRevealOnScroll } from "@/lib/use-reveal-on-scroll";
 
-const LOGO_SLOTS = [0, 1];
+/**
+ * The client's two images, the same pair the footer shows. Square artwork in a
+ * wide, short plate, so they are fitted rather than cropped.
+ */
+const PLATE_IMAGES = ["/piatto-img1.jpg", "/piatto-img2.jpg"];
 
 /**
  * The teaser for the story: two lines and a way through to the full page, over
- * an off-white ground with a row of empty logo plates below. Centred text and
+ * an off-white ground with a row of image plates below. Centred text and
  * logical spacing keep it correct in both directions; the Latin "Piatto" in
  * the Arabic line is left to the bidi algorithm, which places it correctly
  * inside the right-to-left run.
@@ -56,10 +61,18 @@ export function About() {
         </div>
 
         <ul className="mt-14 grid w-full max-w-md grid-cols-2 gap-5 md:mt-16 md:max-w-xl md:gap-10">
-          {LOGO_SLOTS.map((slot) => (
-            <li key={slot} data-reveal="about" className="reveal">
-              <div className="tracked-label flex h-20 items-center justify-center border border-foreground/15 text-[0.62rem] tracking-[0.2em] uppercase opacity-40 md:h-24">
-                {t("logo")}
+          {PLATE_IMAGES.map((src) => (
+            <li key={src} data-reveal="about" className="reveal">
+              <div className="relative h-20 overflow-hidden border border-foreground/15 md:h-24">
+                {/* Decorative: the two lines above already say what this
+                    section is about. */}
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="96px"
+                  className="object-contain p-2 md:p-3"
+                />
               </div>
             </li>
           ))}

@@ -6,6 +6,7 @@ import gsap from "gsap";
 
 import { CompactBar } from "@/components/compact-bar";
 import { LanguageToggle } from "@/components/language-toggle";
+import { Logo } from "@/components/logo";
 import { NavAnchor } from "@/components/nav-anchor";
 import { QuickGrid } from "@/components/quick-grid";
 import { TopBar } from "@/components/top-bar";
@@ -234,12 +235,15 @@ export function SiteNav() {
           {/* The wordmark is centred at every width; the hamburger sits at the
             inline end of the same row, so it mirrors on /ar. */}
           <div className="relative z-30 flex h-[var(--bar-main-h)] items-center justify-center md:h-auto">
-            <a
-              href="#top"
-              data-reveal="wordmark"
-              className="reveal -me-[0.16em] block text-center text-[1.45rem] leading-none font-normal tracking-[0.16em] lowercase sm:text-[1.6rem] md:text-[1.9rem]"
-            >
-              {tCommon("siteName")}
+            {/* Sized by height so the square mark keeps its air in the bar at
+                every width. It carries the row on its own, so it loads eagerly
+                rather than waiting to be scrolled into view. */}
+            <a href="#top" data-reveal="wordmark" className="reveal block">
+              <Logo
+                alt={tCommon("siteName")}
+                loading="eager"
+                className="h-10 w-auto sm:h-11 md:h-12"
+              />
             </a>
 
             <button
