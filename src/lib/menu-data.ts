@@ -1,6 +1,10 @@
-import drinksFile from "../../drinks.json";
-import menuFile from "../../menu.json";
-import { defaultLocale } from "@/i18n/routing";
+/**
+ * The shape a menu takes on the page, in one language.
+ *
+ * This is deliberately free of any data source: the menus live in Postgres and
+ * are read by `@/lib/menu`, which returns these shapes. Keeping the two apart
+ * lets the components stay unaware of where a dish came from.
+ */
 
 export type PriceOption = {
   label: string;
@@ -32,24 +36,6 @@ export type MenuDocument = {
   note?: string;
   sections: MenuSection[];
 };
-
-/**
- * The menus live as JSON at the repo root, one document per locale, so prices
- * and dishes can be edited without touching the components. They are imported
- * rather than read at runtime, so the pages stay static.
- */
-const documents = {
-  menu: menuFile as Record<string, MenuDocument>,
-  drinks: drinksFile as Record<string, MenuDocument>,
-};
-
-export type MenuKind = keyof typeof documents;
-
-/** The requested menu, falling back to the default locale if one is missing. */
-export function getMenuDocument(kind: MenuKind, locale: string): MenuDocument {
-  const byLocale = documents[kind];
-  return byLocale[locale] ?? byLocale[defaultLocale];
-}
 
 /** A price as it is written on the page: the amount, then the currency. */
 export function formatPrice(value: number | string, currency: string): string {

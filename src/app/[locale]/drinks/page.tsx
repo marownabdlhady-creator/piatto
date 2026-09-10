@@ -3,7 +3,14 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { MenuScreen } from "@/components/menu-screen";
 import { SiteNav } from "@/components/site-nav";
-import { getMenuDocument } from "@/lib/menu-data";
+import { getDrinksMenu } from "@/lib/menu";
+
+/**
+ * Rendered once and refreshed in the background a minute later, so a phone on
+ * the street gets a static page and an edited dish still shows up shortly
+ * after. Has to be a literal here; it mirrors MENU_REVALIDATE_SECONDS.
+ */
+export const revalidate = 60;
 
 type DrinksProps = {
   params: Promise<{ locale: string }>;
@@ -18,7 +25,7 @@ export async function generateMetadata({
   return { title: `${t("drinks")} — piatto` };
 }
 
-/** The drinks list, read from drinks.json. */
+/** The drinks list, read from the database. */
 export default async function Drinks({ params }: DrinksProps) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -33,7 +40,7 @@ export default async function Drinks({ params }: DrinksProps) {
         <MenuScreen
           title={t("drinks")}
           image="/feature-drinks.jpg"
-          menu={getMenuDocument("drinks", locale)}
+          menu={await getDrinksMenu(locale)}
           sectionsLabel={tPage("sections")}
           crossLink={{ href: "/menu", label: tPage("viewMenu") }}
         />
