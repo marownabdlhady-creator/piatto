@@ -235,14 +235,14 @@ export function SiteNav() {
           {/* The wordmark is centred at every width; the hamburger sits at the
             inline end of the same row, so it mirrors on /ar. */}
           <div className="relative z-30 flex h-[var(--bar-main-h)] items-center justify-center md:h-auto">
-            {/* Sized by height so the square mark keeps its air in the bar at
-                every width. It carries the row on its own, so it loads eagerly
-                rather than waiting to be scrolled into view. */}
+            {/* Sized by height, with --bar-main-h raised to match so the mark
+                keeps its air on small screens. It carries the row on its own,
+                so it loads eagerly rather than waiting to be scrolled to. */}
             <a href="#top" data-reveal="wordmark" className="reveal block">
               <Logo
                 alt={tCommon("siteName")}
                 loading="eager"
-                className="h-10 w-auto sm:h-11 md:h-12"
+                className="h-16 w-auto sm:h-[4.5rem] md:h-24"
               />
             </a>
 

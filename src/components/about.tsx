@@ -8,8 +8,9 @@ import { Link } from "@/i18n/navigation";
 import { useRevealOnScroll } from "@/lib/use-reveal-on-scroll";
 
 /**
- * The client's two images, the same pair the footer shows. Square artwork in a
- * wide, short plate, so they are fitted rather than cropped.
+ * The client's two images, the same pair the footer shows. The artwork is
+ * square and so is its frame, so the border sits flush against the image with
+ * nothing between them; `cover` keeps that true of anything dropped in later.
  */
 const PLATE_IMAGES = ["/piatto-img1.jpg", "/piatto-img2.jpg"];
 
@@ -60,10 +61,13 @@ export function About() {
           </Link>
         </div>
 
-        <ul className="mt-14 grid w-full max-w-md grid-cols-2 gap-5 md:mt-16 md:max-w-xl md:gap-10">
+        {/* Two square frames side by side, centred as a pair. A flex row
+            rather than a grid, because the frames are the size of the artwork
+            now and a two-column grid would leave them adrift in their cells. */}
+        <ul className="mt-14 flex items-center justify-center gap-5 md:mt-16 md:gap-10">
           {PLATE_IMAGES.map((src) => (
             <li key={src} data-reveal="about" className="reveal">
-              <div className="relative h-20 overflow-hidden border border-foreground/15 md:h-24">
+              <div className="relative size-20 overflow-hidden border border-foreground/15 md:size-24">
                 {/* Decorative: the two lines above already say what this
                     section is about. */}
                 <Image
@@ -71,7 +75,7 @@ export function About() {
                   alt=""
                   fill
                   sizes="96px"
-                  className="object-contain p-2 md:p-3"
+                  className="object-cover"
                 />
               </div>
             </li>

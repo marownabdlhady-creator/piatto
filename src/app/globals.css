@@ -13,7 +13,9 @@
      changes with the breakpoint. */
   --bar-top-h: 2.5rem;
   --grid-cell-h: 3.5rem;
-  --bar-main-h: 4rem;
+  /* Tall enough to give the wordmark room to breathe: the mark is 4rem here,
+     so this leaves an even 1rem above and below it. */
+  --bar-main-h: 6rem;
 }
 
 html[lang="ar"] {
@@ -72,14 +74,17 @@ body {
 
 /* The bar is sticky, so in-page anchors need to clear it. Any anchor jump
    leaves the page scrolled, which on small screens means the collapsed bar -
-   the wordmark row plus the two-cell strip - is what the target has to clear. */
+   the wordmark row plus the two-cell strip - is what the target has to clear.
+   That is --bar-main-h plus the 2.75rem compact strip; on desktop it is the
+   top padding, the wordmark, the rule and the links row. Both totals move with
+   the wordmark, so they are re-derived whenever it is resized. */
 html {
-  scroll-padding-top: 7rem;
+  scroll-padding-top: 8.75rem;
 }
 
 @media (min-width: 48rem) {
   html {
-    scroll-padding-top: 9.5rem;
+    scroll-padding-top: 12.5rem;
   }
 }
 

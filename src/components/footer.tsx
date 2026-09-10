@@ -19,13 +19,12 @@ const LINES = "mt-6 space-y-2 text-[0.85rem] leading-[1.9] text-foreground/70";
 
 /** The same plate the home teaser uses, stacked here from md. */
 const PLATE =
-  "relative h-20 overflow-hidden border border-foreground/15 md:h-24";
+  "relative size-20 overflow-hidden border border-foreground/15 md:size-24";
 
 /**
- * The client's two images, which repeat between here and the home teaser.
- * Square artwork in a wide, short plate, so they are fitted rather than
- * cropped - `contain` keeps all of both, which is the whole point of showing
- * them.
+ * The client's two images, which repeat between here and the home teaser. The
+ * artwork is square and so is its frame, so the border sits flush against the
+ * image rather than standing off it.
  */
 const PLATE_IMAGES = ["/piatto-img1.jpg", "/piatto-img2.jpg"];
 
@@ -56,10 +55,7 @@ export async function Footer() {
       <div className="px-4 py-20 sm:px-6 md:px-8 md:py-24 lg:px-12">
         <div className="mx-auto grid max-w-[84rem] gap-x-8 gap-y-14 md:grid-cols-12 md:gap-y-0">
           <div className="md:col-span-4">
-            <Logo
-              alt={tCommon("siteName")}
-              className="h-12 w-auto md:h-14"
-            />
+            <Logo alt={tCommon("siteName")} className="h-20 w-auto md:h-24" />
 
             <ul className={LINES}>
               <li>{t.rich("address", isolate)}</li>
@@ -97,7 +93,7 @@ export async function Footer() {
                     alt=""
                     fill
                     sizes="96px"
-                    className="object-contain p-2 md:p-3"
+                    className="object-cover"
                   />
                 </div>
               </li>
