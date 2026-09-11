@@ -117,14 +117,14 @@
   },
   "footer": {
     "address": "Address — to be provided",
-    "tel": "Tel: <n>+000 000 0000</n>",
+    "tel": "Tel: <n>{phone}</n>",
     "fax": "Fax: — to be provided",
     "hours": "Opening Hours",
     "hoursWeekdays": "Sun–Thu: <n>00:00–00:00</n>",
     "hoursWeekend": "Fri–Sat: <n>00:00–00:00</n>",
     "contact": "Contact Us",
-    "contactTel": "Tel: <n>+000 000 0000</n>",
-    "whatsapp": "WhatsApp: <n>+000 000 0000</n>",
+    "contactTel": "Tel: <n>{phone}</n>",
+    "whatsapp": "WhatsApp: <n>{phone}</n>",
     "logo": "Logo"
   }
 }

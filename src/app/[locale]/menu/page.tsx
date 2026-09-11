@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { MenuScreen } from "@/components/menu-screen";
 import { SiteNav } from "@/components/site-nav";
+import { SocialLinks } from "@/components/social-links";
 import { getFoodMenu } from "@/lib/menu";
 
 /**
@@ -44,6 +45,13 @@ export default async function Menu({ params }: MenuProps) {
           sectionsLabel={tPage("sections")}
           crossLink={{ href: "/drinks", label: tPage("viewDrinks") }}
         />
+
+        {/* Where to find the restaurant between visits, at the end of the
+            read. The menu screen already closes on its own bottom margin, so
+            this only carries the space below itself. */}
+        <div className="px-4 pb-24 sm:px-6 md:px-8 md:pb-32 lg:px-12">
+          <SocialLinks className="justify-center" />
+        </div>
       </main>
     </>
   );

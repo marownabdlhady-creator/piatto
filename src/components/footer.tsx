@@ -3,6 +3,8 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { Logo } from "@/components/logo";
+import { SocialLinks } from "@/components/social-links";
+import { PHONE_DISPLAY, TEL_HREF, WHATSAPP_HREF } from "@/lib/contact";
 
 /**
  * Isolates the runs that carry digits. A phone number or a time range has no
@@ -11,6 +13,28 @@ import { Logo } from "@/components/logo";
  * and this places them as one left-to-right island.
  */
 const isolate = { n: (chunks: ReactNode) => <bdi dir="ltr">{chunks}</bdi> };
+
+/**
+ * The same isolated run, made reachable: the number is the link and the label
+ * beside it stays plain text, so only the part worth tapping is a target.
+ * The number itself comes from one place, so the copy only carries its label.
+ */
+function phoneLine(href: string, external = false) {
+  return {
+    phone: PHONE_DISPLAY,
+    n: (chunks: ReactNode) => (
+      <a
+        href={href}
+        className="transition-opacity duration-300 hover:opacity-60"
+        {...(external
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : null)}
+      >
+        <bdi dir="ltr">{chunks}</bdi>
+      </a>
+    ),
+  };
+}
 
 const HEADING =
   "tracked-label text-[0.66rem] tracking-[0.22em] uppercase md:text-[0.7rem]";
@@ -31,7 +55,8 @@ const PLATE_IMAGES = ["/piatto-img1.jpg", "/piatto-img2.jpg"];
 /**
  * Site footer: the wordmark and address, opening hours, contact, and the two
  * image plates at the inline end - a row of columns from md, a single stack
- * below it. Every string is a placeholder until the real details land.
+ * below it. The address, fax and hours are still placeholders; the phone
+ * number and the social accounts are the client's own.
  *
  * The pattern is a real image rather than a CSS background so it goes through
  * the image pipeline; it is decorative, and lazy, so it never competes with
@@ -59,7 +84,7 @@ export async function Footer() {
 
             <ul className={LINES}>
               <li>{t.rich("address", isolate)}</li>
-              <li>{t.rich("tel", isolate)}</li>
+              <li>{t.rich("tel", phoneLine(TEL_HREF))}</li>
               <li>{t.rich("fax", isolate)}</li>
             </ul>
           </div>
@@ -77,9 +102,11 @@ export async function Footer() {
             <h2 className={HEADING}>{t("contact")}</h2>
 
             <ul className={LINES}>
-              <li>{t.rich("contactTel", isolate)}</li>
-              <li>{t.rich("whatsapp", isolate)}</li>
+              <li>{t.rich("contactTel", phoneLine(TEL_HREF))}</li>
+              <li>{t.rich("whatsapp", phoneLine(WHATSAPP_HREF, true))}</li>
             </ul>
+
+            <SocialLinks className="mt-6" />
           </div>
 
           <ul className="grid grid-cols-2 gap-4 md:col-span-2 md:grid-cols-1">

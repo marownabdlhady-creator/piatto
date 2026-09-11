@@ -1,12 +1,16 @@
+import { WHATSAPP_HREF } from "@/lib/contact";
+
 /**
  * One navigation destination. Anchors point at a section of the home page;
  * entries flagged `route` are pages of their own and have to go through the
- * locale-aware Link, so the /en or /ar prefix is carried across.
+ * locale-aware Link, so the /en or /ar prefix is carried across, and entries
+ * flagged `external` leave the site and open in a tab of their own.
  */
 export type NavLink = {
   key: string;
   href: string;
   route?: boolean;
+  external?: boolean;
 };
 
 /** Site navigation items. `key` resolves against the "nav" message namespace. */
@@ -44,14 +48,14 @@ export const darkCell =
 
 /**
  * Curated shortcuts: the 2x2 grid under the action strip on small screens,
- * and the visible row in the desktop bar. The WhatsApp entry is a placeholder
- * anchor until the real wa.me link exists.
+ * and the visible row in the desktop bar. WhatsApp leaves for the restaurant
+ * conversation rather than pointing anywhere on the page.
  */
 export const quickLinks: readonly NavLink[] = [
   { key: "menu", href: "/menu", route: true },
   { key: "gallery", href: "/gallery", route: true },
   { key: "about", href: "#about" },
-  { key: "whatsapp", href: "#whatsapp" },
+  { key: "whatsapp", href: WHATSAPP_HREF, external: true },
 ];
 
 /**
@@ -61,5 +65,5 @@ export const quickLinks: readonly NavLink[] = [
 export const compactLinks: readonly NavLink[] = [
   { key: "home", href: "/", route: true },
   { key: "menu", href: "/menu", route: true },
-  { key: "whatsapp", href: "#whatsapp" },
+  { key: "whatsapp", href: WHATSAPP_HREF, external: true },
 ];

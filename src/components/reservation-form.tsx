@@ -8,15 +8,8 @@ import {
 } from "react";
 import { useTranslations } from "next-intl";
 
+import { PHONE_E164 } from "@/lib/contact";
 import { cn } from "@/lib/utils";
-
-/**
- * The restaurant's WhatsApp number, in international format: digits only, no
- * "+", no spaces, no leading zeros.
- *
- * TODO: replace this placeholder with the real number.
- */
-const WHATSAPP_NUMBER = "970000000000";
 
 /** The guest list runs 1..MAX_GUESTS, then one open-ended entry above it. */
 const MAX_GUESTS = 12;
@@ -173,7 +166,7 @@ export function ReservationForm() {
       return;
     }
 
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(compose())}`;
+    const url = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(compose())}`;
     setOpening(true);
 
     // A blocked popup would leave the page claiming it opened WhatsApp when

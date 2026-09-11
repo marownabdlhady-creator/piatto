@@ -18,7 +18,8 @@ type NavAnchorProps = {
  * One nav destination, rendered the way its target needs: a page goes through
  * the locale-aware Link so /en and /ar keep their prefix and the route is
  * prefetched, while an in-page anchor stays a plain <a> the browser scrolls to
- * without a navigation.
+ * without a navigation. A destination off the site opens in its own tab, so
+ * the visit is still here to come back to.
  */
 export function NavAnchor({
   item,
@@ -46,6 +47,9 @@ export function NavAnchor({
       onClick={onClick}
       data-reveal={reveal}
       className={className}
+      {...(item.external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : null)}
     >
       {children}
     </a>
