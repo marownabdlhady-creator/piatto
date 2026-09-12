@@ -20,7 +20,9 @@ import { prisma } from "@/lib/prisma";
 /**
  * Cache tags, one per menu. Both languages of a menu carry its tag, so a save
  * in the dashboard can drop the English and Arabic pages together with a
- * single `revalidateTag(MENU_TAGS.food, "max")`.
+ * single `revalidateTag(MENU_TAGS.food, "max")`. /menu reads both menus, so
+ * either tag drops it — which is how a drinks edit reaches the page now that
+ * the drinks live there too.
  */
 export const MENU_TAGS = {
   food: "menu-food",
@@ -29,8 +31,8 @@ export const MENU_TAGS = {
 
 /**
  * How long a rendered menu may be served before it is refreshed in the
- * background. The pages repeat this as their route `revalidate`, which has to
- * be a literal there, so the two are kept in step by hand.
+ * background. The page repeats this as its route `revalidate`, which has to be
+ * a literal there, so the two are kept in step by hand.
  */
 export const MENU_REVALIDATE_SECONDS = 60;
 
@@ -170,12 +172,12 @@ function cachedMenu(domain: MenuDomain, tag: string) {
 const loadFoodMenu = cachedMenu(MenuDomain.FOOD, MENU_TAGS.food);
 const loadDrinksMenu = cachedMenu(MenuDomain.DRINKS, MENU_TAGS.drinks);
 
-/** The food menu behind /menu. */
+/** The food half of /menu. */
 export function getFoodMenu(locale: string): Promise<MenuDocument> {
   return loadFoodMenu(locale);
 }
 
-/** The drinks list behind /drinks. */
+/** The drinks half of /menu. */
 export function getDrinksMenu(locale: string): Promise<MenuDocument> {
   return loadDrinksMenu(locale);
 }

@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type MouseEvent,
@@ -15,8 +16,15 @@ export type MenuNavSection = {
   title: string;
 };
 
-type MenuNavProps = {
+/** The sections of one half of the menu, under the name that divides it off. */
+export type MenuNavGroup = {
+  id: string;
+  label: string;
   sections: MenuNavSection[];
+};
+
+type MenuNavProps = {
+  groups: MenuNavGroup[];
   /** Names the bar for assistive tech: the page's own title. */
   label: string;
   /** The word on the control that opens the list on small screens. */
@@ -31,20 +39,33 @@ const MOBILE_QUERY = "(min-width: 48rem)";
 /**
  * Sticky category bar, parked just under the site nav.
  *
- * From md it is a row of chips, one per section. Below that the row would run
- * off the side of the screen and hide half the menu, so the same sections sit
- * behind a single control that opens them as one vertical list.
+ * From md it is a row of chips, one per section, with a hairline marking where
+ * one half of the menu gives way to the next. Below that the row would run off
+ * the side of the screen and hide most of the menu, so the same sections sit
+ * behind a single control that opens them as one vertical list - long enough
+ * now that each half is named on the way past.
  *
  * Either way the section currently under the bar is marked active. That is
  * read off a one-pixel band placed exactly at the bar's lower edge - the
  * sections run flush into each other, so precisely one of them crosses that
- * line at a time, and the observer only wakes when the crossing changes.
+ * line at a time, and the observer only wakes when the crossing changes. The
+ * dividers between the halves are not sections, so the mark simply stays where
+ * it was while one of them passes.
  */
-export function MenuNav({ sections, label, sectionsLabel }: MenuNavProps) {
+export function MenuNav({ groups, label, sectionsLabel }: MenuNavProps) {
   const barRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(sections[0]?.id ?? "");
+  const [active, setActive] = useState(groups[0]?.sections[0]?.id ?? "");
   const [open, setOpen] = useState(false);
+
+  // Both halves are watched as one run, so neither the spy nor the chip row
+  // has to know the menu arrives in pieces. Memoised because the observer
+  // effect below depends on the list, and would otherwise reconnect on every
+  // change of state here.
+  const sections = useMemo(
+    () => groups.flatMap((group) => group.sections),
+    [groups],
+  );
 
   const activeTitle =
     sections.find((section) => section.id === active)?.title ?? "";
@@ -126,7 +147,7 @@ export function MenuNav({ sections, label, sectionsLabel }: MenuNavProps) {
     };
   }, []);
 
-  // Keeps the active chip reachable in the row, which can outrun even a wide
+  // Keeps the active chip reachable in the row, which now outruns even a wide
   // screen. scrollIntoView handles the reversed axis on /ar, which hand-set
   // scroll offsets do not.
   useEffect(() => {
@@ -240,24 +261,45 @@ export function MenuNav({ sections, label, sectionsLabel }: MenuNavProps) {
                 : "invisible -translate-y-2 opacity-0",
             )}
           >
-            <ul className="px-4 pb-4 sm:px-6">
-              {sections.map((section) => (
-                <li key={section.id}>
-                  <a
-                    href={`#${section.id}`}
-                    aria-current={section.id === active ? "true" : undefined}
-                    onClick={(event) => jump(event, section.id)}
-                    className={cn(
-                      "tracked-label block border-t border-foreground/10 py-4",
-                      "text-[0.68rem] tracking-[0.16em] uppercase",
-                      section.id === active ? "opacity-100" : "opacity-50",
-                    )}
+            <div className="px-4 pb-4 sm:px-6">
+              {groups.map((group) => (
+                <section
+                  key={group.id}
+                  aria-labelledby={`sections-${group.id}`}
+                >
+                  {/* Which half of the menu the run below it belongs to. */}
+                  <h2
+                    id={`sections-${group.id}`}
+                    className="tracked-label pt-6 pb-2 text-[0.58rem] tracking-[0.2em] uppercase opacity-40"
                   >
-                    {section.title}
-                  </a>
-                </li>
+                    {group.label}
+                  </h2>
+
+                  <ul>
+                    {group.sections.map((section) => (
+                      <li key={section.id}>
+                        <a
+                          href={`#${section.id}`}
+                          aria-current={
+                            section.id === active ? "true" : undefined
+                          }
+                          onClick={(event) => jump(event, section.id)}
+                          className={cn(
+                            "tracked-label block border-t border-foreground/10 py-3.5",
+                            "text-[0.68rem] tracking-[0.16em] uppercase",
+                            section.id === active
+                              ? "opacity-100"
+                              : "opacity-50",
+                          )}
+                        >
+                          {section.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
-            </ul>
+            </div>
           </div>
         </nav>
 
@@ -266,35 +308,50 @@ export function MenuNav({ sections, label, sectionsLabel }: MenuNavProps) {
           aria-label={label}
           className="no-scrollbar hidden overflow-x-auto overscroll-x-contain md:block"
         >
-          <ul className="mx-auto flex w-max min-w-full items-stretch justify-center gap-7 px-4 sm:px-6 md:gap-10 md:px-8 lg:px-12">
-            {sections.map((section) => {
-              const current = section.id === active;
+          <ul className="mx-auto flex w-max min-w-full items-stretch justify-center gap-6 px-4 sm:px-6 md:gap-7 md:px-8 lg:gap-9 lg:px-12">
+            {groups.map((group, groupIndex) =>
+              group.sections.map((section, sectionIndex) => {
+                const current = section.id === active;
 
-              return (
-                <li key={section.id}>
-                  <a
-                    href={`#${section.id}`}
-                    data-chip={section.id}
-                    aria-current={current ? "true" : undefined}
-                    onClick={(event) => jump(event, section.id)}
+                // The join between two halves, so the row reads as two runs
+                // rather than one endless one. The border is logical, so it
+                // lands on the leading side in both reading directions.
+                const divides = groupIndex > 0 && sectionIndex === 0;
+
+                return (
+                  <li
+                    key={section.id}
                     className={cn(
-                      "tracked-label block py-4 text-[0.62rem] tracking-[0.18em] whitespace-nowrap uppercase",
-                      "transition-opacity duration-300",
-                      current ? "opacity-100" : "opacity-45 hover:opacity-80",
+                      divides &&
+                        "border-s border-foreground/15 ps-6 md:ps-7 lg:ps-9",
                     )}
                   >
-                    <span
+                    <a
+                      href={`#${section.id}`}
+                      data-chip={section.id}
+                      aria-current={current ? "true" : undefined}
+                      onClick={(event) => jump(event, section.id)}
                       className={cn(
-                        "block border-b pb-1.5",
-                        current ? "border-current" : "border-transparent",
+                        "tracked-label block py-4 text-[0.62rem] tracking-[0.18em] whitespace-nowrap uppercase",
+                        "transition-opacity duration-300",
+                        current
+                          ? "opacity-100"
+                          : "opacity-45 hover:opacity-80",
                       )}
                     >
-                      {section.title}
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
+                      <span
+                        className={cn(
+                          "block border-b pb-1.5",
+                          current ? "border-current" : "border-transparent",
+                        )}
+                      >
+                        {section.title}
+                      </span>
+                    </a>
+                  </li>
+                );
+              }),
+            )}
           </ul>
         </nav>
       </div>

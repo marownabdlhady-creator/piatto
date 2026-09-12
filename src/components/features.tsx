@@ -49,15 +49,16 @@ function Panel({ image, sizes, className, title, href }: PanelProps) {
   );
 }
 
+/** The lead panel, and the shorter band that closes the run under it. */
 const WIDE = "aspect-[3/2] md:aspect-auto md:h-[80svh]";
-const HALF = "aspect-[3/2] md:aspect-auto md:h-[70svh]";
+const BAND = "aspect-[3/2] md:aspect-auto md:h-[58svh]";
 
 /**
- * The run of full-bleed panels after the Interlude: the three rooms of the
- * site anyone might be looking for, each behind its own picture. Menu takes
- * the full width; Drinks and About share the row below it, splitting it in
- * half from md and stacking under each other below that. The columns follow
- * the inline direction, so the pair mirrors on /ar.
+ * The run of full-bleed panels after the Interlude: the two rooms of the site
+ * anyone might be looking for, each behind its own picture. Menu leads on the
+ * taller band - the drinks are part of it now - and About closes the run on a
+ * shorter one, so the pair reads as a lead and its coda rather than two equal
+ * blocks. Both are the full width, so there is nothing to mirror on /ar.
  *
  * Everything is edge to edge with no gaps. Static by design - no hover state.
  */
@@ -79,23 +80,13 @@ export function Features() {
         className={WIDE}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <Panel
-          image={features.drinks.image}
-          href={features.drinks.href}
-          title={t("drinks")}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className={HALF}
-        />
-
-        <Panel
-          image={features.about.image}
-          href={features.about.href}
-          title={t("about")}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className={HALF}
-        />
-      </div>
+      <Panel
+        image={features.about.image}
+        href={features.about.href}
+        title={t("about")}
+        sizes="100vw"
+        className={BAND}
+      />
     </section>
   );
 }

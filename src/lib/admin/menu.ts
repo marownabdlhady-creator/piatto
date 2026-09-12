@@ -82,8 +82,8 @@ export async function domainOfItem(
 }
 
 /**
- * Drops the cached menu behind a domain so the public page picks the change up
- * on its next request.
+ * Drops the cached menu behind a domain so /menu picks the change up on its
+ * next request. Both domains are read there, so either tag is enough.
  *
  * `{ expire: 0 }` rather than `"max"`: this runs in a Route Handler, where
  * `updateTag` is not available, and stale-while-revalidate would show the

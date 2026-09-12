@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { MenuScreen } from "@/components/menu-screen";
+import { MenuScreen, type MenuGroup } from "@/components/menu-screen";
 import { SiteNav } from "@/components/site-nav";
 import { SocialLinks } from "@/components/social-links";
-import { getFoodMenu } from "@/lib/menu";
+import { getDrinksMenu, getFoodMenu } from "@/lib/menu";
 
 /**
  * Rendered once and refreshed in the background a minute later, so a phone on
@@ -12,6 +12,14 @@ import { getFoodMenu } from "@/lib/menu";
  * after. Has to be a literal here; it mirrors MENU_REVALIDATE_SECONDS.
  */
 export const revalidate = 60;
+
+/**
+ * The ids the two dividers carry, and so the hashes /menu can be deep-linked
+ * at: `/menu#drinks` lands the reader on the Drinks divider rather than at the
+ * top of the food.
+ */
+const FOOD_ANCHOR = "food";
+const DRINKS_ANCHOR = "drinks";
 
 type MenuProps = {
   params: Promise<{ locale: string }>;
@@ -26,13 +34,27 @@ export async function generateMetadata({
   return { title: `${t("menu")} — piatto` };
 }
 
-/** The food menu, read from the database. */
+/**
+ * The whole menu, read from the database: the food, then the drinks, each
+ * behind its own divider. Both are cached under their own tag, so an edit to
+ * either in the dashboard drops this page.
+ */
 export default async function Menu({ params }: MenuProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
   const t = await getTranslations("features");
   const tPage = await getTranslations("menuPage");
+
+  const [food, drinks] = await Promise.all([
+    getFoodMenu(locale),
+    getDrinksMenu(locale),
+  ]);
+
+  const groups: MenuGroup[] = [
+    { id: FOOD_ANCHOR, label: tPage("food"), menu: food },
+    { id: DRINKS_ANCHOR, label: tPage("drinks"), menu: drinks },
+  ];
 
   return (
     <>
@@ -41,9 +63,8 @@ export default async function Menu({ params }: MenuProps) {
         <MenuScreen
           title={t("menu")}
           image="/feature-menu.jpg"
-          menu={await getFoodMenu(locale)}
+          groups={groups}
           sectionsLabel={tPage("sections")}
-          crossLink={{ href: "/drinks", label: tPage("viewDrinks") }}
         />
 
         {/* Where to find the restaurant between visits, at the end of the

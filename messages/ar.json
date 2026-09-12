@@ -75,8 +75,8 @@
   },
   "menuPage": {
     "sections": "الأقسام",
-    "viewDrinks": "عرض المشروبات",
-    "viewMenu": "عرض القائمة"
+    "food": "الطعام",
+    "drinks": "المشروبات"
   },
   "galleryPage": {
     "heading": "معرض الصور",
@@ -107,7 +107,6 @@
   },
   "features": {
     "menu": "القائمة",
-    "drinks": "المشروبات",
     "about": "من نحن"
   },
   "reserve": {

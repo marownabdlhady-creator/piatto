@@ -75,8 +75,8 @@
   },
   "menuPage": {
     "sections": "Sections",
-    "viewDrinks": "View Drinks",
-    "viewMenu": "View Menu"
+    "food": "Food",
+    "drinks": "Drinks"
   },
   "galleryPage": {
     "heading": "Gallery",
@@ -107,7 +107,6 @@
   },
   "features": {
     "menu": "Menu",
-    "drinks": "Drinks",
     "about": "About"
   },
   "reserve": {
