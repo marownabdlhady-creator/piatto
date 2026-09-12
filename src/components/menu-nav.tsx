@@ -85,14 +85,29 @@ export function MenuNav({ groups, label, sectionsLabel }: MenuNavProps) {
     return (Number.isNaN(top) ? 0 : top) + bar.offsetHeight;
   }, []);
 
+  // The band is the only thing that watches the scroll, and an observer costs
+  // nothing between crossings. Rebuilding it does cost something - measuring
+  // the bar forces layout - and resize fires on every step of a phone's
+  // address bar sliding away, so a rebuild waits for a frame and is skipped
+  // outright unless the band it would draw has actually moved.
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
+    let frame = 0;
+    let drawnLine = -1;
+    let drawnHeight = -1;
 
     const watch = () => {
-      observer?.disconnect();
+      frame = 0;
 
       const line = threshold();
-      const bottom = Math.max(0, window.innerHeight - line - 1);
+      const height = window.innerHeight;
+      if (observer && line === drawnLine && height === drawnHeight) return;
+
+      drawnLine = line;
+      drawnHeight = height;
+      observer?.disconnect();
+
+      const bottom = Math.max(0, height - line - 1);
 
       observer = new IntersectionObserver(
         (entries) => {
@@ -109,11 +124,16 @@ export function MenuNav({ groups, label, sectionsLabel }: MenuNavProps) {
       }
     };
 
+    const onResize = () => {
+      if (!frame) frame = requestAnimationFrame(watch);
+    };
+
     watch();
-    window.addEventListener("resize", watch);
+    window.addEventListener("resize", onResize);
 
     return () => {
-      window.removeEventListener("resize", watch);
+      window.removeEventListener("resize", onResize);
+      if (frame) cancelAnimationFrame(frame);
       observer?.disconnect();
     };
   }, [sections, threshold]);
@@ -148,20 +168,44 @@ export function MenuNav({ groups, label, sectionsLabel }: MenuNavProps) {
   }, []);
 
   // Keeps the active chip reachable in the row, which now outruns even a wide
-  // screen. scrollIntoView handles the reversed axis on /ar, which hand-set
-  // scroll offsets do not.
+  // screen.
+  //
+  // Deliberately not scrollIntoView: that walks up the ancestors and scrolls
+  // whatever else it has to, and a smooth programmatic scroll that reaches the
+  // document fights the reader's own - which is exactly the stutter a long run
+  // of sections used to produce, one animation per section passing the bar.
+  // Nudging the row by a delta only ever moves the row. The delta is measured
+  // in viewport coordinates, so the reversed axis on /ar needs no special case.
+  //
+  // It is all done a frame later, in one read pass with no write between the
+  // reads, so the measuring cannot force a second layout mid-scroll; and only
+  // when the chip has actually drifted out of the middle of the row, so most
+  // crossings cost a rect or two and nothing else.
   useEffect(() => {
     const scroller = scrollerRef.current;
-    if (!scroller || scroller.scrollWidth <= scroller.clientWidth) return;
+    if (!scroller) return;
 
-    const chip = scroller.querySelector<HTMLElement>(`[data-chip="${active}"]`);
-    if (!chip) return;
+    const frame = requestAnimationFrame(() => {
+      const chip = scroller.querySelector<HTMLElement>(
+        `[data-chip="${active}"]`,
+      );
+      if (!chip) return;
 
-    chip.scrollIntoView({
-      behavior: prefersReducedMotion() ? "auto" : "smooth",
-      block: "nearest",
-      inline: "center",
+      const row = scroller.getBoundingClientRect();
+      const mark = chip.getBoundingClientRect();
+      const delta = mark.left + mark.width / 2 - (row.left + row.width / 2);
+
+      // `<=` also covers the row being laid out at no width at all, which is
+      // what a display:none scroller measures as below md.
+      if (Math.abs(delta) <= row.width / 4) return;
+
+      scroller.scrollBy({
+        left: delta,
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+      });
     });
+
+    return () => cancelAnimationFrame(frame);
   }, [active]);
 
   const jump = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -205,7 +249,9 @@ export function MenuNav({ groups, label, sectionsLabel }: MenuNavProps) {
       <div
         ref={barRef}
         className={cn(
-          "sticky top-[6.75rem] z-30 border-y border-foreground/10 bg-background md:top-[9.5rem]",
+          // Parked from --menu-bar-top, which is tuned against the wordmark in
+          // globals.css, so the bar follows the nav whenever the mark grows.
+          "sticky top-[var(--menu-bar-top)] z-30 border-y border-foreground/10 bg-background",
           // Covers the sliver between the site nav and this bar, so nothing
           // scrolls through the join. A sticky box is already positioned, so
           // the cover hangs off it directly.

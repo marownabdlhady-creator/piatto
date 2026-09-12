@@ -3,7 +3,7 @@
 :root {
   /* Placeholder monochrome editorial palette — tuned in the design step. */
   --color-bg: #f6f3ee; /* warm off-white */
-  --color-fg: #110e0b; /* deep near-black */
+  --color-fg: #085260; /* deep near-black */
 
   /* Resolved to the Arabic face on /ar (see below). */
   --font-primary: var(--font-latin);
@@ -13,9 +13,42 @@
      changes with the breakpoint. */
   --bar-top-h: 2.5rem;
   --grid-cell-h: 3.5rem;
-  /* Tall enough to give the wordmark room to breathe: the mark is 4rem here,
-     so this leaves an even 1rem above and below it. */
-  --bar-main-h: 6rem;
+  /* The wordmark carries the brand, so it is set as large as each width will
+     take, and the row around it is sized from it: the mark plus an even 1rem
+     of air above and below. From md the row is sized by the mark directly and
+     --bar-main-h no longer applies. */
+  --logo-h: 6rem;
+  --bar-main-h: 8rem;
+  /* Where the sticky category bar on the menu parks, and how far an in-page
+     anchor has to clear. Both are tuned against the stack above, so both move
+     with the wordmark by exactly as much as it grows. */
+  --menu-bar-top: 8.75rem;
+  --anchor-offset: 10.75rem;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --logo-h: 7rem;
+    --bar-main-h: 8.5rem;
+    --menu-bar-top: 9.25rem;
+    --anchor-offset: 11.25rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --logo-h: 9rem;
+    --menu-bar-top: 12.5rem;
+    --anchor-offset: 15.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --logo-h: 11rem;
+    --menu-bar-top: 14.5rem;
+    --anchor-offset: 17.5rem;
+  }
 }
 
 html[lang="ar"] {
@@ -74,18 +107,12 @@ body {
 
 /* The bar is sticky, so in-page anchors need to clear it. Any anchor jump
    leaves the page scrolled, which on small screens means the collapsed bar -
-   the wordmark row plus the two-cell strip - is what the target has to clear.
-   That is --bar-main-h plus the 2.75rem compact strip; on desktop it is the
-   top padding, the wordmark, the rule and the links row. Both totals move with
-   the wordmark, so they are re-derived whenever it is resized. */
+   the wordmark row plus the two-cell strip - is what the target has to clear;
+   on desktop it is the top padding, the wordmark, the rule and the links row.
+   Both totals are held in --anchor-offset above, beside the wordmark they are
+   measured from. */
 html {
-  scroll-padding-top: 8.75rem;
-}
-
-@media (min-width: 48rem) {
-  html {
-    scroll-padding-top: 12.5rem;
-  }
+  scroll-padding-top: var(--anchor-offset);
 }
 
 /* Rise state for the image panels, paired with .reveal's opacity. Declared

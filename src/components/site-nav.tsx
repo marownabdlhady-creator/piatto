@@ -158,16 +158,39 @@ export function SiteNav() {
     return () => observer.disconnect();
   }, []);
 
+  // Reading the scroll offset can be made to flush pending style and layout
+  // work, and on a long page - the menu is a couple of hundred rows now - that
+  // is far too much to do per wheel event. So the listener does nothing but
+  // book a frame, the offset is read once inside it, once layout has settled,
+  // and React is only told when the answer actually changes. The mirror in a
+  // local is what makes that last part possible: the handler decides without
+  // reading state, so a scroll that changes nothing costs nothing.
   useEffect(() => {
-    const onScroll = () => {
+    let frame = 0;
+    let stuck = false;
+
+    const measure = () => {
+      frame = 0;
       const y = window.scrollY;
       // Hysteresis, so a scroll that hovers on the threshold cannot flicker.
-      setCollapsed((current) => (current ? y > 12 : y > 56));
+      const next = stuck ? y > 12 : y > 56;
+      if (next === stuck) return;
+
+      stuck = next;
+      setCollapsed(next);
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -235,14 +258,16 @@ export function SiteNav() {
           {/* The wordmark is centred at every width; the hamburger sits at the
             inline end of the same row, so it mirrors on /ar. */}
           <div className="relative z-30 flex h-[var(--bar-main-h)] items-center justify-center md:h-auto">
-            {/* Sized by height, with --bar-main-h raised to match so the mark
-                keeps its air on small screens. It carries the row on its own,
-                so it loads eagerly rather than waiting to be scrolled to. */}
+            {/* Sized by height from --logo-h, which every other measurement in
+                the bar stack is tuned against, so growing the mark carries the
+                row, the category bar and the anchor offsets with it. It is the
+                whole of this row, so it loads eagerly rather than waiting to be
+                scrolled to. */}
             <a href="#top" data-reveal="wordmark" className="reveal block">
               <Logo
                 alt={tCommon("siteName")}
                 loading="eager"
-                className="h-16 w-auto sm:h-[4.5rem] md:h-24"
+                className="h-[var(--logo-h)] w-auto"
               />
             </a>
 
