@@ -10,6 +10,7 @@
     "postinstall": "prisma generate",
     "typecheck": "tsc --noEmit",
     "db:seed": "prisma db seed",
+    "db:seed:gallery": "tsx --env-file=.env scripts/seed-gallery.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "admin:create": "tsx --env-file=.env scripts/create-admin.ts"

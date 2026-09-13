@@ -97,7 +97,8 @@
       "hall": "The main hall, warm under low light",
       "window": "The room seen through its window after dark",
       "aperitivo": "A berry aperitivo over crushed ice",
-      "toast": "Glasses raised across the table"
+      "toast": "Glasses raised across the table",
+      "fallback": "A photograph from the restaurant"
     }
   },
   "interlude": {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 
 import { ENTRANCE, entranceScale } from "@/lib/entrance";
-import type { GalleryImage } from "@/lib/gallery";
+import type { GalleryPhoto } from "@/lib/gallery-data";
 
 /** True while the document is laid out right to left. */
 function isRtl() {
@@ -22,10 +22,8 @@ type Labels = {
 };
 
 type GalleryLightboxProps = {
-  images: readonly GalleryImage[];
+  photos: readonly GalleryPhoto[];
   index: number;
-  /** Caption and alt text for a still, resolved by the caller. */
-  describe: (image: GalleryImage) => string;
   labels: Labels;
   /** Moves by whole steps through the set; the caller wraps at both ends. */
   onStep: (delta: number) => void;
@@ -43,9 +41,8 @@ type GalleryLightboxProps = {
  * dir, so "next" always means further along the set in both locales.
  */
 export function GalleryLightbox({
-  images,
+  photos,
   index,
-  describe,
   labels,
   onStep,
   onClosed,
@@ -61,7 +58,7 @@ export function GalleryLightbox({
   const direction = useRef(1);
   const shown = useRef(index);
 
-  const image = images[index];
+  const photo = photos[index];
 
   const go = useCallback(
     (delta: number) => {
@@ -234,7 +231,9 @@ export function GalleryLightbox({
     go(forward ? 1 : -1);
   };
 
-  const description = describe(image);
+  // Written with the photograph, or translated for the set that ships with
+  // the app; either way the page has already resolved it.
+  const description = photo.alt;
 
   return (
     <div
@@ -262,7 +261,7 @@ export function GalleryLightbox({
             dir="ltr"
             className="tracked-label pointer-events-none text-[0.66rem] tracking-[0.22em] tabular-nums opacity-60"
           >
-            {index + 1} / {images.length}
+            {index + 1} / {photos.length}
           </span>
 
           <button
@@ -284,11 +283,11 @@ export function GalleryLightbox({
           >
             <div ref={slideRef} className="flex min-h-0 justify-center">
               <Image
-                key={image.src}
-                src={image.src}
+                key={photo.url}
+                src={photo.url}
                 alt={description}
-                width={image.width}
-                height={image.height}
+                width={photo.width}
+                height={photo.height}
                 sizes="(min-width: 1024px) 70vw, (min-width: 768px) 80vw, 92vw"
                 loading="eager"
                 fetchPriority="high"

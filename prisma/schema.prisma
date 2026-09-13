@@ -104,3 +104,28 @@ model Admin {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+/// One photograph on /gallery.
+///
+/// The set is ordered by `order`, low to high. A `url` is either a path under
+/// public/ — the twelve photographs that ship with the app — or an absolute
+/// Vercel Blob URL, which is what the dashboard will write once it can upload.
+model GalleryImage {
+  id        String   @id @default(cuid())
+  url       String
+  /// Describes the photograph itself. Left unset for the images that ship with
+  /// the app, whose alt text is written in both languages in the message files
+  /// and would lose its Arabic if it were flattened into this one column.
+  alt       String?
+  /// The intrinsic size of the file. next/image reserves each box from it, so
+  /// the masonry keeps its rhythm and nothing shifts as the photographs land;
+  /// whatever writes a row has to record it.
+  width     Int
+  height    Int
+  /// Display position within the set.
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
