@@ -80,7 +80,15 @@ export async function Footer() {
       <div className="px-4 py-20 sm:px-6 md:px-8 md:py-24 lg:px-12">
         <div className="mx-auto grid max-w-[84rem] gap-x-8 gap-y-14 md:grid-cols-12 md:gap-y-0">
           <div className="md:col-span-4">
-            <Logo alt={tCommon("siteName")} className="h-20 w-auto md:h-24" />
+            {/* Held at the size it has always rendered at. The box used to be
+                the artwork's square canvas, of which the lettering was only a
+                middle band; now that the viewBox is cropped to the lettering,
+                the box and the mark are the same height, so the numbers here
+                are the mark the old square box produced, not the box. */}
+            <Logo
+              alt={tCommon("siteName")}
+              className="h-[1.125rem] w-auto md:h-[1.375rem]"
+            />
 
             <ul className={LINES}>
               <li>{t.rich("address", isolate)}</li>

@@ -14,40 +14,44 @@
   --bar-top-h: 2.5rem;
   --grid-cell-h: 3.5rem;
   /* The wordmark carries the brand, so it is set as large as each width will
-     take, and the row around it is sized from it: the mark plus an even 1rem
-     of air above and below. From md the row is sized by the mark directly and
-     --bar-main-h no longer applies. */
-  --logo-h: 6rem;
-  --bar-main-h: 8rem;
+     take, and everything else in the stack is derived from it. The mark is
+     roughly three and a quarter times wider than it is tall, so on a phone it
+     is the screen width that limits it, not the height: 19vw of height is the
+     most that leaves the hamburger beside it clear, and the cap takes over
+     once the screen is wide enough not to need it. The row is the mark plus an
+     even 1.25rem of air above and below. From md the row is sized by the mark
+     directly and --bar-main-h no longer applies. */
+  --logo-h: min(5rem, 19vw);
+  --bar-main-h: calc(var(--logo-h) + 2.5rem);
   /* Where the sticky category bar on the menu parks, and how far an in-page
-     anchor has to clear. Both are tuned against the stack above, so both move
-     with the wordmark by exactly as much as it grows. */
-  --menu-bar-top: 8.75rem;
-  --anchor-offset: 10.75rem;
+     anchor has to clear. Both are derived from the stack above, so both move
+     with the wordmark by exactly as much as it grows: below md the collapsed
+     bar is the wordmark row plus the two-cell strip, so the anchor clears
+     2.75rem more than the row itself. */
+  --menu-bar-top: calc(var(--bar-main-h) + 0.75rem);
+  --anchor-offset: calc(var(--bar-main-h) + 2.75rem);
 }
 
 @media (min-width: 40rem) {
   :root {
-    --logo-h: 7rem;
-    --bar-main-h: 8.5rem;
-    --menu-bar-top: 9.25rem;
-    --anchor-offset: 11.25rem;
+    --logo-h: 8rem;
   }
 }
 
 @media (min-width: 48rem) {
   :root {
-    --logo-h: 9rem;
-    --menu-bar-top: 12.5rem;
-    --anchor-offset: 15.5rem;
+    --logo-h: 10.5rem;
+    /* From md the dark blocks are gone and the row is the mark itself: the
+       bar's top padding and the gap down to the hairline are what the category
+       bar has to clear, and the links row below it is what an anchor adds. */
+    --menu-bar-top: calc(var(--logo-h) + 3.5rem);
+    --anchor-offset: calc(var(--menu-bar-top) + 3rem);
   }
 }
 
 @media (min-width: 64rem) {
   :root {
-    --logo-h: 11rem;
-    --menu-bar-top: 14.5rem;
-    --anchor-offset: 17.5rem;
+    --logo-h: 13rem;
   }
 }
 
