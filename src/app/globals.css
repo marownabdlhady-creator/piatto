@@ -13,14 +13,20 @@
      changes with the breakpoint. */
   --bar-top-h: 2.5rem;
   --grid-cell-h: 3.5rem;
-  /* The wordmark carries the brand, so it is set as large as each width will
-     take, and everything else in the stack is derived from it. The mark is
-     roughly three and a quarter times wider than it is tall, so on a phone it
-     is the screen width that limits it, not the height: 19vw of height is the
-     most that leaves the hamburger beside it clear, and the cap takes over
-     once the screen is wide enough not to need it. The row is the mark plus an
-     even 1.25rem of air above and below. From md the row is sized by the mark
-     directly and --bar-main-h no longer applies. */
+  /* The wordmark carries the brand, and everything else in the stack is
+     derived from it. The mark is roughly three and a quarter times wider than
+     it is tall, so on a phone it is the screen width that limits it, not the
+     height: 19vw of height is the most that leaves the hamburger beside it
+     clear, and the cap takes over once the screen is wide enough not to need
+     it. The row is the mark plus an even 1.25rem of air above and below. From
+     md the row is sized by the mark directly and --bar-main-h no longer
+     applies.
+
+     Past that cap the mark stops growing with the window. A phone is narrow
+     enough that a wordmark filling most of its width still reads as a header;
+     a laptop is not, and a mark scaled to match would be the page rather than
+     the top of it. So the wider breakpoints settle just above the phone size
+     and stay there. */
   --logo-h: min(5rem, 19vw);
   --bar-main-h: calc(var(--logo-h) + 2.5rem);
   /* Where the sticky category bar on the menu parks, and how far an in-page
@@ -32,15 +38,9 @@
   --anchor-offset: calc(var(--bar-main-h) + 2.75rem);
 }
 
-@media (min-width: 40rem) {
-  :root {
-    --logo-h: 8rem;
-  }
-}
-
 @media (min-width: 48rem) {
   :root {
-    --logo-h: 10.5rem;
+    --logo-h: 5.25rem;
     /* From md the dark blocks are gone and the row is the mark itself: the
        bar's top padding and the gap down to the hairline are what the category
        bar has to clear, and the links row below it is what an anchor adds. */
@@ -51,7 +51,7 @@
 
 @media (min-width: 64rem) {
   :root {
-    --logo-h: 13rem;
+    --logo-h: 6rem;
   }
 }
 
