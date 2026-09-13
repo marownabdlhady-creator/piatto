@@ -89,6 +89,22 @@ export type AdminStrings = {
   signingOut: string;
   language: string;
 
+  galleryHeading: string;
+  galleryIntro: string;
+  uploadImages: string;
+  uploading: string;
+  /** Takes the size limit, so the hint and the limit cannot disagree. */
+  uploadHint: (megabytes: number) => string;
+  noImages: string;
+  appendedNote: string;
+  imagesAdded: (count: number) => string;
+  imageDeleted: string;
+  uploadNotAllowed: string;
+  /** Take the file's name; several can fail at once and each says which. */
+  fileNotImage: (name: string) => string;
+  fileTooLarge: (name: string, megabytes: number) => string;
+  uploadFailed: (name: string, reason: string) => string;
+
   food: string;
   drinks: string;
   updating: string;
@@ -164,6 +180,24 @@ const en: AdminStrings = {
   signingOut: "Signing out…",
   language: "Interface language",
 
+  galleryHeading: "Gallery",
+  galleryIntro:
+    "Photographs go live on the public gallery as soon as they are uploaded.",
+  uploadImages: "Upload photographs",
+  uploading: "Uploading…",
+  uploadHint: (megabytes) => `JPG, PNG or WebP, up to ${megabytes} MB each.`,
+  noImages: "No photographs yet.",
+  appendedNote: "New photographs are added to the end of the gallery.",
+  imagesAdded: (count) =>
+    count === 1 ? "Photograph uploaded." : `${count} photographs uploaded.`,
+  imageDeleted: "Photograph deleted.",
+  uploadNotAllowed:
+    "The server would not allow this upload. Sign in again if you have been signed out.",
+  fileNotImage: (name) => `“${name}” is not a JPG, PNG or WebP image.`,
+  fileTooLarge: (name, megabytes) =>
+    `“${name}” is larger than ${megabytes} MB.`,
+  uploadFailed: (name, reason) => `“${name}”: ${reason}`,
+
   food: "Food",
   drinks: "Drinks",
   updating: "Updating…",
@@ -237,6 +271,24 @@ const ar: AdminStrings = {
   signOut: "تسجيل الخروج",
   signingOut: "جارٍ تسجيل الخروج…",
   language: "لغة الواجهة",
+
+  galleryHeading: "معرض الصور",
+  galleryIntro: "تظهر الصور في المعرض العام فور رفعها.",
+  uploadImages: "رفع صور",
+  uploading: "جارٍ الرفع…",
+  uploadHint: (megabytes) =>
+    `JPG أو PNG أو WebP، حتى ${megabytes} ميغابايت للصورة.`,
+  noImages: "لا توجد صور بعد.",
+  appendedNote: "تُضاف الصور الجديدة إلى نهاية المعرض.",
+  imagesAdded: (count) =>
+    count === 1 ? "تم رفع الصورة." : `تم رفع ${count} صور.`,
+  imageDeleted: "تم حذف الصورة.",
+  uploadNotAllowed:
+    "لم يسمح الخادم بهذا الرفع. سجّل الدخول مرة أخرى إذا انتهت جلستك.",
+  fileNotImage: (name) => `«${name}» ليس صورة JPG أو PNG أو WebP.`,
+  fileTooLarge: (name, megabytes) =>
+    `«${name}» أكبر من ${megabytes} ميغابايت.`,
+  uploadFailed: (name, reason) => `«${name}»: ${reason}`,
 
   food: "الطعام",
   drinks: "المشروبات",

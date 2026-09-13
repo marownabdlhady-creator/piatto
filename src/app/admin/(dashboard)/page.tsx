@@ -1,6 +1,7 @@
 import { AdminLanguageToggle } from "@/components/admin/language";
 import { LogoutButton } from "@/components/admin/logout-button";
-import { MenuEditor } from "@/components/admin/menu-editor";
+import { AdminWorkspace } from "@/components/admin/workspace";
+import { readEditorGallery } from "@/lib/admin/gallery";
 import { adminStrings } from "@/lib/admin/i18n";
 import { readAdminLocale } from "@/lib/admin/locale";
 import { readEditorMenu } from "@/lib/admin/menu";
@@ -8,12 +9,12 @@ import { DOMAINS } from "@/lib/admin/menu-types";
 import { requireAdminSession } from "@/lib/auth";
 
 /**
- * The menu editor.
+ * The dashboard: the menu editor and the gallery manager, behind one sign-in.
  *
- * Both menus are read here, on the server, and handed down as plain objects —
- * the browser never sees Prisma or the connection string. The read is not
- * cached: the public pages are the ones that want a static menu, and this page
- * wants the row as it stands.
+ * Both menus and every photograph are read here, on the server, and handed down
+ * as plain objects — the browser never sees Prisma, the connection string or the
+ * blob token. Neither read is cached: the public pages are the ones that want
+ * something static, and this page wants the rows as they stand.
  *
  * The layout above already requires a session; asking again is deliberate,
  * since a layout does not re-run on every navigation into its tree.
@@ -22,7 +23,10 @@ export default async function AdminDashboard() {
   const admin = await requireAdminSession();
   const strings = adminStrings(await readAdminLocale());
 
-  const menus = await Promise.all(DOMAINS.map(readEditorMenu));
+  const [menus, photos] = await Promise.all([
+    Promise.all(DOMAINS.map(readEditorMenu)),
+    readEditorGallery(),
+  ]);
 
   return (
     <main className="mx-auto min-h-svh w-full max-w-[64rem] px-5 py-12 sm:px-8 md:px-10 md:py-16">
@@ -36,7 +40,7 @@ export default async function AdminDashboard() {
             piatto
           </p>
           <h1 className="display-tight mt-3 text-[1.75rem] leading-[1.2] sm:text-[2rem]">
-            {strings.heading}
+            {strings.adminTitle}
           </h1>
         </div>
 
@@ -49,12 +53,8 @@ export default async function AdminDashboard() {
         </div>
       </header>
 
-      <p className="mt-6 max-w-[38rem] text-[0.82rem] leading-[1.8] text-foreground/50">
-        {strings.intro}
-      </p>
-
       <div className="mt-10">
-        <MenuEditor menus={menus} />
+        <AdminWorkspace menus={menus} photos={photos} />
       </div>
     </main>
   );
