@@ -4,6 +4,6 @@
  * menu panel covers both.
  */
 export const features = {
-  menu: { href: "/menu", image: "/feature-menu.jpg" },
-  about: { href: "/about", image: "/feature-about.jpg" },
+  menu: { href: "/menu", image: "/piatto-12.png" },
+  about: { href: "/about", image: "/piatto-10.png" },
 } as const;

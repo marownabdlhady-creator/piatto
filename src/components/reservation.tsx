@@ -9,7 +9,7 @@ import { RevealFallback } from "@/components/reveal-fallback";
 import { useSoftReveal } from "@/lib/use-soft-reveal";
 
 /** The room, laid and lit for the evening the table is being booked for. */
-const IMAGE = "/reservations-hero.jpg";
+const IMAGE = "/piatto-11.JPG";
 
 /**
  * The reservation page: the room on one side, the form on the other, side by

@@ -18,7 +18,7 @@ export const navItems: readonly NavLink[] = [
   { key: "contact", href: "#contact" },
   { key: "workingHours", href: "#working-hours" },
   { key: "menu", href: "/menu", route: true },
-  { key: "about", href: "#about" },
+  { key: "about", href: "/about", route: true },
   { key: "gallery", href: "/gallery", route: true },
 ];
 
@@ -54,7 +54,7 @@ export const darkCell =
 export const quickLinks: readonly NavLink[] = [
   { key: "menu", href: "/menu", route: true },
   { key: "gallery", href: "/gallery", route: true },
-  { key: "about", href: "#about" },
+  { key: "about", href: "/about", route: true },
   { key: "whatsapp", href: WHATSAPP_HREF, external: true },
 ];
 

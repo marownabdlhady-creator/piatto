@@ -8,7 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { useRevealOnScroll } from "@/lib/use-reveal-on-scroll";
 
 /** An evening table, set and waiting - the picture the invitation rests on. */
-const IMAGE = "/reserve-table.jpg";
+const IMAGE = "/piatto-11.JPG";
 
 /**
  * The invitation that closes the page: a full-bleed table under a scrim, with

@@ -6,16 +6,16 @@ export const spaces = [
   {
     key: "restaurant",
     href: "/restaurant",
-    image: "/space-restaurant.jpg",
+    image: "/piatto-11.JPG",
   },
   {
     key: "privateRoom",
     href: "/private-room",
-    image: "/space-private-room.jpg",
+    image: "/family-paitto.JPG",
   },
   {
     key: "garden",
     href: "/garden",
-    image: "/space-garden.jpg",
+    image: "/vibes-paitto.JPG",
   },
 ] as const;

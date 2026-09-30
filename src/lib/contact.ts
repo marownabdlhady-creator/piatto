@@ -8,13 +8,19 @@
 export const PHONE_E164 = "970595643153";
 
 /** The same number as it is read aloud, for anywhere it is shown as text. */
-export const PHONE_DISPLAY = "+970 595 643 153";
+export const PHONE_DISPLAY = "022777688";
+
+/** The WhatsApp number as it is read aloud. */
+export const WHATSAPP_DISPLAY = "+970 595 643 153";
 
 /** Dials the restaurant. */
-export const TEL_HREF = `tel:+${PHONE_E164}`;
+export const TEL_HREF = "tel:022777688";
 
 /** Opens the WhatsApp conversation with the restaurant. */
 export const WHATSAPP_HREF = `https://wa.me/${PHONE_E164}`;
+
+/** Opens the restaurant location from its supplied coordinates. */
+export const MAPS_HREF = "https://www.google.com/maps?q=31.712944,35.194778";
 
 /** Where the restaurant is on social, in the order the icons are shown. */
 export const socialLinks = [

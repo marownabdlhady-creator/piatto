@@ -62,7 +62,7 @@ export default async function Menu({ params }: MenuProps) {
       <main>
         <MenuScreen
           title={t("menu")}
-          image="/feature-menu.jpg"
+          image="/piatto-12.png"
           groups={groups}
           sectionsLabel={tPage("sections")}
         />

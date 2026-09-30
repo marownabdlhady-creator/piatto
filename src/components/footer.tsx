@@ -4,7 +4,13 @@ import { getTranslations } from "next-intl/server";
 
 import { Logo } from "@/components/logo";
 import { SocialLinks } from "@/components/social-links";
-import { PHONE_DISPLAY, TEL_HREF, WHATSAPP_HREF } from "@/lib/contact";
+import {
+  PHONE_DISPLAY,
+  TEL_HREF,
+  MAPS_HREF,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_HREF,
+} from "@/lib/contact";
 
 /**
  * Isolates the runs that carry digits. A phone number or a time range has no
@@ -14,14 +20,31 @@ import { PHONE_DISPLAY, TEL_HREF, WHATSAPP_HREF } from "@/lib/contact";
  */
 const isolate = { n: (chunks: ReactNode) => <bdi dir="ltr">{chunks}</bdi> };
 
+const mapCoordinates = {
+  n: (chunks: ReactNode) => (
+    <a
+      href={MAPS_HREF}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="transition-opacity duration-300 hover:opacity-60"
+    >
+      <bdi dir="ltr">{chunks}</bdi>
+    </a>
+  ),
+};
+
 /**
  * The same isolated run, made reachable: the number is the link and the label
  * beside it stays plain text, so only the part worth tapping is a target.
  * The number itself comes from one place, so the copy only carries its label.
  */
-function phoneLine(href: string, external = false) {
+function phoneLine(
+  href: string,
+  external = false,
+  phone = PHONE_DISPLAY,
+) {
   return {
-    phone: PHONE_DISPLAY,
+    phone,
     n: (chunks: ReactNode) => (
       <a
         href={href}
@@ -91,7 +114,7 @@ export async function Footer() {
             />
 
             <ul className={LINES}>
-              <li>{t.rich("address", isolate)}</li>
+              <li>{t.rich("address", mapCoordinates)}</li>
               <li>{t.rich("tel", phoneLine(TEL_HREF))}</li>
               <li>{t.rich("fax", isolate)}</li>
             </ul>
@@ -111,7 +134,12 @@ export async function Footer() {
 
             <ul className={LINES}>
               <li>{t.rich("contactTel", phoneLine(TEL_HREF))}</li>
-              <li>{t.rich("whatsapp", phoneLine(WHATSAPP_HREF, true))}</li>
+              <li>
+                {t.rich(
+                  "whatsapp",
+                  phoneLine(WHATSAPP_HREF, true, WHATSAPP_DISPLAY),
+                )}
+              </li>
             </ul>
 
             <SocialLinks className="mt-6" />

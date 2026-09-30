@@ -116,12 +116,12 @@
     "cta": "Book Now"
   },
   "footer": {
-    "address": "Address — to be provided",
+    "address": "<n>View location on map</n>",
     "tel": "Tel: <n>{phone}</n>",
     "fax": "Fax: — to be provided",
     "hours": "Opening Hours",
-    "hoursWeekdays": "Sun–Thu: <n>00:00–00:00</n>",
-    "hoursWeekend": "Fri–Sat: <n>00:00–00:00</n>",
+    "hoursWeekdays": "Sun–Thu: <n>08:00–01:00</n>",
+    "hoursWeekend": "Fri–Sat: <n>08:00–01:00</n>",
     "contact": "Contact Us",
     "contactTel": "Tel: <n>{phone}</n>",
     "whatsapp": "WhatsApp: <n>{phone}</n>",
