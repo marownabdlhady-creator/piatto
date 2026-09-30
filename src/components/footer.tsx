@@ -28,7 +28,7 @@ const mapCoordinates = {
       rel="noopener noreferrer"
       className="transition-opacity duration-300 hover:opacity-60"
     >
-      <bdi dir="ltr">{chunks}</bdi>
+      {chunks}
     </a>
   ),
 };
