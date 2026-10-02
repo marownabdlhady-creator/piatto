@@ -117,6 +117,7 @@
   },
   "footer": {
     "address": "<n>Beit Jala, Al-Sahl Street, next to Beit Jala Gas Station</n>",
+    "directions": "View on Google Maps",
     "tel": "Tel: <n>{phone}</n>",
     "fax": "Fax: — to be provided",
     "hours": "Opening Hours",

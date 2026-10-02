@@ -118,6 +118,15 @@ export async function Footer() {
               <li>{t.rich("tel", phoneLine(TEL_HREF))}</li>
               <li>{t.rich("fax", isolate)}</li>
             </ul>
+
+            <a
+              href={MAPS_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex min-h-10 items-center justify-center border border-foreground/25 px-4 text-sm transition-colors hover:bg-foreground hover:text-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+            >
+              {t("directions")}
+            </a>
           </div>
 
           <div className="md:col-span-3">
