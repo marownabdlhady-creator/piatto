@@ -42,3 +42,4 @@ next-env.d.ts
 
 # large unoptimized source media (optimized derivatives are committed)
 /public/hero-piatto.mp4
+/media-source/
