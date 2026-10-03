@@ -12,6 +12,8 @@ import { cn } from "@/lib/utils";
 
 type PanelProps = {
   image: string;
+  /** Crop focus, as an object-position class. */
+  position: string;
   sizes: string;
   className: string;
   title: string;
@@ -21,7 +23,14 @@ type PanelProps = {
 /**
  * One image panel: the image under a scrim, with its title centred over it.
  */
-function Panel({ image, sizes, className, title, href }: PanelProps) {
+function Panel({
+  image,
+  position,
+  sizes,
+  className,
+  title,
+  href,
+}: PanelProps) {
   return (
     <Link
       href={href}
@@ -32,7 +41,13 @@ function Panel({ image, sizes, className, title, href }: PanelProps) {
       )}
     >
       <span className="absolute inset-0 block">
-        <Image src={image} alt="" fill sizes={sizes} className="object-cover" />
+        <Image
+          src={image}
+          alt=""
+          fill
+          sizes={sizes}
+          className={cn("object-cover", position)}
+        />
 
         <span
           aria-hidden="true"
@@ -40,7 +55,7 @@ function Panel({ image, sizes, className, title, href }: PanelProps) {
         />
 
         <span className="absolute inset-0 flex items-center justify-center px-6">
-          <span className="tracked-label text-center text-[1.05rem] tracking-[0.26em] text-white uppercase md:text-[1.2rem]">
+          <span className="tracked-label text-center text-[1.05rem] tracking-[0.26em] text-white uppercase [text-shadow:0_1px_14px_rgb(0_0_0/0.45)] md:text-[1.2rem]">
             {title}
           </span>
         </span>
@@ -74,6 +89,7 @@ export function Features() {
 
       <Panel
         image={features.menu.image}
+        position={features.menu.position}
         href={features.menu.href}
         title={t("menu")}
         sizes="100vw"
@@ -82,6 +98,7 @@ export function Features() {
 
       <Panel
         image={features.about.image}
+        position={features.about.position}
         href={features.about.href}
         title={t("about")}
         sizes="100vw"
