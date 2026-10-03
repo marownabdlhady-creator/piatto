@@ -5,6 +5,11 @@ import gsap from "gsap";
 
 import { ENTRANCE, entranceScale } from "@/lib/entrance";
 
+/** At and above this width the 1920 cut plays; below it, the 1280 one. */
+const DESKTOP_QUERY = "(min-width: 768px)";
+
+type HeroSize = "desktop" | "mobile";
+
 /**
  * Framed hero panel: the video sits inset from the page edges so the warm
  * off-white background reads as a margin around it. The poster is always
@@ -12,14 +17,24 @@ import { ENTRANCE, entranceScale } from "@/lib/entrance";
  * JavaScript is unavailable); the video mounts on top only when the visitor
  * has not asked for reduced motion, which also keeps the download off those
  * connections entirely.
+ *
+ * The cut comes in two sizes. Which one plays is decided from the viewport
+ * before the video element exists, so a phone never requests the desktop
+ * file; it is read once, so a rotation or resize does not start a second
+ * download mid-loop.
  */
 export function Hero() {
   const panelRef = useRef<HTMLDivElement>(null);
-  const [playVideo, setPlayVideo] = useState(false);
+  /** The cut to play, or null while reduced motion keeps the poster alone. */
+  const [video, setVideo] = useState<HeroSize | null>(null);
 
   useEffect(() => {
+    const size: HeroSize = window.matchMedia(DESKTOP_QUERY).matches
+      ? "desktop"
+      : "mobile";
+
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setPlayVideo(!query.matches);
+    const sync = () => setVideo(query.matches ? null : size);
 
     sync();
     query.addEventListener("change", sync);
@@ -65,7 +80,7 @@ export function Hero() {
           className="absolute inset-0 h-full w-full object-cover"
         />
 
-        {playVideo && (
+        {video && (
           <video
             autoPlay
             muted
@@ -77,8 +92,8 @@ export function Hero() {
             tabIndex={-1}
             className="absolute inset-0 h-full w-full object-cover"
           >
-            <source src="/hero.webm" type="video/webm" />
-            <source src="/hero.mp4" type="video/mp4" />
+            <source src={`/hero-${video}.webm`} type="video/webm" />
+            <source src={`/hero-${video}.mp4`} type="video/mp4" />
           </video>
         )}
       </div>
