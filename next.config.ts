@@ -20,6 +20,26 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  /**
+   * The Spaces panels used to open placeholder pages for each room; they now
+   * open the gallery. Old links land there too, keeping their language. The
+   * unprefixed form goes to /gallery and lets the locale proxy pick one.
+   */
+  async redirects() {
+    return [
+      {
+        source: "/:locale(en|ar)/:room(restaurant|private-room|garden)",
+        destination: "/:locale/gallery",
+        permanent: true,
+      },
+      {
+        source: "/:room(restaurant|private-room|garden)",
+        destination: "/gallery",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

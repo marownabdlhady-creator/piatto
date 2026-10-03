@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -13,7 +13,8 @@ import { useSoftReveal } from "@/lib/use-soft-reveal";
  * Three panels, touching each other with no gaps, each a room of the
  * restaurant under a restrained scrim. The row is a centred block rather than
  * full-bleed: on large screens the page background stays visible down both
- * outer edges, while small screens keep the stack full width. Static by
+ * outer edges, while small screens keep the stack full width, each panel
+ * taking its photograph's own shape so nothing is cropped. Static by
  * design - no hover state. The grid mirrors on /ar, so the first panel reads
  * first in both directions.
  */
@@ -34,7 +35,12 @@ export function Spaces() {
               key={space.key}
               href={space.href}
               data-reveal="panel"
-              className="reveal reveal-rise relative block aspect-[4/3] overflow-hidden bg-foreground md:aspect-auto md:h-[78svh]"
+              style={
+                {
+                  "--space-ratio": `${space.width} / ${space.height}`,
+                } as CSSProperties
+              }
+              className="reveal reveal-rise relative block aspect-(--space-ratio) overflow-hidden bg-foreground md:aspect-auto md:h-[78svh]"
             >
               <span className="absolute inset-0 block">
                 <Image
