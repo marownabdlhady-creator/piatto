@@ -25,6 +25,8 @@ const FRAME =
 type FrameProps = {
   image: string;
   eager?: boolean;
+  /** Crop focus, as an object-position class. */
+  position?: string;
 };
 
 /**
@@ -32,7 +34,7 @@ type FrameProps = {
  * parallax drift never pulls its edges into view; the frame itself carries the
  * entrance, so the two transforms never contend for the same element.
  */
-function Frame({ image, eager = false }: FrameProps) {
+function Frame({ image, eager = false, position }: FrameProps) {
   return (
     <div data-reveal="story" className={FRAME}>
       <span data-parallax className="absolute inset-0 block scale-[1.16]">
@@ -43,7 +45,7 @@ function Frame({ image, eager = false }: FrameProps) {
           sizes="100vw"
           loading={eager ? "eager" : "lazy"}
           fetchPriority={eager ? "high" : "auto"}
-          className="object-cover"
+          className={cn("object-cover", position)}
         />
       </span>
     </div>
@@ -72,7 +74,11 @@ export function Story() {
       <RevealFallback />
 
       <div className={PLATE}>
-        <Frame image={storyImages.interior} eager />
+        <Frame
+          image={storyImages.interior}
+          position="object-[50%_60%]"
+          eager
+        />
       </div>
 
       <div className="mx-auto max-w-[40rem] py-24 text-center md:py-36 lg:py-44">

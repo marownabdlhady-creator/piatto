@@ -8,6 +8,6 @@ export const storyImages = {
   pasta: "/about-pasta.jpg",
   oven: "/about-oven.jpg",
   bread: "/about-bread.jpg",
-  interior: "/piatto-10.png",
+  interior: "/about-feature.jpg",
   table: "/about-table.jpg",
 } as const;
